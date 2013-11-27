@@ -5,7 +5,7 @@ namespace Game
 	public interface IPlace
 	{
 		char Symbol();
-		bool PerformAction(Player p, out string msg);
+		bool PerformAction(Player p, Location l, out string msg, out Location  l2);
 	}
 }
 

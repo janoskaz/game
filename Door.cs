@@ -59,9 +59,10 @@ namespace Game
 			}
 		}
 		
-		public override bool PerformAction(Player p, out string msg)
+		public override bool PerformAction(Player p, Location l, out string msg, out Location l2)
 		{
 			msg = this.Description;
+			l2 = l;
 			if (!this.Locked)
 			{
 				return true;

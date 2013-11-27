@@ -7,82 +7,18 @@ class Program
 	
 	public static void Main()
 	{
-		//create dices
-		Dice dice6 = new Dice(6);
-		
-		/*
-		// create empty inventory
-		Inventory bag = new Inventory(10);
-				
-		// create big sword and put it into bag
-		Characteristics ch1 = new Characteristics(0, 10, 0, 0);		
-		Weapon bigsword = new Weapon("Big sword", ch1, new List<string> {"weapon","shield"}, dice6);
-		bag.Add(bigsword);
-		
-		// create small sword and put it into bag
-		Characteristics ch2 = new Characteristics(0, 5, 0, 2);		
-		Weapon smallsword = new Weapon("Small sword", ch2, new List<string> {"weapon"}, dice6);
-		bag.Add(smallsword);
-		
-		// create armor and put it into bag
-		Characteristics ch3 = new Characteristics(0, 0, 5, -2);
-		Equipment armor = new Equipment("Leather armor", ch3, new List<string> {"body"});
-		bag.Add(armor);
-		
-		// create ring and put it into bag
-		Characteristics ch4 = new Characteristics(10, 0, 0, 0);
-		Equipment ring = new Equipment("Ring", ch4, new List<string>());
-		bag.Add(ring);
-		
-		// create orc
-		Characteristics ch_orc = new Characteristics(50, 10, 3, -1);
-		Being orc = new Being("Orc", ch_orc, 10, dice6);
-		
-		// create goblin
-		Characteristics ch_goblin = new Characteristics(40, 8, 5, 1);
-		Being goblin = new Being("Goblin", ch_goblin, 10, dice6);
-		
-		
-		//orc.PickItem(bigsword);
-		//orc.PickItem(ring);		
-		//orc.EquipItem("Big sword");
-		//orc.EquipItem("Ring");
-		
-		goblin.PickItem(smallsword);
-		goblin.PickItem(armor);
-		goblin.PickItem(bigsword);
-		goblin.PickItem(ring);
-		goblin.EquipItem("Leather armor");
-		goblin.EquipItem("Small sword");
-		goblin.EquipItem("Big sword");
-		goblin.EquipItem("Big sword", true);
-		
-		Console.WriteLine();
-		Console.WriteLine("##############################");
-		Console.WriteLine(orc);
-		Console.WriteLine("##############################");
-		Console.WriteLine(goblin);
-		
-		// create simple map
-		Map newMap = new Map(10,5);
-		// create new world
-		World middleEarth = new World(newMap);
-		
-		middleEarth.Fight(orc, goblin);	
-		
-		goblin.ManageInventory();
-		*/
+		// some vizualization
+		Console.BackgroundColor = ConsoleColor.White;
+		Console.ForegroundColor = ConsoleColor.Black;		
+		Console.Clear();
 		
 		// create world
 		Map dungeon = new Map(15,5);
 		
-		// some vizualization
-		Console.BackgroundColor = ConsoleColor.White;
-		Console.ForegroundColor = ConsoleColor.Black;
-		Console.Clear();	
+		//create dices
+		Dice dice6 = new Dice(6);	
 		
 		// create walls
-		// counting from 0!
 		for (int i = 0; i<10; i++){
 			dungeon.AddLocation(new Location(i,0, new Wall()));
 			dungeon.AddLocation(new Location(i,4, new Wall()));
@@ -92,9 +28,21 @@ class Program
 			dungeon.AddLocation(new Location(9,i,new Wall()));
 		}
 		
+		// doors and hallway behind them
 		Door door = new Door("In front of you are solid wooden doors. You will need a key to open them.", "Rusty key", true);
-		dungeon.AddLocation(new Location(9,3,door));
+		dungeon.AddLocation(new Location(9,2,door));
 		
+		dungeon.AddLocation(new Location(13,1,new Wall()));
+		dungeon.AddLocation(new Location(13,2,new Wall()));
+		dungeon.AddLocation(new Location(13,3,new Wall()));
+		dungeon.AddLocation(new Location(12,1,new Wall()));
+		dungeon.AddLocation(new Location(12,3,new Wall()));
+		dungeon.AddLocation(new Location(11,1,new Wall()));
+		dungeon.AddLocation(new Location(11,3,new Wall()));
+		dungeon.AddLocation(new Location(10,1,new Wall()));
+		dungeon.AddLocation(new Location(10,3,new Wall()));
+		
+		// key to the doors, small sword and chest toput them to
 		Item key = new Item("Rusty key");
 		Characteristics ch2 = new Characteristics(0, 5, 0, 2);	
 		Weapon smallsword = new Weapon("Small sword", ch2, new List<string> {"weapon"}, dice6);
@@ -106,11 +54,19 @@ class Program
 		
 		dungeon.AddLocation(new Location(1,1,chest));
 		
-		dungeon.AddLocation(new Location(11,2,new Wall()));
-		dungeon.AddLocation(new Location(11,4,new Wall()));
-		dungeon.AddLocation(new Location(10,2,new Wall()));
-		dungeon.AddLocation(new Location(10,4,new Wall()));
+		// create goblin
+		Characteristics ch_goblin = new Characteristics(15, 5, 1, 0);
+		Being goblin = new Being("Goblin", ch_goblin, 10, dice6);
+		Characteristics chSword = new Characteristics(0, 5, 0, 2);		
+		Weapon smallsword2 = new Weapon("Small sword", chSword, new List<string> {"weapon"}, dice6);
+		Characteristics chArmor = new Characteristics(0, 0, 2, -2);
+		Equipment armor = new Equipment("Leather armor", chArmor, new List<string> {"body"});
+		goblin.PickItem(smallsword2);
+		goblin.PickItem(armor);
+		goblin.EquipItem("Leather armor");
+		goblin.EquipItem("Small sword");
 		
+		dungeon.AddLocation(new Location(11,2, goblin));
 		
 		// Create player
 		Console.WriteLine("What is the name of your hero?");
@@ -132,7 +88,7 @@ class Program
 			ch = new Characteristics(35, 5, 7, 2);
 		Player p = new Player(name, ch, 100, dice6, 3, 3);
 		
-		
+		// main loop - runnig the program
 		bool end = false;
 		
 		string message = "";
@@ -160,6 +116,13 @@ class Program
 				p.ManageInventory();
 			p.Move(c, dungeon, out message);
 			
+			if (!p.Alive())
+			{
+				Console.WriteLine("Your dead! press any key");
+				end = true;
+				Console.ReadKey();
+			}
+				
 		}		
 		
 	}

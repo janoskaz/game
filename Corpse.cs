@@ -2,23 +2,20 @@ using System;
 
 namespace Game
 {
-	public class Chest :Item
+	public class Corpse: Chest
 	{
-		public Inventory Content {get; set;}
-		
-		public Chest (string name, Inventory content) :base(name)
+		public Corpse (string name, Inventory content) :base(name, content)
 		{
-			Content = content;
 		}
 		
 		public override char Symbol()
 		{
-			return 'o';
+			return 'X';
 		}
 		
 		public override bool PerformAction (Player p, Location l, out string msg, out Location l2)
 		{
-			msg = "";
+			msg = string.Format("You stumbled upon a {0}... Literaly - you have stumbled and fallen down", this.Name);
 			l2 = l;
 			bool lootChest = true;
 			
@@ -27,7 +24,7 @@ namespace Game
 			while (lootChest)
 			{
 				Console.Clear();
-				Console.WriteLine("CONTENT OF CHEST");
+				Console.WriteLine("THE CORPSE HAS:");
 				Console.Write(this.Content.ToString());
 				Console.WriteLine();
 				Console.WriteLine("YOUR INVENTORY");

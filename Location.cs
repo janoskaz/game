@@ -20,10 +20,11 @@ namespace Game
 			return Block.Symbol();
 		}
 		
-		public bool PerformAction(Player p, out string msg)
+		public bool PerformAction(Player p, Location l, out string msg, out Location l2)
 		{
 			msg = "";
-			bool action = Block.PerformAction(p, out msg);
+			l2 = l;
+			bool action = Block.PerformAction(p, l, out msg, out l2);
 			Console.WriteLine(msg);
 			return action;
 		}

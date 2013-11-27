@@ -13,9 +13,10 @@ namespace Game
 			return ' ';
 		}
 		
-		public virtual bool PerformAction(Player p, out string msg)
+		public virtual bool PerformAction(Player p, Location l, out string msg, out Location l2)
 		{
 			msg = "";
+			l2 = l;
 			return true;
 		}
 	}

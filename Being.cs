@@ -255,7 +255,7 @@ namespace Game
 		public void Attack(Being b)
 		{
 			int attack = this.CalculateAttack();
-			b.Defend(attack);
+			Console.WriteLine(b.Defend(attack));
 		}
 		
 		/// <summary>
@@ -386,7 +386,7 @@ namespace Game
 				{
 					isNum = int.TryParse(words[1], out n);
 					bool canEquip = this.bag.bag.Count >= n;
-					bool isEquipment = this.bag.bag[n-1].GetType() == typeof(Equipment);
+					bool isEquipment = this.bag.bag[n-1] is Equipment;
 					if (canEquip && isNum && isEquipment)
 					{
 						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1].Name,true));
@@ -421,16 +421,33 @@ namespace Game
 			}
 			
 		}
-			
-		public char Symbol()
+		
+		private Corpse BecameCorpse()
+		{
+			foreach (Equipment e in this.equiped.bag)
+			{
+				this.bag.Add(e);
+			}
+			Corpse thisCorpse = new Corpse(string.Format("Corpse of {0}", this.Name), this.bag);
+			return thisCorpse;
+		}
+		
+		public virtual char Symbol()
 		{
 			return 'A';
 		}
 		
-		public bool PerformAction (Player p, out string msg)
+		public bool PerformAction (Player p, Location l, out string msg, out Location l2)
 		{
 			msg = "";
-			return true;
+			l2 = l;
+			bool f = p.Fight(this);
+			if (f)
+			{
+				msg += "Enemy has been slain";
+				l2.Block = this.BecameCorpse();
+			}				
+			return f;
 		}
 		
 	}
