@@ -214,10 +214,10 @@ namespace Game
 			if (!equip)
 				multiplier = -1;
 			
-			int hitpoints = i.Characteristics["hitpoints"] * multiplier;
-			int	attack = i.Characteristics["attack"] * multiplier;
-			int	defence = i.Characteristics["defence"] * multiplier;
-			int	speed = i.Characteristics["speed"] * multiplier;
+			int hitpoints = i.Characteristics.hitpoints * multiplier;
+			int	attack = i.Characteristics.attack * multiplier;
+			int	defence = i.Characteristics.defence * multiplier;
+			int	speed = i.Characteristics.speed* multiplier;
 						
 			this.CurrentCharacteristics.Update(hitpoints, attack, defence, speed);
 		}
@@ -231,7 +231,7 @@ namespace Game
 		public int CalculateAttack()
 		{
 			// get attack value, set default dice and default weapon to bare hands
-			int attack = this.CurrentCharacteristics.GetValue("attack");
+			int attack = this.CurrentCharacteristics.attack;
 			Dice d = this.dice; 
 			string weapon = "Bare hands"; 
 			// if a weapon is equiped, find out the name and dice of this weapon
@@ -270,7 +270,7 @@ namespace Game
 		/// </returns>
 		public int CalculateDefence()
 		{
-			int defence = this.CurrentCharacteristics.GetValue("defence");
+			int defence = this.CurrentCharacteristics.defence;
 			defence += this.dice.Roll();
 			return defence;
 		}
@@ -283,7 +283,7 @@ namespace Game
 		/// </returns>
 		public int CalculateInitiative()
 		{
-			int speed = this.CurrentCharacteristics.GetValue("speed");
+			int speed = this.CurrentCharacteristics.speed;
 			speed += this.dice.Roll();
 			return speed;
 		}
@@ -304,14 +304,14 @@ namespace Game
 			if (injury>0)
 			{
 				msg += " has been injured for " + injury + " hitpoints";
-				int hp = this.CurrentCharacteristics.GetValue("hitpoints");
+				int hp = this.CurrentCharacteristics.hitpoints;
 				hp -= injury;
 				if (hp<=0) // if died
 				{
 					hp = 0;
 					msg += " and died";
 				}
-				this.CurrentCharacteristics.SetValue("hitpoints", hp);
+				this.CurrentCharacteristics.hitpoints = hp;
 			}
 			else
 				msg += " has defended himself";
@@ -321,7 +321,7 @@ namespace Game
 		
 		public bool Alive()
 		{
-			return (this.CurrentCharacteristics.GetValue("hitpoints") > 0);
+			return (this.CurrentCharacteristics.hitpoints > 0);
 		}
 		
 		/// <summary>
