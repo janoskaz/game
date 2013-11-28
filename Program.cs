@@ -63,8 +63,8 @@ class Program
 		Equipment armor = new Equipment("Leather armor", chArmor, new List<string> {"body"});
 		goblin.PickItem(smallsword2);
 		goblin.PickItem(armor);
-		goblin.EquipItem("Leather armor");
-		goblin.EquipItem("Small sword");
+		goblin.EquipItem(armor);
+		goblin.EquipItem(smallsword2);
 		
 		dungeon.AddLocation(new Location(11,2, goblin));
 		

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F09029C1-70F6-4BB8-88E3-C82739830CF8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Game</RootNamespace>
+    <AssemblyName>Game</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Characteristics.cs" />
+    <Compile Include="Equipment.cs" />
+    <Compile Include="Body.cs" />
+    <Compile Include="Being.cs" />
+    <Compile Include="Inventory.cs" />
+    <Compile Include="Dice.cs" />
+    <Compile Include="Weapon.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="Wall.cs" />
+    <Compile Include="Door.cs" />
+    <Compile Include="BasicObject.cs" />
+    <Compile Include="Chest.cs" />
+    <Compile Include="LimitedQueue.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="IPlace.cs" />
+    <Compile Include="Corpse.cs" />
+  </ItemGroup>
+</Project>

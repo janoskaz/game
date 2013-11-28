@@ -49,14 +49,14 @@ namespace Game
 		/// <param name='i'>
 		/// I.
 		/// </param>
-		public string Remove(string s)
+		public string Remove(Item i)
 		{
-			string msg = ("Attempt to remove " + s);
+			string msg = ("Attempt to remove " + i.Name);
 			bool removed = false;
-			foreach(Item i in this.bag)
-				if (i.Name == s)
+			foreach(Item item in this.bag)
+				if (item.Name == i.Name)
 				{
-					this.bag.Remove(i);
+					this.bag.Remove(item);
 					removed = true;
 					msg += "\nRemoved";
 					break;
@@ -78,10 +78,10 @@ namespace Game
 		/// <exception cref='ArgumentException'>
 		/// Is thrown when an argument passed to a method is invalid.
 		/// </exception>
-		public Item GetItem(string name)
+		public Item GetItem(string s)
 		{
 			foreach (Item i in this.bag)
-				if (i.Name == name)
+				if (i.Name == s)
 					return i;
 			throw new ArgumentException("This item is not in the inventory.");
 		}
@@ -92,12 +92,17 @@ namespace Game
 		/// <param name='name'>
 		/// If set to <c>true</c> name.
 		/// </param>
-		public bool Inside(string name)
+		public bool Inside(Item i)
 		{
-			foreach (Item i in this.bag)
-				if(i.Name == name)
+			foreach (Item item in this.bag)
+				if(item.Name == i.Name)
 					return true;
 			return false;
+		}
+		
+		public int Count()
+		{
+			return this.bag.Count;
 		}
 		
 		/// <summary>

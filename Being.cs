@@ -60,10 +60,18 @@ namespace Game
 			this.bag.Add(item);
 		}
 		
-		public bool HasItem(string itemName)
+		public bool HasItem(Item i)
 		{
-			bool hasIt = (this.bag.Inside(itemName) || this.equiped.Inside(itemName));
+			bool hasIt = (this.bag.Inside(i) || this.equiped.Inside(i));
 			return hasIt;
+		}
+		
+		public bool HasKey(string keyname)
+		{
+			foreach (Item i in this.bag.bag)
+				if (i.Name == keyname)
+					return true;
+			return false;
 		}
 		
 		/// <summary>
@@ -72,9 +80,9 @@ namespace Game
 		/// <param name='name'>
 		/// Name.
 		/// </param>
-		public string DropItem(string name)
+		public string DropItem(Item i)
 		{
-			string msg = this.bag.Remove(name);
+			string msg = this.bag.Remove(i);
 			return msg;
 		}
 		
@@ -87,9 +95,8 @@ namespace Game
 		/// <param name='name'>
 		/// If set to <c>true</c> name.
 		/// </param>
-		public bool CanEquip(string name)
+		public bool CanEquip(Item i)
 		{
-			Item i = this.bag.GetItem(name);
 			return this.body.CanEquip(i);
 		}
 		
@@ -99,13 +106,12 @@ namespace Game
 		/// <param name='name'>
 		/// Name.
 		/// </param>
-		public string MakeSpaceForEquipment(string name)
+		public string MakeSpaceForEquipment(Item i)
 		{
 			string msg = "Making space for new items";
-			bool isInside = this.bag.Inside(name);
+			bool isInside = this.bag.Inside(i);
 			if (isInside)
 			{
-				Item i = this.bag.GetItem(name);
 				// list of covered body parts
 				List<string> slots = new List<string>();
 				foreach(var pair in ((Equipment)i).Body)
@@ -124,7 +130,7 @@ namespace Game
 				// strip these body parts
 				foreach (Equipment e in toRemove)
 				{
-					msg += ("\n" + this.StripItem(e.Name));
+					msg += ("\n" + this.StripItem(e));
 				}
 			}
 			return msg;
@@ -136,26 +142,25 @@ namespace Game
 		/// <param name='name'>
 		/// Name.
 		/// </param>
-		public string EquipItem(string name, bool force = false)
+		public string EquipItem(Item i, bool force = false)
 		{
 			string msg = "Attempt to equip and item";
 			// can the thing be equiped?
-			if (this.CanEquip(name))
+			if (this.CanEquip(i))
 			{
 				// Is the item already inside bag?
-				bool isInside = this.bag.Inside(name);
+				bool isInside = this.bag.Inside(i);
 				if (isInside)
 				{
-					Item i = this.bag.GetItem(name);
 					// can the Item be put on body? (are there empty slots?)
 					bool canEquip = this.body.CanEquip(i);
 					if (canEquip)
 					{
-						msg += this.bag.Remove(name); // remove from the bag
+						msg += this.bag.Remove(i); // remove from the bag
 						msg += this.equiped.Add(i); // equip
 						this.body.UpdateBody((Equipment)i, true); // update body slots
 						this.UpdateCharacteristics((Equipment)i, true); // update current characteristics
-						msg = String.Format("{0} has been equiped", name);
+						msg = String.Format("{0} has been equiped", i.Name);
 					}
 						
 				}
@@ -166,11 +171,11 @@ namespace Game
 			{
 				if (force)
 				{
-					this.MakeSpaceForEquipment(name);
-					this.EquipItem(name, false);
+					this.MakeSpaceForEquipment(i);
+					this.EquipItem(i, false);
 				}
 				else
-					msg = String.Format("{0} can not be equiped", name);			
+					msg = String.Format("{0} can not be equiped", i.Name);			
 			}
 			return msg;
 		}
@@ -181,22 +186,21 @@ namespace Game
 		/// <param name='name'>
 		/// Name.
 		/// </param>
-		public string StripItem(string name)
+		public string StripItem(Item i)
 		{
-			Item i = this.equiped.GetItem(name);
 			bool spaceInBag = (this.bag.bag.Count < this.bag.maxsize);
 			string msg;
 			if (spaceInBag)
 			{
-				this.equiped.Remove(name);
+				this.equiped.Remove(i);
 				this.bag.Add(i);
 				this.body.UpdateBody((Equipment)i, false);
 				this.UpdateCharacteristics((Equipment)i, false);
-				msg = String.Format("{0} has been stripped and put into bag",name);
+				msg = String.Format("{0} has been stripped and put into bag", i.Name);
 			}
 			else
 			{
-				msg = String.Format("{0} can not be stripped, because the bag is full", name);
+				msg = String.Format("{0} can not be stripped, because the bag is full", i.Name);
 			}
 			return msg;
 		}
@@ -371,10 +375,10 @@ namespace Game
 				case "strip":
 				{
 					isNum = int.TryParse(words[1], out n);
-					bool canStrip = this.equiped.bag.Count >= n;
+					bool canStrip = this.equiped.Count() >= n;
 					if (canStrip && isNum)
 					{
-						messageBoard.Enqueue(this.StripItem(this.equiped.bag[n-1].Name));
+						messageBoard.Enqueue(this.StripItem(this.equiped.bag[n-1]));
 					}
 					else
 					{
@@ -385,11 +389,11 @@ namespace Game
 				case "equip":
 				{
 					isNum = int.TryParse(words[1], out n);
-					bool canEquip = this.bag.bag.Count >= n;
+					bool canEquip = this.bag.Count() >= n;
 					bool isEquipment = this.bag.bag[n-1] is Equipment;
 					if (canEquip && isNum && isEquipment)
 					{
-						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1].Name,true));
+						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1],true));
 					}
 					else
 					{
@@ -400,10 +404,10 @@ namespace Game
 				case "drop":
 				{
 					isNum = int.TryParse(words[1], out n);
-					bool canDrop = this.bag.bag.Count >= n;
+					bool canDrop = this.bag.Count() >= n;
 					if (canDrop && isNum)
 					{
-						messageBoard.Enqueue(this.DropItem(this.bag.bag[n-1].Name));
+						messageBoard.Enqueue(this.DropItem(this.bag.bag[n-1]));
 					}
 					else
 					{

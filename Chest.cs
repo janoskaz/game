@@ -63,7 +63,7 @@ namespace Game
 					{
 						p.PickItem(this.Content.bag[n-1]);
 						messageBoard.Enqueue(this.Content.bag[n-1].Name);
-						this.Content.Remove(this.Content.bag[n-1].Name);
+						this.Content.Remove(this.Content.bag[n-1]);
 					}
 					else
 					{
@@ -79,7 +79,7 @@ namespace Game
 					{
 						this.Content.Add(p.bag.GetItem(p.bag.bag[n-1].Name));
 						messageBoard.Enqueue(p.bag.bag[n-1].Name);
-						p.DropItem(p.bag.bag[n-1].Name);
+						p.DropItem(p.bag.bag[n-1]);
 					}
 					else
 					{

@@ -68,7 +68,7 @@ namespace Game
 				return true;
 			}
 			string keyname = this.Keyname;
-			bool hasKey = p.HasItem(keyname);
+			bool hasKey = p.HasKey(keyname);
 			string msg2 = "";
 			if (hasKey)
 			{
