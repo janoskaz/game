@@ -105,7 +105,7 @@ class Program
 			Console.CursorLeft = 0;
 			Console.WriteLine("Movement - arrows");
 			Console.WriteLine("End - escape");
-			Console.WriteLine("Inventory - enter");
+			Console.WriteLine("Inventory - Enter");
 			Console.WriteLine();
 			Console.WriteLine(message);
 			

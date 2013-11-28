@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Game
 {
@@ -450,6 +451,9 @@ namespace Game
 			{
 				msg += "Enemy has been slain";
 				l2.Block = this.BecameCorpse();
+				Console.WriteLine("\nThe fight is over, press any key to loot the corpse.");
+				Console.ReadKey();
+				l2.Block.PerformAction(p, l, out msg, out l2);
 			}				
 			return f;
 		}
