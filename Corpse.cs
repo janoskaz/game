@@ -24,6 +24,7 @@ namespace Game
 			while (lootChest)
 			{
 				Console.Clear();
+				Console.WriteLine("Some might find it disgusting, but looting corpses is the only way to survive in this world.");
 				Console.WriteLine("THE CORPSE HAS:");
 				Console.Write(this.Content.ToString());
 				Console.WriteLine();
@@ -31,7 +32,7 @@ namespace Game
 				Console.Write(p.bag.ToString());
 				Console.WriteLine();
 				
-				Console.WriteLine("To equip item, write 'pick #of_equipment'\n" +
+				Console.WriteLine("To pick item, write 'pick #of_equipment'\n" +
 					"To drop item from inventory, write 'drop #of_equipment'\n" +
 					"To go back to game, write 'close'\n");
 				

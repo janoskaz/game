@@ -27,6 +27,7 @@ namespace Game
 			while (lootChest)
 			{
 				Console.Clear();
+				Console.WriteLine("You have opened a chest");
 				Console.WriteLine("CONTENT OF CHEST");
 				Console.Write(this.Content.ToString());
 				Console.WriteLine();
@@ -34,7 +35,7 @@ namespace Game
 				Console.Write(p.bag.ToString());
 				Console.WriteLine();
 				
-				Console.WriteLine("To equip item, write 'pick #of_equipment'\n" +
+				Console.WriteLine("To pick item, write 'pick #of_equipment'\n" +
 					"To drop item from inventory, write 'drop #of_equipment'\n" +
 					"To go back to game, write 'close'\n");
 				
@@ -57,6 +58,11 @@ namespace Game
 				}
 				case "pick":
 				{
+					if (words.Length<2)
+					{
+						messageBoard.Enqueue("Wrong format of command.");
+						continue;
+					}
 					isNum = int.TryParse(words[1], out n);
 					bool canEquip = this.Content.bag.Count >= n;
 					if (canEquip && isNum)
@@ -73,6 +79,11 @@ namespace Game
 				}
 				case "drop":
 				{
+					if (words.Length<2)
+					{
+						messageBoard.Enqueue("Wrong format of command.");
+						continue;
+					}
 					isNum = int.TryParse(words[1], out n);
 					bool canDrop = p.bag.bag.Count >= n;
 					if (canDrop && isNum)

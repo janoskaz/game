@@ -375,6 +375,11 @@ namespace Game
 				}
 				case "strip":
 				{
+					if (words.Length<2)
+					{
+						messageBoard.Enqueue("Wrong format of command.");
+						continue;
+					}
 					isNum = int.TryParse(words[1], out n);
 					bool canStrip = this.equiped.Count() >= n;
 					if (canStrip && isNum)
@@ -389,6 +394,11 @@ namespace Game
 				}
 				case "equip":
 				{
+					if (words.Length<2)
+					{
+						messageBoard.Enqueue("Wrong format of command.");
+						continue;
+					}
 					isNum = int.TryParse(words[1], out n);
 					bool canEquip = this.bag.Count() >= n;
 					bool isEquipment = this.bag.bag[n-1] is Equipment;
@@ -404,6 +414,11 @@ namespace Game
 				}
 				case "drop":
 				{
+					if (words.Length<2)
+					{
+						messageBoard.Enqueue("Wrong format of command.");
+						continue;
+					}
 					isNum = int.TryParse(words[1], out n);
 					bool canDrop = this.bag.Count() >= n;
 					if (canDrop && isNum)
