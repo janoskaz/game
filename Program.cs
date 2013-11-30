@@ -95,6 +95,7 @@ class Program
 		while(!end)
 		{
 			Console.Clear();
+			dungeon.CalculateVisibility(p);
 			dungeon.Draw();			
 			
 			Console.CursorLeft = p.X;

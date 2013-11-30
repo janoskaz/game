@@ -7,12 +7,14 @@ namespace Game
 		public int X {get; set;}
 		public int Y {get; set;}
 		public IPlace Block {get; set;}
+		public bool Visible {get; set;}
 		
 		public Location (int x, int y, IPlace o)
 		{
 			X = x;
 			Y = y;
 			Block = o;
+			Visible = false;
 		}
 		
 		public char Symbol()

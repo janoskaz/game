@@ -234,7 +234,7 @@ namespace Game
 			// get attack value, set default dice and default weapon to bare hands
 			int attack = this.CurrentCharacteristics.attack;
 			Dice d = this.dice; 
-			string weapon = "Bare hands"; 
+			string weapon = "bare hands"; 
 			// if a weapon is equiped, find out the name and dice of this weapon
 			foreach (Item i in this.equiped.bag)
 			{
