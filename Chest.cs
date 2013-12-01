@@ -4,11 +4,14 @@ namespace Game
 {
 	public class Chest :Item
 	{
+		protected string message;
+		
 		public Inventory Content {get; set;}
 		
 		public Chest (string name, Inventory content) :base(name)
 		{
 			Content = content;
+			message = "You have opened a chest\nCONTENT OF CHEST";
 		}
 		
 		public override char Symbol()
@@ -27,8 +30,7 @@ namespace Game
 			while (lootChest)
 			{
 				Console.Clear();
-				Console.WriteLine("You have opened a chest");
-				Console.WriteLine("CONTENT OF CHEST");
+				Console.WriteLine(this.message);
 				Console.Write(this.Content.ToString());
 				Console.WriteLine();
 				Console.WriteLine("YOUR INVENTORY");

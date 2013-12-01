@@ -19,7 +19,7 @@ namespace Game
 	        this.Limit = limit;
 	    }
 	
-	    public new void Enqueue(T item)
+	    public void Enqueue(T item)
 	    {
 	        if (this.Count >= this.Limit)
 	        {
