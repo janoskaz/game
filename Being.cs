@@ -365,7 +365,6 @@ namespace Game
 				messageBoard.Enqueue(response);
 				string[] words = response.Split(' ');
 				int n;
-				bool isNum;
 				switch (words[0])
 				{
 				case "close":
@@ -375,59 +374,40 @@ namespace Game
 				}
 				case "strip":
 				{
-					if (words.Length<2)
+					try
 					{
-						messageBoard.Enqueue("Wrong format of command.");
-						continue;
-					}
-					isNum = int.TryParse(words[1], out n);
-					bool canStrip = this.equiped.Count() >= n;
-					if (canStrip && isNum)
-					{
+						n = int.Parse(words[1]);
 						messageBoard.Enqueue(this.StripItem(this.equiped.bag[n-1]));
 					}
-					else
+					catch
 					{
-						messageBoard.Enqueue("Can not strip this item");
+						messageBoard.Enqueue("Something wrong with your output");
 					}
 					break;
 				}
 				case "equip":
 				{
-					if (words.Length<2)
+					try
 					{
-						messageBoard.Enqueue("Wrong format of command.");
-						continue;
+						n = int.Parse(words[1]);
+						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1]));
 					}
-					isNum = int.TryParse(words[1], out n);
-					bool canEquip = this.bag.Count() >= n;
-					bool isEquipment = this.bag.bag[n-1] is Equipment;
-					if (canEquip && isNum && isEquipment)
+					catch
 					{
-						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1],true));
-					}
-					else
-					{
-						messageBoard.Enqueue("Can not equip this item");
+						messageBoard.Enqueue("Something wrong with your output");
 					}
 					break;
 				}
 				case "drop":
 				{
-					if (words.Length<2)
+					try
 					{
-						messageBoard.Enqueue("Wrong format of command.");
-						continue;
-					}
-					isNum = int.TryParse(words[1], out n);
-					bool canDrop = this.bag.Count() >= n;
-					if (canDrop && isNum)
-					{
+						n = int.Parse(words[1]);
 						messageBoard.Enqueue(this.DropItem(this.bag.bag[n-1]));
 					}
-					else
+					catch
 					{
-						messageBoard.Enqueue("Can not drop this item");
+						messageBoard.Enqueue("Something wrong with your output");
 					}
 					break;
 				}

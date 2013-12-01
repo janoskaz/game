@@ -50,7 +50,6 @@ namespace Game
 				messageBoard.Enqueue(response);
 				string[] words = response.Split(' ');
 				int n;
-				bool isNum;
 				switch (words[0])
 				{
 				case "close":
@@ -60,43 +59,31 @@ namespace Game
 				}
 				case "pick":
 				{
-					if (words.Length<2)
+					try
 					{
-						messageBoard.Enqueue("Wrong format of command.");
-						continue;
-					}
-					isNum = int.TryParse(words[1], out n);
-					bool canEquip = this.Content.bag.Count >= n;
-					if (canEquip && isNum)
-					{
+						n = int.Parse(words[1]);
 						p.PickItem(this.Content.bag[n-1]);
 						messageBoard.Enqueue(this.Content.bag[n-1].Name);
 						this.Content.Remove(this.Content.bag[n-1]);
 					}
-					else
+					catch
 					{
-						messageBoard.Enqueue("Can not equip this item");
+						messageBoard.Enqueue("Something wrong with your output");
 					}
 					break;
 				}
 				case "drop":
 				{
-					if (words.Length<2)
+					try
 					{
-						messageBoard.Enqueue("Wrong format of command.");
-						continue;
-					}
-					isNum = int.TryParse(words[1], out n);
-					bool canDrop = p.bag.bag.Count >= n;
-					if (canDrop && isNum)
-					{
+						n = int.Parse(words[1]);
 						this.Content.Add(p.bag.GetItem(p.bag.bag[n-1].Name));
 						messageBoard.Enqueue(p.bag.bag[n-1].Name);
 						p.DropItem(p.bag.bag[n-1]);
 					}
-					else
+					catch
 					{
-						messageBoard.Enqueue("Can not drop this item");
+						messageBoard.Enqueue("Something wrong with your output");
 					}
 					break;
 				}
@@ -112,4 +99,3 @@ namespace Game
 		}
 	}
 }
-
