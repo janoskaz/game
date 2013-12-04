@@ -13,34 +13,17 @@ class Program
 		Console.Clear();
 		
 		// create world
-		Map dungeon = new Map(15,5);
+		Map dungeon = new Map();
+		
+		// load map from source file - so far only map dimension and walls
+		dungeon.LoadMap("map.dat");
 		
 		//create dices
 		Dice dice6 = new Dice(6);	
 		
-		// create walls
-		for (int i = 0; i<10; i++){
-			dungeon.AddLocation(new Location(i,0, new Wall()));
-			dungeon.AddLocation(new Location(i,4, new Wall()));
-		}		
-		for (int i = 0; i<5; i++){
-			dungeon.AddLocation(new Location(0,i,new Wall()));
-			dungeon.AddLocation(new Location(9,i,new Wall()));
-		}
-		
 		// doors and hallway behind them
 		Door door = new Door("In front of you are solid wooden doors. You will need a key to open them.", "Rusty key", true);
 		dungeon.AddLocation(new Location(9,2,door));
-		
-		dungeon.AddLocation(new Location(13,1,new Wall()));
-		dungeon.AddLocation(new Location(13,2,new Wall()));
-		dungeon.AddLocation(new Location(13,3,new Wall()));
-		dungeon.AddLocation(new Location(12,1,new Wall()));
-		dungeon.AddLocation(new Location(12,3,new Wall()));
-		dungeon.AddLocation(new Location(11,1,new Wall()));
-		dungeon.AddLocation(new Location(11,3,new Wall()));
-		dungeon.AddLocation(new Location(10,1,new Wall()));
-		dungeon.AddLocation(new Location(10,3,new Wall()));
 		
 		// key to the doors, small sword and chest toput them to
 		Item key = new Item("Rusty key");

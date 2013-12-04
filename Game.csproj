@@ -52,4 +52,7 @@
     <Compile Include="IPlace.cs" />
     <Compile Include="Corpse.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="files\" />
+  </ItemGroup>
 </Project>

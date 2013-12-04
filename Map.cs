@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.IO;
 
 namespace Game
 {
@@ -10,7 +11,11 @@ namespace Game
 		
 		public Location[,] location;
 		
-		public Map (int x, int y)
+		public Map ()
+		{
+		}
+		
+		public void CreateMapField(int x, int y)
 		{
 			Heigth = y;
 			Width = x;
@@ -67,6 +72,44 @@ namespace Game
 				}
 			}
 			
+		}
+		
+		public void LoadMap(string filename)
+		{
+			string startupPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+filename);
+			
+			using (StreamReader sr = new StreamReader(startupPath))
+			{
+				string s;
+				while ((s = sr.ReadLine()) != null)
+				{
+					try
+					{
+						string[] splitted = s.Split(';');
+						string klass = splitted[0];
+						int x = int.Parse (splitted[1]);
+						int y = int.Parse (splitted[2]);
+						switch(klass)
+							{
+							case "Map":
+							{
+								this.CreateMapField(x,y);
+								break;
+							}
+							case "Wall":
+							{
+								this.AddLocation( new Location( x,y, new Wall() ) );
+								break;
+							}
+						}
+					}
+					catch
+					{
+						Console.WriteLine("Configuration file is incorrect.");
+					}
+					
+				}
+			}
 		}
 	
 	}
