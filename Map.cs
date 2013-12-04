@@ -90,17 +90,26 @@ namespace Game
 						int x = int.Parse (splitted[1]);
 						int y = int.Parse (splitted[2]);
 						switch(klass)
-							{
-							case "Map":
-							{
-								this.CreateMapField(x,y);
-								break;
-							}
-							case "Wall":
-							{
-								this.AddLocation( new Location( x,y, new Wall() ) );
-								break;
-							}
+						{
+						case "Map":
+						{
+							this.CreateMapField(x,y);
+							break;
+						}
+						case "Wall":
+						{
+							this.AddLocation( new Location( x,y, new Wall() ) );
+							break;
+						}
+						case "Door":
+						{
+							string msg = splitted[3];
+							string keyname = splitted[4];
+							bool locked = splitted[5] == "true";
+							this.AddLocation( new Location( x,y, new Door(msg, keyname, locked)  ) );
+							break;
+						}
+								
 						}
 					}
 					catch

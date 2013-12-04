@@ -15,15 +15,11 @@ class Program
 		// create world
 		Map dungeon = new Map();
 		
-		// load map from source file - so far only map dimension and walls
+		// load map from source file - so far only map dimension, walls and doors
 		dungeon.LoadMap("map.dat");
 		
 		//create dices
 		Dice dice6 = new Dice(6);	
-		
-		// doors and hallway behind them
-		Door door = new Door("In front of you are solid wooden doors. You will need a key to open them.", "Rusty key", true);
-		dungeon.AddLocation(new Location(9,2,door));
 		
 		// key to the doors, small sword and chest toput them to
 		Item key = new Item("Rusty key");

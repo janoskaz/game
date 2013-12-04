@@ -33,3 +33,4 @@ Wall;12;3
 Wall;13;1
 Wall;13;2
 Wall;13;3
+Door;9;2;In front of you are solid wooden doors. You will need a key to open them.;Rusty key;true
