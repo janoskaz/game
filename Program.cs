@@ -13,11 +13,15 @@ class Program
 		Console.Clear();
 		
 		// create world
-		Map dungeon = new Map();
+		//Map dungeon = new Map();
 		
 		// load map from source file - so far only map dimension, walls and doors
-		dungeon.LoadMap("map.dat");
+		//dungeon.LoadMap("map.dat");
 		
+		ThisGame g = new ThisGame();
+		g.RunGame();
+		
+		/*
 		//create dices
 		Dice dice6 = new Dice(6);	
 		
@@ -32,6 +36,8 @@ class Program
 		Chest chest = new Chest("Small wooden chest", chestInventory);
 		
 		dungeon.AddLocation(new Location(1,1,chest));
+		
+		
 		
 		// create goblin
 		Characteristics ch_goblin = new Characteristics(15, 5, 1, 0);
@@ -67,6 +73,7 @@ class Program
 			ch = new Characteristics(35, 5, 7, 2);
 		Player p = new Player(name, ch, 100, dice6, 3, 3);
 		
+		
 		// main loop - runnig the program
 		bool end = false;
 		
@@ -86,6 +93,7 @@ class Program
 			Console.WriteLine("Movement - arrows");
 			Console.WriteLine("End - escape");
 			Console.WriteLine("Inventory - Enter");
+			Console.WriteLine("Save current player - press S");
 			Console.WriteLine();
 			Console.WriteLine(message);
 			
@@ -94,6 +102,8 @@ class Program
 				end = true;
 			else if (c.Key == ConsoleKey.Enter)
 				p.ManageInventory();
+			else if (c.Key == ConsoleKey.S)
+				p.Save();
 			p.Move(c, dungeon, out message);
 			
 			if (!p.Alive())
@@ -105,6 +115,7 @@ class Program
 				
 		}		
 		
+		*/
 	}
 	
 }

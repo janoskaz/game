@@ -51,6 +51,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="IPlace.cs" />
     <Compile Include="Corpse.cs" />
+    <Compile Include="ThisGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="files\" />

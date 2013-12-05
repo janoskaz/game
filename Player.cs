@@ -1,5 +1,7 @@
 using System;
 using System.Threading;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Game
 {
@@ -9,7 +11,7 @@ namespace Game
 		public int Y {get; set;}
 		public string Message {get; set;}
 		
-		public Player (string name, Characteristics ch, int bagsize, Dice dice, int x, int y) :base(name, ch, bagsize, dice)
+		public Player (string name, Characteristics ch, Characteristics currentCh, int bagsize, Dice dice, int x, int y) :base(name, ch, currentCh, bagsize, dice)
 		{
 			X = x;
 			Y = y;
@@ -96,6 +98,74 @@ namespace Game
 				Thread.Sleep(500);
 			}
 			return this.Alive();
+		}
+		
+		public void Save(out string message)
+		{
+			string startupPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+this.Name.ToLower()+".plr");
+			
+			using (StreamWriter sw = new StreamWriter(startupPath))
+			{
+				// write first line with name and coordinates
+				string[] plr = {"Player" ,Name, X.ToString(), Y.ToString()};
+				string plrJoin = String.Join(";", plr);
+				sw.WriteLine(plrJoin);
+				
+				// second line with characteristics
+				string[] characteristics = {"Characteristics" ,this.Characteristics.hitpoints.ToString(), 
+					this.Characteristics.attack.ToString(), this.Characteristics.defence.ToString(), this.Characteristics.speed.ToString()};
+				string charJoin = String.Join(";", characteristics);
+				sw.WriteLine(charJoin);
+				
+				// third line with current characteristics
+				string[] currentCharacteristics = {"CurrentCharacteristics" ,(this.CurrentCharacteristics.hitpoints - this.Characteristics.hitpoints).ToString(), 
+					(this.CurrentCharacteristics.attack - this.Characteristics.attack).ToString(),
+					(this.CurrentCharacteristics.defence - this.Characteristics.defence).ToString(),
+					(this.CurrentCharacteristics.speed - this.Characteristics.speed).ToString()};
+				string curCharJoin = String.Join(";", currentCharacteristics);
+				sw.WriteLine(curCharJoin);
+				
+				// fourth line with the size of the bag
+				sw.WriteLine("Bagsize;"+this.bag.maxsize);
+				// add all items in the bag
+				foreach (Item i in this.bag.bag)
+				{
+					switch(i.GetType().ToString())
+					{
+					case "Game.Item": // it item, write item
+					{
+						sw.WriteLine("Bag;Game.Item;"+i.Name);
+						break;
+					}
+					default: // if equipment or weapon, saving object is the same
+					{
+						string output = "Bag;" + i.GetType().ToString() + ";" + i.Name; // bag + type of item
+						foreach (var pair in ((Equipment)i).Body) // all body parts as binary numbers
+							output += ";" + pair.Value.ToString();						
+						output += ";"+((Equipment)i).Characteristics.hitpoints.ToString(); // add characteristics
+						output += ";"+((Equipment)i).Characteristics.attack.ToString();
+						output += ";"+((Equipment)i).Characteristics.defence.ToString();
+						output += ";"+((Equipment)i).Characteristics.speed.ToString();
+						sw.WriteLine(output);
+						break;
+					}
+					}
+				}
+				// add all items currently equiped
+				foreach (Item i in this.equiped.bag)
+				{
+					string output = "Equipment;" + i.GetType().ToString() + ";" + i.Name; // bag + type of item
+					foreach (var part in ((Equipment)i).Body) // all body parts as binary numbers
+						output += ";" + part.Value.ToString();						
+					output += ";"+((Equipment)i).Characteristics.hitpoints.ToString(); // add characteristics
+					output += ";"+((Equipment)i).Characteristics.attack.ToString();
+					output += ";"+((Equipment)i).Characteristics.defence.ToString();
+					output += ";"+((Equipment)i).Characteristics.speed.ToString();
+					sw.WriteLine(output);
+				}
+				
+			}
+			message = "Saved";
 		}
 		
 		new public char Symbol()

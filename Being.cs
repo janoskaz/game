@@ -20,7 +20,7 @@ namespace Game
 		public Inventory bag;
 		
 		// everyone has things, which are currently equiped
-		protected Inventory equiped;
+		public Inventory equiped;
 		
 		// Everyone has a body
 		private Body body = new Body( new List<string>());
@@ -40,11 +40,11 @@ namespace Game
 		/// <param name='bagsize'>
 		/// Bagsize.
 		/// </param>
-		public Being (string name, Characteristics ch, int bagsize, Dice dice)
+		public Being (string name, Characteristics ch,Characteristics currentCh, int bagsize, Dice dice)
 		{
 			this.Name = name;
 			this.Characteristics = ch;
-			this.CurrentCharacteristics = ch;
+			this.CurrentCharacteristics = currentCh;
 			this.bag = new Inventory(bagsize);
 			this.equiped = new Inventory(bagsize);
 			this.dice = dice;
@@ -221,6 +221,11 @@ namespace Game
 			int	speed = i.Characteristics.speed* multiplier;
 						
 			this.CurrentCharacteristics.Update(hitpoints, attack, defence, speed);
+		}
+		
+		public void SetCurrentCharacteriscs(Characteristics ch)
+		{
+			this.CurrentCharacteristics = ch;
 		}
 		
 		/// <summary>
