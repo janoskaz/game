@@ -16,7 +16,7 @@ namespace Game
 
 			Dice dice6 = new Dice(6);
 			
-			Player p = LoadPlayer("odin", dice6);
+			Player p = InitializePlayer(dice6);
 			
 			// main loop - running the program
 			bool end = false;
@@ -240,6 +240,119 @@ namespace Game
 			return newplayer;
 		
 	}
+		
+		public Player InitializePlayer(Dice dice)
+		{
+			string startupPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files");
+			
+			List<string> players = new List<string>();
+			
+			// initialize empty player, which will be overriden
+			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, dice, 0, 0);
+			// list of all players ctored in a database
+			DirectoryInfo dir = new DirectoryInfo(startupPath);
+			foreach (FileInfo file in dir.GetFiles())
+			{
+				string filename = file.Name;
+				if (filename.EndsWith(".plr"))
+				{
+					string newname = char.ToUpper(filename[0]) + filename.Substring(1); // correct name with first capital letter
+					players.Add (newname.Replace(".plr",""));
+				}
+			}
+			
+			// ask player, if he want to chose from existing players, or create a new one
+			if (players.Count == 0)
+			{
+				p = CreateNewPlayer(dice);
+				return p;
+			}
+			
+			bool ask = true;
+			
+			while (ask)
+			{
+				Console.WriteLine("Do you wish to create a new player? [y/n]");
+				char answer = Console.ReadKey().KeyChar;
+				Console.WriteLine();
+				switch(answer)
+				{
+				case 'y':
+				{
+					p = CreateNewPlayer(dice);
+					ask = false;
+					break;
+				}
+				case 'n':
+				{
+					p = PickCharacter(players, dice);
+					ask = false;
+					break;
+				}
+				default:
+				{
+					break;
+				}
+				}				
+				
+			}
+			return p;
+					
+		}
+		
+		public Player CreateNewPlayer(Dice dice)
+		{
+			Console.WriteLine("What is the name of your hero?");
+			string name = Console.ReadLine().Trim();
+			int choice = 0;
+			string userInput;
+			while ((choice!=1) && (choice!=2))
+			{
+				Console.WriteLine("What is body constitution of {0}", name);
+				Console.WriteLine("Press 1 for strong and resilient");
+				Console.WriteLine("Press 2 for agile and quick");
+				userInput = Console.ReadLine();
+				int.TryParse(userInput, out choice );
+			}
+			Characteristics ch;
+			if (choice==1)
+				ch = new Characteristics(50, 10, 3, -1);
+			else
+				ch = new Characteristics(35, 5, 7, 2);
+			Player p = new Player(name, ch, ch, 100, dice, 3, 3);
+			return p;
+		}
+		
+		public Player PickCharacter(List<string> players, Dice dice)
+		{
+			// create empty player, which will be overriden
+			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, dice, 0, 0);
+			bool chosen = false;
+			while(!chosen)
+			{
+				Console.WriteLine("Which characters should I load?");
+				Console.WriteLine();
+				
+				int i = 1;
+				foreach (string name in players)
+				{
+					Console.WriteLine("{0}: {1}", i, name);
+				}
+				
+				string n = Console.ReadLine();
+				try
+				{
+					int nint = int.Parse(n)-1;
+					p = LoadPlayer(players[nint], dice);
+					chosen = true;
+				}
+				catch
+				{
+					Console.WriteLine("Your input was incorrect");
+				}
+			}
+			return p;
+		}
 		
 	}
 }
