@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Player name="Odin" x="2" y="2">
+  <Characteristics hitpoints="40" attack="20" defence="7" speed="1" />
+  <CurrentCharacteristics hitpoints="40" attack="25" defence="9" speed="1" />
+  <Bag maxsize="100">
+    <Item name="Rusty key" />
+    <Weapon name="Small sword">
+      <Characteristics hitpoints="0" attack="5" defence="0" speed="2" />
+      <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="False" />
+    </Weapon>
+  </Bag>
+  <Equiped maxsize="100">
+    <Weapon name="Small sword">
+      <Characteristics hitpoints="0" attack="5" defence="0" speed="2" />
+      <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="False" />
+    </Weapon>
+    <Weapon name="Leather armor">
+      <Characteristics hitpoints="0" attack="0" defence="2" speed="-2" />
+      <Body head="False" body="False" legs="False" boots="False" weapon="False" shield="False" />
+    </Weapon>
+  </Equiped>
+  <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="False" />
+</Player>

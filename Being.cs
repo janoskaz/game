@@ -24,7 +24,7 @@ namespace Game
 		public Inventory equiped;
 		
 		// Everyone has a body
-		private Body body = new Body( new List<string>());
+		public Body Body {get; private set;}
 		
 		// Default dice for defence rolls and barehanded attacks
 		public readonly Dice dice;
@@ -49,6 +49,7 @@ namespace Game
 			this.bag = new Inventory(bagsize);
 			this.equiped = new Inventory(bagsize);
 			this.dice = dice;
+			this.Body = new Body( new List<string>()) ;
 		}
 		
 		/// <summary>
@@ -99,7 +100,7 @@ namespace Game
 		/// </param>
 		public bool CanEquip(Item i)
 		{
-			return this.body.CanEquip(i);
+			return this.Body.CanEquip(i);
 		}
 		
 		/// <summary>
@@ -155,12 +156,12 @@ namespace Game
 				if (isInside)
 				{
 					// can the Item be put on body? (are there empty slots?)
-					bool canEquip = this.body.CanEquip(i);
+					bool canEquip = this.Body.CanEquip(i);
 					if (canEquip)
 					{
 						msg += this.bag.Remove(i); // remove from the bag
 						msg += this.equiped.Add(i); // equip
-						this.body.UpdateBody((Equipment)i, true); // update body slots
+						this.Body.UpdateBody((Equipment)i, true); // update body slots
 						this.UpdateCharacteristics((Equipment)i, true); // update current characteristics
 						msg = String.Format("{0} has been equiped", i.Name);
 					}
@@ -196,7 +197,7 @@ namespace Game
 			{
 				this.equiped.Remove(i);
 				this.bag.Add(i);
-				this.body.UpdateBody((Equipment)i, false);
+				this.Body.UpdateBody((Equipment)i, false);
 				this.UpdateCharacteristics((Equipment)i, false);
 				msg = String.Format("{0} has been stripped and put into bag", i.Name);
 			}
@@ -476,7 +477,7 @@ namespace Game
 			XmlElement equiped = this.equiped.ToXml(doc, "Equiped");
 			being.AppendChild(equiped);
 			// add body
-			XmlElement body = this.body.ToXml(doc, "Body");
+			XmlElement body = this.Body.ToXml(doc, "Body");
 			being.AppendChild(body);
 			
 			return being;

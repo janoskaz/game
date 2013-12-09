@@ -48,6 +48,7 @@ goblin.EquipItem(smallsword2);
 dungeon.AddLocation(new Location(11,2, goblin));
 			
 dungeon.ToXml("testmap.xml");
+p.SaveAsXml();
 			//
 			
 			// main loop - running the program

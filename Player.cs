@@ -174,6 +174,45 @@ namespace Game
 			return 'P';
 		}
 		
+		public override XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement plr = doc.CreateElement(elementName);
+			plr.SetAttribute("name", Name); // set name attribute
+			plr.SetAttribute("x", this.X.ToString()); // set coordinates
+			plr.SetAttribute("y", this.Y.ToString()); // set coordinates
+			// add characteristics
+			XmlElement ch = this.Characteristics.ToXml(doc, "Characteristics");
+			plr.AppendChild(ch);
+			// add Current Characteristics
+			XmlElement cch = this.CurrentCharacteristics.ToXml(doc, "CurrentCharacteristics");
+			plr.AppendChild(cch);
+			// add bag
+			XmlElement bag = this.bag.ToXml(doc, "Bag");
+			plr.AppendChild(bag);
+			// add equiped items
+			XmlElement equiped = this.equiped.ToXml(doc, "Equiped");
+			plr.AppendChild(equiped);
+			// add body
+			XmlElement body = this.Body.ToXml(doc, "Body");
+			plr.AppendChild(body);
+			
+			return plr;
+		}
+		
+		public void SaveAsXml()
+		{
+			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/");
+			
+			XmlDocument doc = new XmlDocument();
+			
+			XmlDeclaration header = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+			doc.AppendChild(header);
+			XmlElement root = this.ToXml(doc, "Player");
+			
+			doc.AppendChild(root);
+			doc.Save( Path.Combine(path, this.Name+".xml") );
+		}
+		
 	}
 }
 
