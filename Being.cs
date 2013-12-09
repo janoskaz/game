@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Xml;
 
 namespace Game
 {
@@ -456,6 +457,29 @@ namespace Game
 				l2.Block.PerformAction(p, l, out msg, out l2);
 			}				
 			return f;
+		}
+		
+		public virtual XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement being = doc.CreateElement(elementName);
+			being.SetAttribute("name", Name); // set name attribute
+			// add characteristics
+			XmlElement ch = this.Characteristics.ToXml(doc, "Characteristics");
+			being.AppendChild(ch);
+			// add Current Characteristics
+			XmlElement cch = this.CurrentCharacteristics.ToXml(doc, "CurrentCharacteristics");
+			being.AppendChild(cch);
+			// add bag
+			XmlElement bag = this.bag.ToXml(doc, "Bag");
+			being.AppendChild(bag);
+			// add equiped items
+			XmlElement equiped = this.equiped.ToXml(doc, "Equiped");
+			being.AppendChild(equiped);
+			// add body
+			XmlElement body = this.body.ToXml(doc, "Body");
+			being.AppendChild(body);
+			
+			return being;
 		}
 		
 	}

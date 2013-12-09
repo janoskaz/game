@@ -18,6 +18,38 @@ namespace Game
 			
 			Player p = InitializePlayer(dice6);
 			
+// test - creating XML
+//create dices
+					
+// key to the doors, small sword and chest toput them to
+Item key = new Item("Rusty key");
+Characteristics ch2 = new Characteristics(0, 5, 0, 2);	
+Weapon smallsword = new Weapon("Small sword", ch2, new List<string> {"weapon"}, dice6);
+Inventory chestInventory = new Inventory(10);
+chestInventory.Add(key);
+chestInventory.Add(smallsword);
+			
+Chest chest = new Chest("Small wooden chest", chestInventory);
+
+dungeon.AddLocation(new Location(1,1,chest));
+			
+// add goblin
+Characteristics ch_goblin = new Characteristics(15, 5, 1, 0);
+Being goblin = new Being("Goblin", ch_goblin, ch_goblin, 10, dice6);
+Characteristics chSword = new Characteristics(0, 5, 0, 2);		
+Weapon smallsword2 = new Weapon("Small sword", chSword, new List<string> {"weapon"}, dice6);
+Characteristics chArmor = new Characteristics(0, 0, 2, -2);
+Equipment armor = new Equipment("Leather armor", chArmor, new List<string> {"body"});
+goblin.PickItem(smallsword2);
+goblin.PickItem(armor);
+goblin.EquipItem(armor);
+goblin.EquipItem(smallsword2);
+	
+dungeon.AddLocation(new Location(11,2, goblin));
+			
+dungeon.ToXml("testmap.xml");
+			//
+			
 			// main loop - running the program
 			bool end = false;
 			
@@ -61,7 +93,8 @@ namespace Game
 					Console.ReadKey();
 				}
 					
-			}		
+			}
+			dungeon.ToXml("testmap.xml");
 			
 		}
 		

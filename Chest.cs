@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 
 namespace Game
 {
@@ -97,5 +98,15 @@ namespace Game
 			}
 			return true;
 		}
+		
+		public override XmlElement ToXml (XmlDocument doc, string elementName)
+		{
+			XmlElement chest = doc.CreateElement("Chest");		
+			chest.SetAttribute("name", this.Name);
+			XmlElement inv = this.Content.ToXml(doc, "Inventory");
+			chest.AppendChild(inv);
+			return chest;
+		}
+		
 	}
 }

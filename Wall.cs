@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 
 namespace Game
 {
@@ -11,6 +12,12 @@ namespace Game
 		public override char Symbol()
 		{
 			return '#';
+		}
+		
+		public override XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement wall = doc.CreateElement("Wall");
+			return wall;
 		}
 		
 		public override bool PerformAction(Player p, Location l, out string msg, out Location l2)

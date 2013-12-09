@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 
 namespace Game
 {
@@ -57,6 +58,23 @@ namespace Game
 			{
 				this.MapSymbol = '-';
 			}
+		}
+		
+		public override XmlElement ToXml (XmlDocument doc, string slementName)
+		{
+			XmlElement door = doc.CreateElement("Door");
+			// append description
+			XmlElement msg = doc.CreateElement("Message");
+			msg.InnerXml = Description;
+			door.AppendChild(msg);
+			// append keyname
+			XmlElement keyname = doc.CreateElement("Keyname");
+			keyname.InnerXml = Keyname;
+			door.AppendChild(keyname);
+			// append locked
+			door.SetAttribute("locked", Locked.ToString());
+				
+			return door;
 		}
 		
 		public override bool PerformAction(Player p, Location l, out string msg, out Location l2)

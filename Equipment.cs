@@ -3,6 +3,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Game
 {
@@ -31,7 +32,6 @@ namespace Game
 			this.CanBeEquiped = true;
 			this.Characteristics = ch;
 			this.Body = new Body(lst);
-			this.CanBeEquiped = true;
 		}
 		
 		/// <summary>
@@ -43,6 +43,17 @@ namespace Game
 		public override string ToString ()
 		{
 			return string.Format ("[Item:]\nName: {0}\n{1}\n[Equiped in slots:] {2}", this.Name, this.Characteristics.ToString(), this.Body.ToString());
+		}
+		
+		public override XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement equipment = doc.CreateElement(elementName);
+			equipment.SetAttribute("name", Name);
+			XmlElement ch = this.Characteristics.ToXml(doc, "Characteristics");
+			equipment.AppendChild(ch);
+			XmlElement body = this.Body.ToXml(doc, "Body");
+			equipment.AppendChild(body);
+			return equipment;
 		}
 	}
 }

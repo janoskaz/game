@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 
 namespace Game
 {
@@ -11,6 +12,12 @@ namespace Game
 		public virtual char Symbol()
 		{
 			return ' ';
+		}
+		
+		public virtual XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement basicObject = doc.CreateElement("BasicObject");
+			return basicObject;
 		}
 		
 		public virtual bool PerformAction(Player p, Location l, out string msg, out Location l2)

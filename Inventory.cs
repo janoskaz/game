@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Game
 {
-	public class Inventory
+	public class Inventory :IXml
 	{
 		/// <summary>
 		/// Number of items, which can be stored in an inventory.
@@ -121,6 +122,18 @@ namespace Game
 				position++;
 			}
 			return s;
+		}
+		
+		public XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement inventory = doc.CreateElement(elementName);
+			inventory.SetAttribute("maxsize", this.maxsize.ToString());
+			foreach (IXml i in this.bag)
+			{
+				XmlElement xmli = i.ToXml(doc, i.GetType().ToString().Split('.')[1]);
+				inventory.AppendChild(xmli);
+			}
+			return inventory;
 		}
 	}
 }

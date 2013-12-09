@@ -37,6 +37,7 @@ class Program
 		
 		dungeon.AddLocation(new Location(1,1,chest));
 		
+		dungeon.ToXml();
 		
 		
 		// create goblin

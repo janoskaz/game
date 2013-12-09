@@ -4,6 +4,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Game
 {
@@ -89,6 +90,18 @@ namespace Game
 					output += String.Format("\n{0}", pair.Key);
 			}
 			return output;
+		}
+		
+		public XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement bodylist = doc.CreateElement(elementName);
+			
+			foreach (var pair in this)
+			{
+				bodylist.SetAttribute(pair.Key, pair.Value.ToString());
+			}
+			
+			return bodylist;
 		}
 	}
 }

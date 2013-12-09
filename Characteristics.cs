@@ -4,10 +4,11 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Game
 {
-	public class Characteristics
+	public class Characteristics :IXml
 	{
 		public int hitpoints;
 		public int attack;
@@ -82,6 +83,18 @@ namespace Game
 		{
 			return string.Format ("[Characteristics:]\nHitpoints: {0}\nAttack: {1}\nDefence: {2}\n" +
 				"Speed: {3}", this.hitpoints, this.attack, this.defence, this.speed);
+		}
+		
+		public XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement ch = doc.CreateElement(elementName);
+			// append hitpoints
+			ch.SetAttribute("hitpoints", this.hitpoints.ToString());
+			ch.SetAttribute("attack", this.attack.ToString());
+			ch.SetAttribute("defence", this.defence.ToString());
+			ch.SetAttribute("speed", this.speed.ToString());
+			
+			return ch;
 		}
 		
 	}

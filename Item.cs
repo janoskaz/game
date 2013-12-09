@@ -2,6 +2,7 @@
  * Every item has name and characteristics (attack, defence, hitpoints etc)
  * */
 using System;
+using System.Xml;
 
 namespace Game
 {
@@ -49,6 +50,13 @@ namespace Game
 			msg = "";
 			l2 = l;
 			return true;
+		}
+		
+		public virtual XmlElement ToXml(XmlDocument doc, string elementName="Item")
+		{
+			XmlElement item = doc.CreateElement(elementName);
+			item.SetAttribute("name", Name);
+			return item;
 		}
 	}
 }
