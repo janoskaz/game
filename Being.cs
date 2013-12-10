@@ -230,6 +230,11 @@ namespace Game
 			this.CurrentCharacteristics = ch;
 		}
 		
+		public void SetBody(Body b)
+		{
+			this.Body = b;
+		}
+		
 		/// <summary>
 		/// Calculates the attack roll.
 		/// </summary>

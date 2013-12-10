@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Game
 {
@@ -47,8 +49,9 @@ goblin.EquipItem(smallsword2);
 	
 dungeon.AddLocation(new Location(11,2, goblin));
 			
-dungeon.ToXml("testmap.xml");
-p.SaveAsXml();
+//dungeon.ToXml("testmap.xml");
+//p.SaveAsXml();
+p = this.LoadFromXml("Odin");
 			//
 			
 			// main loop - running the program
@@ -388,5 +391,151 @@ p.SaveAsXml();
 			return p;
 		}
 		
+		public Player LoadFromXml(string playername)
+		{
+			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+playername + ".xml");
+			
+			XmlDocument doc = new XmlDocument();
+			doc.Load(path);
+			
+			XmlNode root = doc.DocumentElement;
+						
+			// get attributes of player - name and positions
+			string name = root.Attributes["name"].Value;
+			int x = int.Parse(root.Attributes["x"].Value);
+			int y = int.Parse(root.Attributes["y"].Value);
+			Console.WriteLine("name: {0}; x: {1}; y: {2}", name, x, y);
+			
+			Characteristics ch = new Characteristics(0,0,0,0);
+			Characteristics cch = new Characteristics(0,0,0,0);
+			Inventory bag = new Inventory(0);
+			Inventory equiped = new Inventory(0);
+			List<string> b = new List<string>();
+			
+			Console.ReadKey();
+			
+			foreach (XmlNode node in root.ChildNodes)
+			{
+				string nodeName = node.Name;
+				switch (nodeName)
+				{
+				case "Characteristics":
+				{
+					ch = LoadCharacteristicsFromXml((XmlElement)node);
+					break;
+				}
+				case "CurrentCharacteristics":
+				{
+					cch = LoadCharacteristicsFromXml((XmlElement)node);
+					break;
+				}
+				case "Bag":
+				{
+					bag = LoadInventoryFromXml((XmlElement)node);
+					break;
+				}
+				case "Equiped":
+				{
+					equiped = LoadInventoryFromXml((XmlElement)node);
+					break;
+				}
+				case "Body":
+				{
+					b = LoadBodyFromXML((XmlElement)node);
+					break;
+				}
+					
+				}
+				
+			}
+			Player p = new Player(name, ch, cch, bag.maxsize, new Dice(6), x, y);
+			p.bag = bag;
+			p.equiped = equiped;
+			p.SetBody(new Body(b));
+			Console.WriteLine(p.ToString());
+			Console.ReadKey();
+			
+			return p;
+		}
+		
+		public Characteristics LoadCharacteristicsFromXml(XmlElement node)
+		{
+			int hp = int.Parse (node.GetAttribute("hitpoints"));
+			int attack = int.Parse (node.GetAttribute("attack"));
+			int defence = int.Parse (node.GetAttribute("defence"));
+			int speed = int.Parse (node.GetAttribute("speed"));
+			Characteristics ch = new Characteristics(hp, attack, defence, speed);
+			return ch;
+		}
+		
+		public List<string> LoadBodyFromXML(XmlElement node)
+		{
+			List<string> lst = new List<string>();
+			if (bool.Parse (node.GetAttribute("body")))
+				lst.Add("body");
+			if (bool.Parse (node.GetAttribute("head")))
+				lst.Add("head");
+			if (bool.Parse (node.GetAttribute("legs")))
+				lst.Add("legs");
+			if (bool.Parse (node.GetAttribute("boots")))
+				lst.Add("boots");
+			if (bool.Parse (node.GetAttribute("weapon")))
+				lst.Add("weapon");
+			if (bool.Parse (node.GetAttribute("shield")))
+				lst.Add("shield");
+			return lst;
+		}
+		
+		public Item LoadItemFromXml(XmlElement node)
+		{
+			string name = node.GetAttribute("name");
+			return new Item(name);
+		}
+		
+		public Equipment LoadEquipmentFromXml(XmlElement node)
+		{
+			string name = node.GetAttribute("name");
+			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
+			List<string> b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
+			return new Equipment(name, ch, b);
+		}
+		
+		public Weapon LoadWeaponFromXml(XmlElement node)
+		{
+			string name = node.GetAttribute("name");
+			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
+			List<string> b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
+			return new Weapon(name, ch, b, new Dice(6));
+		}
+		
+		public Inventory LoadInventoryFromXml(XmlElement node)
+		{
+			int bagsize = int.Parse(node.GetAttribute("maxsize"));
+			Inventory inv = new Inventory(bagsize);
+			foreach (XmlNode child in node.ChildNodes)
+			{
+				XmlElement childElement = (XmlElement)child;
+				string name = childElement.Name;
+				switch(name)
+				{
+				case "Item":
+				{
+					inv.Add(LoadItemFromXml(childElement));
+					break;
+				}
+				case "Equipment":
+				{
+					inv.Add(LoadEquipmentFromXml(childElement));
+					break;
+				}
+				case "Weapon":
+				{
+					inv.Add(LoadWeaponFromXml(childElement));
+					break;
+				}
+				}
+			}
+			return inv;
+		}
 	}
 }
