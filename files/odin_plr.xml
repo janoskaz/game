@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Player name="Odin" x="2" y="2">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Player name="Odin" x="7" y="2">
   <Characteristics hitpoints="40" attack="20" defence="7" speed="1" />
   <CurrentCharacteristics hitpoints="35" attack="25" defence="9" speed="1" />
   <Bag maxsize="100">

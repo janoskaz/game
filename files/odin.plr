@@ -1,8 +1,0 @@
-Player;Odin;2;2
-Characteristics;40;15;5;1
-CurrentCharacteristics;0;5;2;0
-Bagsize;100
-Bag;Game.Item;Rusty key
-Equipment;Game.Weapon;Small sword;False;False;False;False;True;False;0;5;0;2
-Equipment;Game.Weapon;Leather armor;False;False;False;False;False;False;0;0;2;-2
-Bag;Game.Weapon;Small sword;False;False;False;False;True;False;0;5;0;2
