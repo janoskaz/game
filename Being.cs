@@ -26,9 +26,6 @@ namespace Game
 		// Everyone has a body
 		public Body Body {get; private set;}
 		
-		// Default dice for defence rolls and barehanded attacks
-		public readonly Dice dice;
-		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Game.Being"/> class.
 		/// </summary>
@@ -41,15 +38,14 @@ namespace Game
 		/// <param name='bagsize'>
 		/// Bagsize.
 		/// </param>
-		public Being (string name, Characteristics ch,Characteristics currentCh, int bagsize, Dice dice)
+		public Being (string name, Characteristics ch,Characteristics currentCh, int bagsize)
 		{
 			this.Name = name;
 			this.Characteristics = ch;
 			this.CurrentCharacteristics = currentCh;
 			this.bag = new Inventory(bagsize);
 			this.equiped = new Inventory(bagsize);
-			this.dice = dice;
-			this.Body = new Body( new List<string>()) ;
+			this.Body = new Body( new List<string>());
 		}
 		
 		/// <summary>
@@ -245,22 +241,22 @@ namespace Game
 		{
 			// get attack value, set default dice and default weapon to bare hands
 			int attack = this.CurrentCharacteristics.attack;
-			Dice d = this.dice; 
 			string weapon = "bare hands"; 
 			// if a weapon is equiped, find out the name and dice of this weapon
 			foreach (Item i in this.equiped.bag)
 			{
 				if (i.GetType() == typeof(Weapon))
 					{
-						d = ((Weapon)i).dice;
+						attack += Dice.Roll(((Weapon)i).NrFacets);
 						weapon = i.Name;
-						break;
+						Console.WriteLine("{0} attack with {1} and rolls {2}", this.Name, weapon, attack);
+						return attack;
 					}			
 			}
-			// calculate actual attack roll and return it
-			attack += d.Roll();
+			// if being does not have weapon, attack with bare hands and with dice 6
+			attack += Dice.Roll(6);
 			Console.WriteLine("{0} attack with {1} and rolls {2}", this.Name, weapon, attack);
-			return attack;
+			return attack;			
 		}
 		
 		/// <summary>
@@ -284,7 +280,7 @@ namespace Game
 		public int CalculateDefence()
 		{
 			int defence = this.CurrentCharacteristics.defence;
-			defence += this.dice.Roll();
+			defence += Dice.Roll(6); // defende with 6 faceted dice
 			return defence;
 		}
 		
@@ -297,7 +293,7 @@ namespace Game
 		public int CalculateInitiative()
 		{
 			int speed = this.CurrentCharacteristics.speed;
-			speed += this.dice.Roll();
+			speed += Dice.Roll(6); // initiative is rolled with 6 faceted dice
 			return speed;
 		}
 		

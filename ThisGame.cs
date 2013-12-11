@@ -15,11 +15,10 @@ namespace Game
 		public void RunGame()
 		{
 			//Map dungeon = LoadMap("map.dat");
-			Dice dice6 = new Dice(6);
 
-			Player p = InitializePlayer(dice6);
+			Player p = InitializePlayer();
 						
-			Map dungeon = InitializeMap(p, dice6);						
+			Map dungeon = InitializeMap(p);						
 			
 			// main loop - running the program
 			bool end = false;
@@ -69,28 +68,28 @@ namespace Game
 			
 		}
 		
-		public Map InitializeMap(Player p, Dice dice)
+		public Map InitializeMap(Player p)
 		{			
 			string mapname = p.Name + "_map";
 			
 			try
 			{
-				return LoadMapFromXml(mapname, dice);
+				return LoadMapFromXml(mapname);
 			}
 			catch
 			{
-				return LoadMapFromXml("defaultmap", dice);
+				return LoadMapFromXml("defaultmap");
 			}
 		}
 		
-		public Player InitializePlayer(Dice dice)
+		public Player InitializePlayer()
 		{
 			string startupPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files");
 			
 			List<string> players = new List<string>();
 			
 			// initialize empty player, which will be overriden
-			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, dice, 0, 0);
+			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, 0, 0);
 			// list of all players ctored in a database
 			DirectoryInfo dir = new DirectoryInfo(startupPath);
 			foreach (FileInfo file in dir.GetFiles())
@@ -106,7 +105,7 @@ namespace Game
 			// ask player, if he want to chose from existing players, or create a new one
 			if (players.Count == 0)
 			{
-				p = CreateNewPlayer(dice);
+				p = CreateNewPlayer();
 				return p;
 			}
 			
@@ -121,13 +120,13 @@ namespace Game
 				{
 				case 'y':
 				{
-					p = CreateNewPlayer(dice);
+					p = CreateNewPlayer();
 					ask = false;
 					break;
 				}
 				case 'n':
 				{
-					p = PickCharacter(players, dice);
+					p = PickCharacter(players);
 					ask = false;
 					break;
 				}
@@ -142,7 +141,7 @@ namespace Game
 					
 		}
 		
-		public Player CreateNewPlayer(Dice dice)
+		public Player CreateNewPlayer()
 		{
 			Console.WriteLine("What is the name of your hero?");
 			string name = Console.ReadLine().Trim();
@@ -161,14 +160,14 @@ namespace Game
 				ch = new Characteristics(50, 10, 3, -1);
 			else
 				ch = new Characteristics(35, 5, 7, 2);
-			Player p = new Player(name, ch, ch, 100, dice, 3, 3);
+			Player p = new Player(name, ch, ch, 100, 3, 3);
 			return p;
 		}
 		
-		public Player PickCharacter(List<string> players, Dice dice)
+		public Player PickCharacter(List<string> players)
 		{
 			// create empty player, which will be overriden
-			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, dice, 0, 0);
+			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, 0, 0);
 			bool chosen = false;
 			while(!chosen)
 			{
@@ -187,7 +186,7 @@ namespace Game
 				try
 				{
 					int nint = int.Parse(n)-1;
-					p = LoadPlayerFromXml(players[nint], dice);
+					p = LoadPlayerFromXml(players[nint]);
 					chosen = true;
 				}
 				catch
@@ -198,7 +197,7 @@ namespace Game
 			return p;
 		}
 		
-		public Player LoadPlayerFromXml(string playername, Dice dice)
+		public Player LoadPlayerFromXml(string playername)
 		{
 			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+playername.ToLower() + "_plr.xml");
 			
@@ -235,12 +234,12 @@ namespace Game
 				}
 				case "Bag":
 				{
-					bag = LoadInventoryFromXml((XmlElement)node, dice);
+					bag = LoadInventoryFromXml((XmlElement)node);
 					break;
 				}
 				case "Equiped":
 				{
-					equiped = LoadInventoryFromXml((XmlElement)node, dice);
+					equiped = LoadInventoryFromXml((XmlElement)node);
 					break;
 				}
 				case "Body":
@@ -252,7 +251,7 @@ namespace Game
 				}
 				
 			}
-			Player p = new Player(name, ch, cch, bag.maxsize, dice, x, y);
+			Player p = new Player(name, ch, cch, bag.maxsize, x, y);
 			p.bag = bag;
 			p.equiped = equiped;
 			p.SetBody(new Body(b));
@@ -302,15 +301,16 @@ namespace Game
 			return new Equipment(name, ch, b);
 		}
 		
-		public Weapon LoadWeaponFromXml(XmlElement node, Dice dice)
+		public Weapon LoadWeaponFromXml(XmlElement node)
 		{
 			string name = node.GetAttribute("name");
+			int nrFacets = int.Parse(node.GetAttribute("nrfacets"));
 			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
 			List<string> b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
-			return new Weapon(name, ch, b, dice);
+			return new Weapon(name, ch, b, nrFacets);
 		}
 		
-		public Inventory LoadInventoryFromXml(XmlElement node, Dice dice)
+		public Inventory LoadInventoryFromXml(XmlElement node)
 		{
 			int bagsize = int.Parse(node.GetAttribute("maxsize"));
 			Inventory inv = new Inventory(bagsize);
@@ -332,7 +332,7 @@ namespace Game
 				}
 				case "Weapon":
 				{
-					inv.Add(LoadWeaponFromXml(childElement, dice));
+					inv.Add(LoadWeaponFromXml(childElement));
 					break;
 				}
 				}
@@ -340,7 +340,7 @@ namespace Game
 			return inv;
 		}
 		
-		public Map LoadMapFromXml(string mapname, Dice dice)
+		public Map LoadMapFromXml(string mapname)
 		{
 			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+mapname.ToLower() + ".xml");
 			
@@ -358,25 +358,25 @@ namespace Game
 			
 			foreach (XmlNode node in root.ChildNodes)
 			{
-				Location l = LoadLocationFromXml((XmlElement)node, dice);
+				Location l = LoadLocationFromXml((XmlElement)node);
 				newmap.AddLocation(l);
 			}
 			
 			return newmap;
 		}
 		
-		public Location LoadLocationFromXml(XmlElement node, Dice dice)
+		public Location LoadLocationFromXml(XmlElement node)
 		{
 			int x = int.Parse(node.Attributes["x"].Value);
 			int y = int.Parse(node.Attributes["y"].Value);
 			bool visible = bool.Parse(node.Attributes["visible"].Value);
-			IPlace block = LoadBlockFromXml((XmlElement)node.GetElementsByTagName("block")[0], dice);
+			IPlace block = LoadBlockFromXml((XmlElement)node.GetElementsByTagName("block")[0]);
 			Location l = new Location(x, y, block);
 			l.Visible = visible;
 			return l;
 		}
 		
-		public IPlace LoadBlockFromXml(XmlElement node, Dice dice)
+		public IPlace LoadBlockFromXml(XmlElement node)
 		{
 			string type = node.Attributes["type"].Value;
 			
@@ -396,15 +396,15 @@ namespace Game
 			}
 			case "Game.Chest":
 			{
-				return LoadChestFromXml((XmlElement)node.GetElementsByTagName("Chest")[0], dice);
+				return LoadChestFromXml((XmlElement)node.GetElementsByTagName("Chest")[0]);
 			}
 			case "Game.Corpse":
 			{
-				return LoadCorpseFromXml((XmlElement)node.GetElementsByTagName("Corpse")[0], dice);
+				return LoadCorpseFromXml((XmlElement)node.GetElementsByTagName("Corpse")[0]);
 			}
 			case "Game.Being":
 			{
-				return LoadBeingFromXml((XmlElement)node.GetElementsByTagName("Being")[0], dice);
+				return LoadBeingFromXml((XmlElement)node.GetElementsByTagName("Being")[0]);
 			}
 			default:
 			{
@@ -421,23 +421,23 @@ namespace Game
 			return new Door(msg, keyname, locked);
 		}
 		
-		public Chest LoadChestFromXml(XmlElement node, Dice dice)
+		public Chest LoadChestFromXml(XmlElement node)
 		{
 			string name = node.Attributes["name"].Value;
 			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
-			Inventory inv = LoadInventoryFromXml(child, dice);
+			Inventory inv = LoadInventoryFromXml(child);
 			return new Chest(name, inv);
 		}
 		
-		public Corpse LoadCorpseFromXml(XmlElement node, Dice dice)
+		public Corpse LoadCorpseFromXml(XmlElement node)
 		{
 			string name = node.Attributes["name"].Value;
 			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
-			Inventory inv = LoadInventoryFromXml(child, dice);
+			Inventory inv = LoadInventoryFromXml(child);
 			return new Corpse(name, inv);
 		}
 		
-		public Being LoadBeingFromXml(XmlElement node, Dice dice)
+		public Being LoadBeingFromXml(XmlElement node)
 		{
 			// get name of being
 			string name = node.Attributes["name"].Value;
@@ -467,12 +467,12 @@ namespace Game
 				}
 				case "Bag":
 				{
-					bag = LoadInventoryFromXml((XmlElement)subnode, dice);
+					bag = LoadInventoryFromXml((XmlElement)subnode);
 					break;
 				}
 				case "Equiped":
 				{
-					equiped = LoadInventoryFromXml((XmlElement)subnode, dice);
+					equiped = LoadInventoryFromXml((XmlElement)subnode);
 					break;
 				}
 				case "Body":
@@ -484,7 +484,7 @@ namespace Game
 				}
 				
 			}
-			Being being = new Being(name, ch, cch, bag.maxsize, dice);
+			Being being = new Being(name, ch, cch, bag.maxsize);
 			being.bag = bag;
 			being.equiped = equiped;
 			being.SetBody(new Body(b));

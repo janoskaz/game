@@ -3,50 +3,24 @@
 using System;
 
 /// <summary>
-/// Dice.
+/// Dice is a static class with one method - roll, which accepts nr of facets of the dice.
 /// </summary>
 namespace Game
 {
-	public class Dice		
+	static class Dice
 	{
-		/// <summary>
-		/// The random number.
-		/// </summary>
-		private Random random;
+		public static Random rnd = new Random();
 		
 		/// <summary>
-		/// The nr facets of the dice.
+		/// Rolls the dice with specified range from 1 to n+1.
 		/// </summary>
-		public int NrFacets {get; private set;}
-		
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Arena.Dice"/> class.
+		/// <param name='n'>
+		/// N.
 		/// </param>
-		public Dice( int n )
+		public static int Roll(int n)
 		{
-			this.NrFacets = n;
-			this.random = new Random();
+			return rnd.Next(1, n+1);
 		}
-		
-		/// <summary>
-		/// Roll a Dice.
-		/// </summary>
-		public int Roll()
-		{
-			return random.Next(1, this.NrFacets+1);
-		}
-		
-		/// <summary>
-		/// Returns a <see cref="System.String"/> that represents the current <see cref="Game.Dice"/>.
-		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String"/> that represents the current <see cref="Game.Dice"/>.
-		/// </returns>
-		public override string ToString ()
-		{
-			return string.Format ("[Dice] with {0} facets", this.NrFacets);
-		}
-		
 	}
 }
 

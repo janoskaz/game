@@ -35,7 +35,7 @@
       <Chest name="Small wooden chest">
         <Inventory maxsize="10">
           <Item name="Rusty key" />
-          <Weapon name="Small sword">
+          <Weapon name="Small sword" nrfacets="6">
             <Characteristics hitpoints="0" attack="5" defence="0" speed="2" />
             <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="False" />
           </Weapon>
@@ -307,7 +307,7 @@
             <Characteristics hitpoints="0" attack="0" defence="2" speed="-2" />
             <Body head="False" body="True" legs="False" boots="False" weapon="False" shield="False" />
           </Equipment>
-          <Weapon name="Small sword">
+          <Weapon name="Small sword" nrfacets="6">
             <Characteristics hitpoints="0" attack="5" defence="0" speed="2" />
             <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="False" />
           </Weapon>

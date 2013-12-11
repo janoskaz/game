@@ -3,6 +3,9 @@ using System.Xml;
 
 namespace Game
 {
+	/// <summary>
+	/// Door - has some message, description, symbol and name ok key, which opens it.
+	/// </summary>
 	public class Door: BasicObject
 	{
 		public string Description {get; private set;}
@@ -18,7 +21,7 @@ namespace Game
 			Description = description;
 			this.Keyname = key;
 			Locked = locked;
-			if (locked)
+			if (locked) // set symbol based on state of doors (locked/open)
 			{
 				this.MapSymbol = '/';
 			}
@@ -48,6 +51,9 @@ namespace Game
 			return this.MapSymbol;
 		}
 		
+		/// <summary>
+		/// Updates the symbol, depending on state.
+		/// </summary>
 		private void UpdateSymbol()
 		{
 			if (this.Locked)
@@ -60,6 +66,18 @@ namespace Game
 			}
 		}
 		
+		/// <summary>
+		/// write the xml.
+		/// </summary>
+		/// <returns>
+		/// The xml.
+		/// </returns>
+		/// <param name='doc'>
+		/// Document.
+		/// </param>
+		/// <param name='slementName'>
+		/// Slement name.
+		/// </param>
 		public override XmlElement ToXml (XmlDocument doc, string slementName)
 		{
 			XmlElement door = doc.CreateElement("Door");
@@ -77,17 +95,38 @@ namespace Game
 			return door;
 		}
 		
+		/// <summary>
+		/// Performs the action. If user has coorect key, opens the door, else - tells him he needs a key.
+		/// </summary>
+		/// <returns>
+		/// The action.
+		/// </returns>
+		/// <param name='p'>
+		/// If set to <c>true</c> p.
+		/// </param>
+		/// <param name='l'>
+		/// If set to <c>true</c> l.
+		/// </param>
+		/// <param name='msg'>
+		/// If set to <c>true</c> message.
+		/// </param>
+		/// <param name='l2'>
+		/// If set to <c>true</c> l2.
+		/// </param>
 		public override bool PerformAction(Player p, Location l, out string msg, out Location l2)
 		{
 			msg = this.Description;
 			l2 = l;
+			// if the door isnot locked, return true
 			if (!this.Locked)
 			{
 				return true;
 			}
+			// does the user have a key to open the door?
 			string keyname = this.Keyname;
 			bool hasKey = p.HasKey(keyname);
 			string msg2 = "";
+			// open, if user has a key
 			if (hasKey)
 			{
 				this.OpenDoor(out msg2);

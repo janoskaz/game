@@ -2,17 +2,18 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Game
 {
 	public class Weapon: Equipment
 	{
 		// Weapon has a dice, which tells, how big the attack is
-		public readonly Dice dice;
+		public readonly int NrFacets;
 		
-		public Weapon (string name, Characteristics ch, List<string> lst, Dice dice) :base(name, ch, lst)
+		public Weapon (string name, Characteristics ch, List<string> lst, int nrFacets) :base(name, ch, lst)
 		{
-			this.dice = dice;
+			this.NrFacets = nrFacets;
 		}
 		
 		/// <summary>
@@ -24,8 +25,20 @@ namespace Game
 		public override string ToString ()
 		{
 			return string.Format ("[Item:]\nName: {0}\n{1}\n[Equiped in slots:] {2}\nAttack roll with with {3}-sided dice", 
-			                      this.Name, this.Characteristics.ToString(), this.Body.ToString(), this.dice.NrFacets);
+			                      this.Name, this.Characteristics.ToString(), this.Body.ToString(), this.NrFacets);
 			
+		}
+		
+		public override XmlElement ToXml(XmlDocument doc, string elementName)
+		{
+			XmlElement equipment = doc.CreateElement(elementName);
+			equipment.SetAttribute("name", Name);
+			equipment.SetAttribute("nrfacets", NrFacets.ToString());
+			XmlElement ch = this.Characteristics.ToXml(doc, "Characteristics");
+			equipment.AppendChild(ch);
+			XmlElement body = this.Body.ToXml(doc, "Body");
+			equipment.AppendChild(body);
+			return equipment;
 		}
 	}
 }

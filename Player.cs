@@ -12,7 +12,7 @@ namespace Game
 		public int Y {get; set;}
 		public string Message {get; set;}
 		
-		public Player (string name, Characteristics ch, Characteristics currentCh, int bagsize, Dice dice, int x, int y) :base(name, ch, currentCh, bagsize, dice)
+		public Player (string name, Characteristics ch, Characteristics currentCh, int bagsize, int x, int y) :base(name, ch, currentCh, bagsize)
 		{
 			X = x;
 			Y = y;
