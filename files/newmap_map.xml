@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <map width="15" heigth="5">
   <location x="0" y="0" visible="False">
     <block type="Game.Wall">
@@ -297,8 +297,23 @@
     </block>
   </location>
   <location x="11" y="2" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject />
+    <block type="Game.Being">
+      <Being name="Goblin">
+        <Characteristics hitpoints="15" attack="5" defence="1" speed="0" />
+        <CurrentCharacteristics hitpoints="15" attack="10" defence="3" speed="0" />
+        <Bag maxsize="10" />
+        <Equiped maxsize="10">
+          <Equipment name="Leather armor">
+            <Characteristics hitpoints="0" attack="0" defence="2" speed="-2" />
+            <Body head="False" body="True" legs="False" boots="False" weapon="False" shield="False" />
+          </Equipment>
+          <Weapon name="Small sword">
+            <Characteristics hitpoints="0" attack="5" defence="0" speed="2" />
+            <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="False" />
+          </Weapon>
+        </Equiped>
+        <Body head="False" body="True" legs="False" boots="False" weapon="True" shield="False" />
+      </Being>
     </block>
   </location>
   <location x="11" y="3" visible="False">

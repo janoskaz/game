@@ -107,7 +107,7 @@ namespace Game
 			}
 			
 			doc.AppendChild(root);
-			doc.Save( Path.Combine(path, mapName) );
+			doc.Save( Path.Combine(path, mapName + "_map.xml") );
 			
 		}
 		
