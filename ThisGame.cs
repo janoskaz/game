@@ -16,46 +16,10 @@ namespace Game
 		{
 			//Map dungeon = LoadMap("map.dat");
 			Dice dice6 = new Dice(6);
-			
-			Map dungeon = LoadMapFromXml("defaultmap", dice6);
 
 			Player p = InitializePlayer(dice6);
-			
-// test - creating XML
-// test code withount intend
-//create dices
-					
-// key to the doors, small sword and chest toput them to
-			
-Item key = new Item("Rusty key");
-Characteristics ch2 = new Characteristics(0, 5, 0, 2);	
-Weapon smallsword = new Weapon("Small sword", ch2, new List<string> {"weapon"}, dice6);
-Inventory chestInventory = new Inventory(10);
-chestInventory.Add(key);
-chestInventory.Add(smallsword);
-			
-Chest chest = new Chest("Small wooden chest", chestInventory);
-
-dungeon.AddLocation(new Location(1,1,chest));
-			
-// add goblin
-Characteristics ch_goblin = new Characteristics(15, 5, 1, 0);
-Characteristics cch_goblin = new Characteristics(15, 5, 1, 0);
-Being goblin = new Being("Goblin", ch_goblin, cch_goblin, 10, dice6);
-Characteristics chSword = new Characteristics(0, 5, 0, 2);		
-Weapon smallsword2 = new Weapon("Small sword", chSword, new List<string> {"weapon"}, dice6);
-Characteristics chArmor = new Characteristics(0, 0, 2, -2);
-Equipment armor = new Equipment("Leather armor", chArmor, new List<string> {"body"});
-goblin.PickItem(smallsword2);
-goblin.PickItem(armor);
-goblin.EquipItem(armor);
-goblin.EquipItem(smallsword2);
-			goblin.SetCurrentCharacteriscs(cch_goblin);
-	
-dungeon.AddLocation(new Location(11,2, goblin));
-dungeon.ToXml("newmap");
-			
-			
+						
+			Map dungeon = InitializeMap(p, dice6);						
 			
 			// main loop - running the program
 			bool end = false;
@@ -88,6 +52,7 @@ dungeon.ToXml("newmap");
 				else if (c.Key == ConsoleKey.S)
 				{
 					p.SaveAsXml(out message);
+					dungeon.ToXml(p.Name.ToLower());
 					continue;
 				}					
 					
@@ -104,54 +69,18 @@ dungeon.ToXml("newmap");
 			
 		}
 		
-		public Map LoadMap(string filename)
-		{
-			Map newmap = new Map();
+		public Map InitializeMap(Player p, Dice dice)
+		{			
+			string mapname = p.Name + "_map";
 			
-			string startupPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+filename);
-			
-			using (StreamReader sr = new StreamReader(startupPath))
+			try
 			{
-				string s;
-				while ((s = sr.ReadLine()) != null)
-				{
-					try
-					{
-						string[] splitted = s.Split(';');
-						string klass = splitted[0];
-						int x = int.Parse (splitted[1]);
-						int y = int.Parse (splitted[2]);
-						switch(klass)
-						{
-						case "Map":
-						{
-							newmap.CreateMapField(x,y);
-							break;
-						}
-						case "Wall":
-						{
-							newmap.AddLocation( new Location( x,y, new Wall() ) );
-							break;
-						}
-						case "Door":
-						{
-							string msg = splitted[3];
-							string keyname = splitted[4];
-							bool locked = splitted[5] == "true";
-							newmap.AddLocation( new Location( x,y, new Door(msg, keyname, locked)  ) );
-							break;
-						}
-								
-						}
-					}
-					catch
-					{
-						Console.WriteLine("Configuration file is incorrect.");
-					}
-					
-				}
+				return LoadMapFromXml(mapname, dice);
 			}
-			return newmap;
+			catch
+			{
+				return LoadMapFromXml("defaultmap", dice);
+			}
 		}
 		
 		public Player InitializePlayer(Dice dice)
@@ -469,6 +398,10 @@ dungeon.ToXml("newmap");
 			{
 				return LoadChestFromXml((XmlElement)node.GetElementsByTagName("Chest")[0], dice);
 			}
+			case "Game.Corpse":
+			{
+				return LoadCorpseFromXml((XmlElement)node.GetElementsByTagName("Corpse")[0], dice);
+			}
 			case "Game.Being":
 			{
 				return LoadBeingFromXml((XmlElement)node.GetElementsByTagName("Being")[0], dice);
@@ -496,6 +429,14 @@ dungeon.ToXml("newmap");
 			return new Chest(name, inv);
 		}
 		
+		public Corpse LoadCorpseFromXml(XmlElement node, Dice dice)
+		{
+			string name = node.Attributes["name"].Value;
+			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
+			Inventory inv = LoadInventoryFromXml(child, dice);
+			return new Corpse(name, inv);
+		}
+		
 		public Being LoadBeingFromXml(XmlElement node, Dice dice)
 		{
 			// get name of being
@@ -507,34 +448,36 @@ dungeon.ToXml("newmap");
 			Inventory equiped = new Inventory(0);
 			List<string> b = new List<string>();
 			
+			Console.WriteLine(node.ChildNodes.Count);
+			
 			foreach (XmlNode subnode in node.ChildNodes)
 			{
-				string nodeName = node.Name;
+				string nodeName = subnode.Name;
 				switch (nodeName)
 				{
 				case "Characteristics":
 				{
-					ch = LoadCharacteristicsFromXml((XmlElement)node);
+					ch = LoadCharacteristicsFromXml((XmlElement)subnode);
 					break;
 				}
 				case "CurrentCharacteristics":
 				{
-					cch = LoadCharacteristicsFromXml((XmlElement)node);
+					cch = LoadCharacteristicsFromXml((XmlElement)subnode);
 					break;
 				}
 				case "Bag":
 				{
-					bag = LoadInventoryFromXml((XmlElement)node, dice);
+					bag = LoadInventoryFromXml((XmlElement)subnode, dice);
 					break;
 				}
 				case "Equiped":
 				{
-					equiped = LoadInventoryFromXml((XmlElement)node, dice);
+					equiped = LoadInventoryFromXml((XmlElement)subnode, dice);
 					break;
 				}
 				case "Body":
 				{
-					b = LoadBodyFromXML((XmlElement)node);
+					b = LoadBodyFromXML((XmlElement)subnode);
 					break;
 				}
 					

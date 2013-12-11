@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 
 namespace Game
 {
@@ -13,6 +14,15 @@ namespace Game
 		public override char Symbol()
 		{
 			return 'X';
+		}
+		
+		public override XmlElement ToXml (XmlDocument doc, string elementName)
+		{
+			XmlElement chest = doc.CreateElement("Corpse");		
+			chest.SetAttribute("name", this.Name);
+			XmlElement inv = this.Content.ToXml(doc, "Inventory");
+			chest.AppendChild(inv);
+			return chest;
 		}
 
 	}

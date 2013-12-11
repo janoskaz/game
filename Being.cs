@@ -9,7 +9,7 @@ namespace Game
 	public class Being: IPlace
 	{
 		// Everyone has to have a name
-		protected string Name {get; private set;}
+		public string Name {get; private set;}
 		
 		// Everyone has basic characteristics
 		protected Characteristics Characteristics {get; private set;}
