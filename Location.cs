@@ -41,18 +41,13 @@ namespace Game
 		/// <param name='l'>
 		/// If set to <c>true</c> l.
 		/// </param>
-		/// <param name='msg'>
-		/// If set to <c>true</c> message.
-		/// </param>
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public bool PerformAction(Player p, Location l, out string msg, out Location l2)
+		public bool PerformAction(Player p, Location l, out Location l2)
 		{
-			msg = "";
 			l2 = l;
-			bool action = Block.PerformAction(p, l, out msg, out l2);
-			Console.WriteLine(msg);
+			bool action = Block.PerformAction(p, l, out l2);
 			return action;
 		}
 		

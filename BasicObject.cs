@@ -56,9 +56,8 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public virtual bool PerformAction(Player p, Location l, out string msg, out Location l2)
+		public virtual bool PerformAction(Player p, Location l, out Location l2)
 		{
-			msg = "";
 			l2 = l;
 			return true;
 		}

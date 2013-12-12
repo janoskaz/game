@@ -20,9 +20,8 @@ namespace Game
 			return 'o';
 		}
 		
-		public override bool PerformAction (Player p, Location l, out string msg, out Location l2)
+		public override bool PerformAction (Player p, Location l, out Location l2)
 		{
-			msg = "";
 			l2 = l;
 			bool lootChest = true;
 			

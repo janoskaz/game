@@ -18,14 +18,13 @@ namespace Game
 			Y = y;
 		}
 		
-		public void Move(ConsoleKeyInfo c, Map m, out string message)
+		public void Move(ConsoleKeyInfo c, Map m)
 		{
 			bool move = false;
-			message = "";
 			Location l2 = m.location[X,Y];
 			if ((c.Key == ConsoleKey.UpArrow) && (Y>0))
 			{
-				move = m.location[X,Y-1].Block.PerformAction(this, m.location[X,Y-1], out message, out l2);
+				move = m.location[X,Y-1].Block.PerformAction(this, m.location[X,Y-1], out l2);
 				if (move)
 					Y--;
 				else
@@ -33,7 +32,7 @@ namespace Game
 			}
 			else if ((c.Key == ConsoleKey.DownArrow) && (Y<(m.Heigth-1)))
 			{
-				move = m.location[X,Y+1].Block.PerformAction(this, m.location[X,Y+1], out message, out l2);
+				move = m.location[X,Y+1].Block.PerformAction(this, m.location[X,Y+1], out l2);
 				if (move)
 					Y++;
 				else
@@ -41,7 +40,7 @@ namespace Game
 			}
 			else if ((c.Key == ConsoleKey.LeftArrow) && (X>0))
 			{
-				move = m.location[X-1,Y].Block.PerformAction(this, m.location[X-1,Y], out message, out l2);
+				move = m.location[X-1,Y].Block.PerformAction(this, m.location[X-1,Y], out l2);
 				if (move)
 					X--;
 				else
@@ -49,15 +48,11 @@ namespace Game
 			}
 			else if ((c.Key == ConsoleKey.RightArrow) && (X<(m.Width-1)))
 			{
-				move = m.location[X+1,Y].Block.PerformAction(this, m.location[X+1,Y], out message, out l2);
+				move = m.location[X+1,Y].Block.PerformAction(this, m.location[X+1,Y], out l2);
 				if (move)
 					X++;
 				else
 					l2 = m.location[X,Y];
-			}
-			else
-			{
-				message = "Nothing happened.";
 			}
 			m.location[X,Y] = l2;
 		}
@@ -93,10 +88,11 @@ namespace Game
 				if(b2.Alive() || attacker==0) // if enemy 2 is alive, of if the attacks are parallel
 				{
 					b2.Attack(b1);
+					Thread.Sleep(600);
 				}
 				b1 = this;
 				b2 = creature;
-				Thread.Sleep(500);
+				Thread.Sleep(600);
 			}
 			return this.Alive();
 		}
@@ -131,9 +127,9 @@ namespace Game
 			return plr;
 		}
 		
-		public void SaveAsXml(out string message)
+		public void SaveAsXml()
 		{
-			message = "Attepmt to save the player.";
+			ThisGame.messageLog.Enqueue("Attepmt to save the player.");
 			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/");
 			
 			XmlDocument doc = new XmlDocument();
@@ -144,7 +140,7 @@ namespace Game
 			
 			doc.AppendChild(root);
 			doc.Save( Path.Combine(path, this.Name.ToLower()+"_plr.xml") );
-			message += "\nSaved.";
+			ThisGame.messageLog.Enqueue("Save");
 		}
 		
 	}

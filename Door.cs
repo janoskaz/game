@@ -40,9 +40,9 @@ namespace Game
 		/// <param name='key'>
 		/// If set to <c>true</c> key.
 		/// </param>
-		public void OpenDoor(out string msg2)
+		public void OpenDoor()
 		{
-			msg2 = "\nDoor has been opened";
+			ThisGame.messageLog.Enqueue("Door has been opened");
 			this.Locked = false;
 		}
 		
@@ -113,9 +113,9 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public override bool PerformAction(Player p, Location l, out string msg, out Location l2)
+		public override bool PerformAction(Player p, Location l, out Location l2)
 		{
-			msg = this.Description;
+			ThisGame.messageLog.Enqueue(this.Description);
 			l2 = l;
 			// if the door isnot locked, return true
 			if (!this.Locked)
@@ -125,16 +125,14 @@ namespace Game
 			// does the user have a key to open the door?
 			string keyname = this.Keyname;
 			bool hasKey = p.HasKey(keyname);
-			string msg2 = "";
 			// open, if user has a key
 			if (hasKey)
 			{
-				this.OpenDoor(out msg2);
+				this.OpenDoor();
 				this.UpdateSymbol();
-				msg += msg2;
 				return true;
 			}
-			msg += "\nThe doors are locked and you don't have the key.";
+			ThisGame.messageLog.Enqueue("The doors are locked and you don't have the key.");
 			return false;
 		}
 		

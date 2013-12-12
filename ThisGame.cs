@@ -8,6 +8,9 @@ namespace Game
 {
 	public class ThisGame
 	{
+		
+		public static LimitedQueue<string> messageLog = new LimitedQueue<string>(6);
+		
 		public ThisGame ()
 		{
 		}
@@ -23,7 +26,6 @@ namespace Game
 			// main loop - running the program
 			bool end = false;
 			
-			string message = "";
 			while(!end)
 			{
 				Console.Clear();
@@ -41,7 +43,7 @@ namespace Game
 				Console.WriteLine("Inventory - Enter");
 				Console.WriteLine("Save current player - press S");
 				Console.WriteLine();
-				Console.WriteLine(message);
+				WriteMessages();
 				
 				ConsoleKeyInfo c = Console.ReadKey();
 				if (c.Key == ConsoleKey.Escape)
@@ -50,12 +52,12 @@ namespace Game
 					p.ManageInventory();
 				else if (c.Key == ConsoleKey.S)
 				{
-					p.SaveAsXml(out message);
+					p.SaveAsXml();
 					dungeon.ToXml(p.Name.ToLower());
 					continue;
 				}					
 					
-				p.Move(c, dungeon, out message);
+				p.Move(c, dungeon);
 				
 				if (!p.Alive())
 				{
@@ -66,6 +68,12 @@ namespace Game
 					
 			}
 			
+		}
+		
+		public void WriteMessages()
+		{
+			foreach (string msg in messageLog)
+				Console.WriteLine(msg);
 		}
 		
 		public Map InitializeMap(Player p)

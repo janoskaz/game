@@ -445,18 +445,17 @@ namespace Game
 			return 'A';
 		}
 		
-		public bool PerformAction (Player p, Location l, out string msg, out Location l2)
+		public bool PerformAction (Player p, Location l, out Location l2)
 		{
-			msg = "";
 			l2 = l;
 			bool f = p.Fight(this);
 			if (f)
 			{
-				msg += "Enemy has been slain";
+				ThisGame.messageLog.Enqueue("Enemy has been slain");
 				l2.Block = this.BecameCorpse();
-				Console.WriteLine("\nThe fight is over, press any key to loot the corpse.");
+				Console.WriteLine("The fight is over, press any key to loot the corpse.");
 				Console.ReadKey();
-				l2.Block.PerformAction(p, l, out msg, out l2);
+				l2.Block.PerformAction(p, l, out l2);
 			}				
 			return f;
 		}
