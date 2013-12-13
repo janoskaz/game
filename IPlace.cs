@@ -9,6 +9,7 @@ namespace Game
 	{
 		char Symbol();
 		bool PerformAction(Player p, Location l, out Location  l2);
+		void VoluntaryAction(Player p);
 	}
 }
 

@@ -51,6 +51,9 @@ namespace Game
 			return true;
 		}
 		
+		public virtual void VoluntaryAction(Player p)
+		{}
+		
 		public virtual XmlElement ToXml(XmlDocument doc, string elementName="Item")
 		{
 			XmlElement item = doc.CreateElement(elementName);

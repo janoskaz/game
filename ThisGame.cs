@@ -39,8 +39,9 @@ namespace Game
 				Console.CursorTop = dungeon.Heigth + 5;
 				Console.CursorLeft = 0;
 				Console.WriteLine("Movement - arrows");
-				Console.WriteLine("End - escape");
-				Console.WriteLine("Inventory - Enter");
+				Console.WriteLine("End - press Escape");
+				Console.WriteLine("Inventory - press I");
+				Console.WriteLine("Interact with objects - press Enter");
 				Console.WriteLine("Save current player - press S");
 				Console.WriteLine();
 				WriteMessages();
@@ -48,8 +49,10 @@ namespace Game
 				ConsoleKeyInfo c = Console.ReadKey();
 				if (c.Key == ConsoleKey.Escape)
 					end = true;
-				else if (c.Key == ConsoleKey.Enter)
+				else if (c.Key == ConsoleKey.I)
 					p.ManageInventory();
+				else if (c.Key == ConsoleKey.Enter)
+					dungeon.location[p.X,p.Y].VoluntaryAction(p);
 				else if (c.Key == ConsoleKey.S)
 				{
 					p.SaveAsXml();

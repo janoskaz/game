@@ -61,6 +61,9 @@ namespace Game
 			l2 = l;
 			return true;
 		}
+		
+		public virtual void VoluntaryAction(Player p)
+		{}
 	}
 }
 

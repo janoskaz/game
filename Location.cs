@@ -51,6 +51,11 @@ namespace Game
 			return action;
 		}
 		
+		public void VoluntaryAction(Player p)
+		{
+			Block.VoluntaryAction(p);
+		}
+		
 		/// <summary>
 		/// Writes location to Xml.
 		/// </summary>

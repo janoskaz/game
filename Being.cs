@@ -455,10 +455,13 @@ namespace Game
 				l2.Block = this.BecameCorpse();
 				Console.WriteLine("The fight is over, press any key to loot the corpse.");
 				Console.ReadKey();
-				l2.Block.PerformAction(p, l, out l2);
+				l2.VoluntaryAction(p);
 			}				
 			return f;
 		}
+		
+		public virtual void VoluntaryAction(Player p)
+		{}
 		
 		public virtual XmlElement ToXml(XmlDocument doc, string elementName)
 		{

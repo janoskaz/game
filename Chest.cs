@@ -6,12 +6,14 @@ namespace Game
 	public class Chest :Item
 	{
 		protected string message;
+		protected string description;
 		
 		public Inventory Content {get; set;}
 		
 		public Chest (string name, Inventory content) :base(name)
 		{
 			Content = content;
+			description = "There is a chest in front of you.";
 			message = "You have opened a chest\nCONTENT OF CHEST";
 		}
 		
@@ -22,7 +24,14 @@ namespace Game
 		
 		public override bool PerformAction (Player p, Location l, out Location l2)
 		{
+			ThisGame.messageLog.Enqueue(description);
 			l2 = l;
+			
+			return true;
+		}
+		
+		public override void VoluntaryAction(Player p)
+		{
 			bool lootChest = true;
 			
 			LimitedQueue<string> messageBoard = new LimitedQueue<string>(10);
@@ -95,7 +104,7 @@ namespace Game
 				}
 
 			}
-			return true;
+			
 		}
 		
 		public override XmlElement ToXml (XmlDocument doc, string elementName)
