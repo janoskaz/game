@@ -45,7 +45,7 @@ namespace Game
 			return '*';
 		}
 		
-		public virtual bool PerformAction(Player p, Location l, out Location l2)
+		public virtual bool AutomaticAction(Player p, Location l, out Location l2)
 		{
 			l2 = l;
 			return true;

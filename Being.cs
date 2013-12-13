@@ -445,7 +445,7 @@ namespace Game
 			return 'A';
 		}
 		
-		public bool PerformAction (Player p, Location l, out Location l2)
+		public bool AutomaticAction (Player p, Location l, out Location l2)
 		{
 			l2 = l;
 			bool f = p.Fight(this);

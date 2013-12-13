@@ -113,7 +113,7 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public override bool PerformAction(Player p, Location l, out Location l2)
+		public override bool AutomaticAction(Player p, Location l, out Location l2)
 		{
 			ThisGame.messageLog.Enqueue(this.Description);
 			l2 = l;

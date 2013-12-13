@@ -44,10 +44,10 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public bool PerformAction(Player p, Location l, out Location l2)
+		public bool AutomaticAction(Player p, Location l, out Location l2)
 		{
 			l2 = l;
-			bool action = Block.PerformAction(p, l, out l2);
+			bool action = Block.AutomaticAction(p, l, out l2);
 			return action;
 		}
 		
