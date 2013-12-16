@@ -20,6 +20,11 @@ namespace Game
 			return '#';
 		}
 		
+		public override bool CanMoveTo()
+		{
+			return false;
+		}
+		
 		/// <summary>
 		/// write the xml - just a node with no childs or attributes.
 		/// </summary>
@@ -56,11 +61,10 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public override bool AutomaticAction(Player p, Location l, out Location l2)
+		public override IPlace AutomaticAction(Player p)
 		{
 			ThisGame.messageLog.Enqueue("You can't go there - there's a wall!");
-			l2 = l;
-			return false;
+			return this;
 		}
 		
 	}

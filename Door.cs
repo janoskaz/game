@@ -51,6 +51,11 @@ namespace Game
 			return this.MapSymbol;
 		}
 		
+		public override bool CanMoveTo()
+		{
+			return !Locked;
+		}
+		
 		/// <summary>
 		/// Updates the symbol, depending on state.
 		/// </summary>
@@ -113,27 +118,24 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public override bool AutomaticAction(Player p, Location l, out Location l2)
+		public override IPlace AutomaticAction(Player p)
 		{
 			ThisGame.messageLog.Enqueue(this.Description);
-			l2 = l;
-			// if the door isnot locked, return true
-			if (!this.Locked)
-			{
-				return true;
-			}
 			// does the user have a key to open the door?
 			string keyname = this.Keyname;
 			bool hasKey = p.HasKey(keyname);
 			// open, if user has a key
-			if (hasKey)
+			if (Locked)
 			{
-				this.OpenDoor();
-				this.UpdateSymbol();
-				return true;
+				if (hasKey)
+				{
+					this.OpenDoor();
+					this.UpdateSymbol();
+				}
+				else
+					ThisGame.messageLog.Enqueue("The doors is locked and you don't have the key.");
 			}
-			ThisGame.messageLog.Enqueue("The doors are locked and you don't have the key.");
-			return false;
+			return this;
 		}
 		
 	}

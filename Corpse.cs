@@ -17,6 +17,11 @@ namespace Game
 			return 'X';
 		}
 		
+		public override bool CanMoveTo()
+		{
+			return true;
+		}
+		
 		public override XmlElement ToXml (XmlDocument doc, string elementName)
 		{
 			XmlElement chest = doc.CreateElement("Corpse");		

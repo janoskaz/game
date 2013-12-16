@@ -21,40 +21,35 @@ namespace Game
 		public void Move(ConsoleKeyInfo c, Map m)
 		{
 			bool move = false;
-			Location l2 = m.location[X,Y];
+			
 			if ((c.Key == ConsoleKey.UpArrow) && (Y>0))
 			{
-				move = m.location[X,Y-1].Block.AutomaticAction(this, m.location[X,Y-1], out l2);
+				move = m.location[X,Y-1].CanMoveTo();
+				m.location[X,Y-1].AutomaticAction(this);
 				if (move)
 					Y--;
-				else
-					l2 = m.location[X,Y];
 			}
 			else if ((c.Key == ConsoleKey.DownArrow) && (Y<(m.Heigth-1)))
 			{
-				move = m.location[X,Y+1].Block.AutomaticAction(this, m.location[X,Y+1], out l2);
+				move = m.location[X,Y+1].CanMoveTo();
+				m.location[X,Y+1].AutomaticAction(this);
 				if (move)
 					Y++;
-				else
-					l2 = m.location[X,Y];
 			}
 			else if ((c.Key == ConsoleKey.LeftArrow) && (X>0))
 			{
-				move = m.location[X-1,Y].Block.AutomaticAction(this, m.location[X-1,Y], out l2);
+				move = m.location[X-1,Y].CanMoveTo();
+				m.location[X-1,Y].AutomaticAction(this);
 				if (move)
 					X--;
-				else
-					l2 = m.location[X,Y];
 			}
 			else if ((c.Key == ConsoleKey.RightArrow) && (X<(m.Width-1)))
 			{
-				move = m.location[X+1,Y].Block.AutomaticAction(this, m.location[X+1,Y], out l2);
+				move = m.location[X+1,Y].CanMoveTo();
+				m.location[X+1,Y].AutomaticAction(this);
 				if (move)
 					X++;
-				else
-					l2 = m.location[X,Y];
 			}
-			m.location[X,Y] = l2;
 		}
 		
 		public int WhoAttacks(Being creature)

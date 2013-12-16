@@ -45,11 +45,16 @@ namespace Game
 			return '*';
 		}
 		
-		public virtual bool AutomaticAction(Player p, Location l, out Location l2)
+		public virtual bool CanMoveTo()
 		{
-			l2 = l;
 			return true;
 		}
+		
+		public virtual IPlace AutomaticAction(Player p)
+		{
+			return this;
+		}
+		
 		
 		public virtual void VoluntaryAction(Player p)
 		{}

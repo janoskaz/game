@@ -13,7 +13,7 @@ namespace Game
 		public Chest (string name, Inventory content) :base(name)
 		{
 			Content = content;
-			description = "There is a chest in front of you.";
+			description = "There is a chest quietly laying on the ground.";
 			message = "You have opened a chest\nCONTENT OF CHEST";
 		}
 		
@@ -22,12 +22,16 @@ namespace Game
 			return 'o';
 		}
 		
-		public override bool AutomaticAction (Player p, Location l, out Location l2)
+		public override bool CanMoveTo()
+		{
+			return true;
+		}
+		
+		
+		public override IPlace AutomaticAction (Player p)
 		{
 			ThisGame.messageLog.Enqueue(description);
-			l2 = l;
-			
-			return true;
+			return this;
 		}
 		
 		public override void VoluntaryAction(Player p)

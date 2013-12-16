@@ -20,6 +20,11 @@ namespace Game
 			return ' ';
 		}
 		
+		public virtual bool CanMoveTo()
+		{
+			return true;
+		}
+		
 		/// <summary>
 		/// Write to the xml - just a simple node with no childs or attributes.
 		/// </summary>
@@ -56,10 +61,9 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public virtual bool AutomaticAction(Player p, Location l, out Location l2)
+		public virtual IPlace AutomaticAction(Player p)
 		{
-			l2 = l;
-			return true;
+			return this;
 		}
 		
 		public virtual void VoluntaryAction(Player p)

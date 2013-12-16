@@ -445,19 +445,27 @@ namespace Game
 			return 'A';
 		}
 		
-		public bool AutomaticAction (Player p, Location l, out Location l2)
+		public virtual bool CanMoveTo()
 		{
-			l2 = l;
+			return false;
+		}
+		
+		public IPlace AutomaticAction (Player p)
+		{
+			IPlace resultsOfInteraction;
 			bool f = p.Fight(this);
 			if (f)
 			{
 				ThisGame.messageLog.Enqueue("Enemy has been slain");
-				l2.Block = this.BecameCorpse();
-				Console.WriteLine("The fight is over, press any key to loot the corpse.");
+				resultsOfInteraction = this.BecameCorpse();
+				Console.WriteLine("The fight is over, press any key.");
 				Console.ReadKey();
-				l2.VoluntaryAction(p);
-			}				
-			return f;
+			}
+			else 
+			{
+			resultsOfInteraction = this;	
+			}
+			return resultsOfInteraction;
 		}
 		
 		public virtual void VoluntaryAction(Player p)

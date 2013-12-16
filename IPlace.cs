@@ -8,7 +8,8 @@ namespace Game
 	public interface IPlace :IXml
 	{
 		char Symbol();
-		bool AutomaticAction(Player p, Location l, out Location  l2);
+		bool CanMoveTo();
+		IPlace AutomaticAction(Player p);
 		void VoluntaryAction(Player p);
 	}
 }

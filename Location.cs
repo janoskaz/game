@@ -29,6 +29,11 @@ namespace Game
 			return Block.Symbol();
 		}
 		
+		public bool CanMoveTo()
+		{
+			return this.Block.CanMoveTo();
+		}
+		
 		/// <summary>
 		/// Passes method to block.
 		/// </summary>
@@ -44,11 +49,10 @@ namespace Game
 		/// <param name='l2'>
 		/// If set to <c>true</c> l2.
 		/// </param>
-		public bool AutomaticAction(Player p, Location l, out Location l2)
+		public IPlace AutomaticAction(Player p)
 		{
-			l2 = l;
-			bool action = Block.AutomaticAction(p, l, out l2);
-			return action;
+			this.Block = Block.AutomaticAction(p);
+			return this;
 		}
 		
 		public void VoluntaryAction(Player p)

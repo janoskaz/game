@@ -246,7 +246,7 @@
   <location x="9" y="2" visible="False">
     <block type="Game.Door">
       <Door locked="True">
-        <Message>In front of you are solid wooden doors. You will need a key to open them.</Message>
+        <Message>In front of you is solid wooden door.</Message>
         <Keyname>Rusty key</Keyname>
       </Door>
     </block>
