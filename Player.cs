@@ -92,6 +92,95 @@ namespace Game
 			return this.Alive();
 		}
 		
+		public void ManageInventory()
+		{
+			bool runInventory = true;
+			
+			LimitedQueue<string> messageBoard = new LimitedQueue<string>(15);
+			
+			while (runInventory)
+			{
+				Console.Clear();
+				Console.Write(this.ToString());
+				Console.WriteLine();
+				Console.WriteLine("To strip item, write 'strip #of_equipment'\n" +
+					"To equip item, wrire 'equip #of_equipment'\n" +
+					"To drop item from inventory, write 'drop #of_equipment'\n" +
+					"To go back to game, write 'close'\n");
+				
+				foreach (string s in messageBoard)
+				{
+					Console.WriteLine(s);
+				}
+				
+				string response = Console.ReadLine();
+				messageBoard.Enqueue(response);
+				string[] words = response.Split(' ');
+				int n;
+				switch (words[0])
+				{
+				case "close":
+				{
+					runInventory = false;
+					break;
+				}
+				case "strip":
+				{
+					try
+					{
+						n = int.Parse(words[1]);
+						messageBoard.Enqueue(this.StripItem(this.bag.bag[n-1]));
+					}
+					catch
+					{
+						messageBoard.Enqueue("Something wrong with your output");
+					}
+					break;
+				}
+				case "equip":
+				{
+					try
+					{
+						n = int.Parse(words[1]);
+						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1]));
+					}
+					catch
+					{
+						messageBoard.Enqueue("Something wrong with your output");
+					}
+					break;
+				}
+				case "drop":
+				{
+					try
+					{
+						n = int.Parse(words[1]);
+						Location loc = ThisGame.dungeon.location[this.X,this.Y];
+						if (loc.CanDropItemOnto())
+						{
+							Item i = this.bag.bag[n-1];
+							messageBoard.Enqueue(this.DropItem(i));
+							ThisGame.dungeon.location[this.X,this.Y].DropItemOnLocation(i);
+						}
+					}
+					catch
+					{
+						messageBoard.Enqueue("Something wrong with your output");
+					}
+					break;
+				}
+				default:
+				{
+					messageBoard.Enqueue("Can not recognize the command");
+					break;
+				}
+				}
+			
+			}
+			
+		}
+		
+		
 		new public char Symbol()
 		{
 			return 'P';

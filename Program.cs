@@ -12,8 +12,7 @@ class Program
 		Console.ForegroundColor = ConsoleColor.Black;		
 		Console.Clear();
 		
-		ThisGame g = new ThisGame();
-		g.RunGame();
+		ThisGame.RunGame();
 		
 	}
 	

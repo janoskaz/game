@@ -34,6 +34,21 @@ namespace Game
 			return this.Block.CanMoveTo();
 		}
 		
+		public virtual bool CanDropItemOnto()
+		{
+			return this.Block.CanDropItemOnto();
+		}
+		
+		public virtual void DropItemOnLocation(Item i)
+		{
+			this.Block = this.Block.DropItemOnto(i);
+		}
+		
+		public virtual IPlace DropItemOnto(Item i)
+		{
+			return this;
+		}
+		
 		/// <summary>
 		/// Passes method to block.
 		/// </summary>

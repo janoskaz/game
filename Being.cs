@@ -348,88 +348,6 @@ namespace Game
 			return s;
 		}
 		
-		public void ManageInventory()
-		{
-			bool runInventory = true;
-			
-			LimitedQueue<string> messageBoard = new LimitedQueue<string>(15);
-			
-			while (runInventory)
-			{
-				Console.Clear();
-				Console.Write(this.ToString());
-				Console.WriteLine();
-				Console.WriteLine("To strip item, write 'strip #of_equipment'\n" +
-					"To equip item, wrire 'equip #of_equipment'\n" +
-					"To drop item from inventory, write 'drop #of_equipment'\n" +
-					"To go back to game, write 'close'\n");
-				
-				foreach (string s in messageBoard)
-				{
-					Console.WriteLine(s);
-				}
-				
-				string response = Console.ReadLine();
-				messageBoard.Enqueue(response);
-				string[] words = response.Split(' ');
-				int n;
-				switch (words[0])
-				{
-				case "close":
-				{
-					runInventory = false;
-					break;
-				}
-				case "strip":
-				{
-					try
-					{
-						n = int.Parse(words[1]);
-						messageBoard.Enqueue(this.StripItem(this.equiped.bag[n-1]));
-					}
-					catch
-					{
-						messageBoard.Enqueue("Something wrong with your output");
-					}
-					break;
-				}
-				case "equip":
-				{
-					try
-					{
-						n = int.Parse(words[1]);
-						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1]));
-					}
-					catch
-					{
-						messageBoard.Enqueue("Something wrong with your output");
-					}
-					break;
-				}
-				case "drop":
-				{
-					try
-					{
-						n = int.Parse(words[1]);
-						messageBoard.Enqueue(this.DropItem(this.bag.bag[n-1]));
-					}
-					catch
-					{
-						messageBoard.Enqueue("Something wrong with your output");
-					}
-					break;
-				}
-				default:
-				{
-					messageBoard.Enqueue("Can not recognize the command");
-					break;
-				}
-				}
-			
-			}
-			
-		}
-		
 		private Corpse BecameCorpse()
 		{
 			foreach (Equipment e in this.equiped.bag)
@@ -448,6 +366,16 @@ namespace Game
 		public virtual bool CanMoveTo()
 		{
 			return false;
+		}
+		
+		public virtual bool CanDropItemOnto()
+		{
+			return false;
+		}
+		
+		public virtual IPlace DropItemOnto(Item i)
+		{
+			return this;
 		}
 		
 		public IPlace AutomaticAction (Player p)

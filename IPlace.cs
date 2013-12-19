@@ -9,6 +9,8 @@ namespace Game
 	{
 		char Symbol();
 		bool CanMoveTo();
+		bool CanDropItemOnto();
+		IPlace DropItemOnto(Item i);
 		IPlace AutomaticAction(Player p);
 		void VoluntaryAction(Player p);
 	}

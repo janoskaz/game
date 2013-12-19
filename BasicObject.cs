@@ -25,6 +25,18 @@ namespace Game
 			return true;
 		}
 		
+		public virtual bool CanDropItemOnto()
+		{
+			return true;
+		}
+		
+		public virtual IPlace DropItemOnto(Item i)
+		{
+			Chest chest = new Chest("Rubble on the ground", new Inventory(100));
+			chest.Content.Add(i);
+			return chest;
+		}
+		
 		/// <summary>
 		/// Write to the xml - just a simple node with no childs or attributes.
 		/// </summary>

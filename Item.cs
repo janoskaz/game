@@ -50,11 +50,22 @@ namespace Game
 			return true;
 		}
 		
+		public virtual bool CanDropItemOnto()
+		{
+			return false;
+		}
+		
+		public virtual IPlace DropItemOnto(Item i)
+		{
+			Chest chest = new Chest("Rubble on the ground", new Inventory(100));
+			chest.Content.Add(i);
+			return chest;
+		}
+		
 		public virtual IPlace AutomaticAction(Player p)
 		{
 			return this;
-		}
-		
+		}		
 		
 		public virtual void VoluntaryAction(Player p)
 		{}

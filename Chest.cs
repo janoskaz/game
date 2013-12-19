@@ -13,7 +13,7 @@ namespace Game
 		public Chest (string name, Inventory content) :base(name)
 		{
 			Content = content;
-			description = "There is a chest quietly laying on the ground.";
+			description = String.Format("There is {0} laying on the ground", Name.ToLower());
 			message = "You have opened a chest\nCONTENT OF CHEST";
 		}
 		
@@ -27,6 +27,16 @@ namespace Game
 			return true;
 		}
 		
+		public override bool CanDropItemOnto()
+		{
+			return true;
+		}
+		
+		public override IPlace DropItemOnto(Item i)
+		{
+			this.Content.Add(i);
+			return this;
+		}
 		
 		public override IPlace AutomaticAction (Player p)
 		{

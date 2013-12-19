@@ -56,6 +56,11 @@ namespace Game
 			return !Locked;
 		}
 		
+		public override bool CanDropItemOnto()
+		{
+			return false;
+		}
+		
 		/// <summary>
 		/// Updates the symbol, depending on state.
 		/// </summary>

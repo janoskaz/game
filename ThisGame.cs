@@ -6,22 +6,19 @@ using System.Xml.Linq;
 
 namespace Game
 {
-	public class ThisGame
+	public static class ThisGame
 	{
 		
 		public static LimitedQueue<string> messageLog = new LimitedQueue<string>(6);
 		
-		public ThisGame ()
+		public static Map dungeon;
+	
+		public static void RunGame()
 		{
-		}
-		
-		public void RunGame()
-		{
-			//Map dungeon = LoadMap("map.dat");
 
 			Player p = InitializePlayer();
 						
-			Map dungeon = InitializeMap(p);						
+			dungeon = InitializeMap(p);						
 			
 			// main loop - running the program
 			bool end = false;
@@ -73,13 +70,13 @@ namespace Game
 			
 		}
 		
-		public void WriteMessages()
+		public static void WriteMessages()
 		{
 			foreach (string msg in messageLog)
 				Console.WriteLine(msg);
 		}
 		
-		public Map InitializeMap(Player p)
+		public static Map InitializeMap(Player p)
 		{			
 			string mapname = p.Name + "_map";
 			
@@ -93,7 +90,7 @@ namespace Game
 			}
 		}
 		
-		public Player InitializePlayer()
+		public static Player InitializePlayer()
 		{
 			string startupPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files");
 			
@@ -152,7 +149,7 @@ namespace Game
 					
 		}
 		
-		public Player CreateNewPlayer()
+		public static Player CreateNewPlayer()
 		{
 			Console.WriteLine("What is the name of your hero?");
 			string name = Console.ReadLine().Trim();
@@ -175,7 +172,7 @@ namespace Game
 			return p;
 		}
 		
-		public Player PickCharacter(List<string> players)
+		public static Player PickCharacter(List<string> players)
 		{
 			// create empty player, which will be overriden
 			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, 0, 0);
@@ -208,7 +205,7 @@ namespace Game
 			return p;
 		}
 		
-		public Player LoadPlayerFromXml(string playername)
+		public static Player LoadPlayerFromXml(string playername)
 		{
 			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+playername.ToLower() + "_plr.xml");
 			
@@ -270,7 +267,7 @@ namespace Game
 			return p;
 		}
 		
-		public Characteristics LoadCharacteristicsFromXml(XmlElement node)
+		public static Characteristics LoadCharacteristicsFromXml(XmlElement node)
 		{
 			int hp = int.Parse (node.GetAttribute("hitpoints"));
 			int attack = int.Parse (node.GetAttribute("attack"));
@@ -280,7 +277,7 @@ namespace Game
 			return ch;
 		}
 		
-		public List<string> LoadBodyFromXML(XmlElement node)
+		public static List<string> LoadBodyFromXML(XmlElement node)
 		{
 			List<string> lst = new List<string>();
 			if (bool.Parse (node.GetAttribute("body")))
@@ -298,13 +295,13 @@ namespace Game
 			return lst;
 		}
 		
-		public Item LoadItemFromXml(XmlElement node)
+		public static Item LoadItemFromXml(XmlElement node)
 		{
 			string name = node.GetAttribute("name");
 			return new Item(name);
 		}
 		
-		public Equipment LoadEquipmentFromXml(XmlElement node)
+		public static Equipment LoadEquipmentFromXml(XmlElement node)
 		{
 			string name = node.GetAttribute("name");
 			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
@@ -312,7 +309,7 @@ namespace Game
 			return new Equipment(name, ch, b);
 		}
 		
-		public Weapon LoadWeaponFromXml(XmlElement node)
+		public static Weapon LoadWeaponFromXml(XmlElement node)
 		{
 			string name = node.GetAttribute("name");
 			int nrFacets = int.Parse(node.GetAttribute("nrfacets"));
@@ -321,7 +318,7 @@ namespace Game
 			return new Weapon(name, ch, b, nrFacets);
 		}
 		
-		public Inventory LoadInventoryFromXml(XmlElement node)
+		public static Inventory LoadInventoryFromXml(XmlElement node)
 		{
 			int bagsize = int.Parse(node.GetAttribute("maxsize"));
 			Inventory inv = new Inventory(bagsize);
@@ -351,7 +348,7 @@ namespace Game
 			return inv;
 		}
 		
-		public Map LoadMapFromXml(string mapname)
+		public static Map LoadMapFromXml(string mapname)
 		{
 			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+mapname.ToLower() + ".xml");
 			
@@ -376,7 +373,7 @@ namespace Game
 			return newmap;
 		}
 		
-		public Location LoadLocationFromXml(XmlElement node)
+		public static Location LoadLocationFromXml(XmlElement node)
 		{
 			int x = int.Parse(node.Attributes["x"].Value);
 			int y = int.Parse(node.Attributes["y"].Value);
@@ -387,7 +384,7 @@ namespace Game
 			return l;
 		}
 		
-		public IPlace LoadBlockFromXml(XmlElement node)
+		public static IPlace LoadBlockFromXml(XmlElement node)
 		{
 			string type = node.Attributes["type"].Value;
 			
@@ -424,7 +421,7 @@ namespace Game
 			}
 		}
 		
-		public Door LoadDoorFromXml(XmlElement node)
+		public static Door LoadDoorFromXml(XmlElement node)
 		{
 			bool locked = bool.Parse(node.Attributes["locked"].Value);
 			string msg = node.GetElementsByTagName("Message")[0].InnerText;
@@ -432,7 +429,7 @@ namespace Game
 			return new Door(msg, keyname, locked);
 		}
 		
-		public Chest LoadChestFromXml(XmlElement node)
+		public static Chest LoadChestFromXml(XmlElement node)
 		{
 			string name = node.Attributes["name"].Value;
 			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
@@ -440,7 +437,7 @@ namespace Game
 			return new Chest(name, inv);
 		}
 		
-		public Corpse LoadCorpseFromXml(XmlElement node)
+		public static Corpse LoadCorpseFromXml(XmlElement node)
 		{
 			string name = node.Attributes["name"].Value;
 			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
@@ -448,7 +445,7 @@ namespace Game
 			return new Corpse(name, inv);
 		}
 		
-		public Being LoadBeingFromXml(XmlElement node)
+		public static Being LoadBeingFromXml(XmlElement node)
 		{
 			// get name of being
 			string name = node.Attributes["name"].Value;
