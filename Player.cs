@@ -3,6 +3,7 @@ using System.Threading;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml;
+using NLua;
 
 namespace Game
 {
@@ -89,6 +90,8 @@ namespace Game
 				b2 = creature;
 				Thread.Sleep(600);
 			}
+			Console.WriteLine("Press any key to continue");
+			Console.ReadKey();
 			return this.Alive();
 		}
 		

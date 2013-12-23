@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Xml;
+using NLua;
 
 namespace Game
 {
@@ -25,6 +26,9 @@ namespace Game
 		
 		// Everyone has a body
 		public Body Body {get; private set;}
+		
+		// every baing has a lua script, which describes the interaction
+		public string Script;
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Game.Being"/> class.
@@ -348,7 +352,7 @@ namespace Game
 			return s;
 		}
 		
-		private Corpse BecameCorpse()
+		public Corpse BecameCorpse()
 		{
 			foreach (Equipment e in this.equiped.bag)
 			{
@@ -380,19 +384,19 @@ namespace Game
 		
 		public IPlace AutomaticAction (Player p)
 		{
-			IPlace resultsOfInteraction;
-			bool f = p.Fight(this);
-			if (f)
-			{
-				ThisGame.messageLog.Enqueue("Enemy has been slain");
-				resultsOfInteraction = this.BecameCorpse();
-				Console.WriteLine("The fight is over, press any key.");
-				Console.ReadKey();
-			}
-			else 
-			{
-			resultsOfInteraction = this;	
-			}
+			
+			// add lua
+			Lua lua = new Lua();
+			lua["player"] = p;
+			lua["goblin"] = this;
+			
+			lua.RegisterFunction("fight", p, p.GetType().GetMethod("Fight"));
+			lua.RegisterFunction("becameCorpse", p, p.GetType().GetMethod("BecameCorpse"));
+			
+			// perform actions in lua script -- name of the script is the same as the name of the being
+			lua.DoFile(String.Format("/home/zbynek/Plocha/csharp/Game/Game/files/{0}.lua",Name.ToLower()));
+			
+			IPlace resultsOfInteraction = (IPlace)lua["out"];
 			return resultsOfInteraction;
 		}
 		
