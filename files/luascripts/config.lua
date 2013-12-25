@@ -1,6 +1,8 @@
 ---File with usefull functions etc
 
 if not luanet then require 'luanet' end
+luanet.load_assembly "System"
+Console = luanet.import_type "System.Console"
 local import_type, load_assembly = luanet.import_type, luanet.load_assembly
 
 --Sleep function

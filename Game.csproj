@@ -60,5 +60,13 @@
   <ItemGroup>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="NLua">
+      <HintPath>..\..\..\..\NLua\NLua\Run\Release\net40\NLua.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="files\luascripts\goblin.lua" />
+    <None Include="files\luascripts\config.lua" />
   </ItemGroup>
 </Project>

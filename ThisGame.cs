@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using NLua;
 
 namespace Game
 {
@@ -14,11 +15,17 @@ namespace Game
 		public static Map dungeon;
 		
 		public static int mapHeight = 10;
+		
+		public static string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/");
+		
+		public static Lua lua = new Lua();
 	
 		public static void RunGame()
 		{
 
 			Player p = InitializePlayer();
+			lua["player"] = p;
+			lua.DoFile(filePath + "luascripts/config.lua");
 						
 			dungeon = InitializeMap(p);		
 			
@@ -100,7 +107,7 @@ namespace Game
 		
 		public static Player InitializePlayer()
 		{
-			string startupPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files");
+			string startupPath = filePath;
 			
 			List<string> players = new List<string>();
 			
@@ -215,7 +222,7 @@ namespace Game
 		
 		public static Player LoadPlayerFromXml(string playername)
 		{
-			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+playername.ToLower() + "_plr.xml");
+			string path = filePath + playername.ToLower() + "_plr.xml";
 			
 			XmlDocument doc = new XmlDocument();
 			doc.Load(path);
@@ -358,7 +365,7 @@ namespace Game
 		
 		public static Map LoadMapFromXml(string mapname)
 		{
-			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/"+mapname.ToLower() + ".xml");
+			string path = filePath + mapname.ToLower() + ".xml";
 			
 			XmlDocument doc = new XmlDocument();
 			doc.Load(path);
@@ -386,8 +393,18 @@ namespace Game
 			int x = int.Parse(node.Attributes["x"].Value);
 			int y = int.Parse(node.Attributes["y"].Value);
 			bool visible = bool.Parse(node.Attributes["visible"].Value);
+			string script;
+			try
+			{
+				script = node.Attributes["script"].Value;
+			}
+			catch 
+			{
+				script = null;
+			}
 			IPlace block = LoadBlockFromXml((XmlElement)node.GetElementsByTagName("block")[0]);
 			Location l = new Location(x, y, block);
+			l.Script = script;
 			l.Visible = visible;
 			return l;
 		}
@@ -463,8 +480,6 @@ namespace Game
 			Inventory bag = new Inventory(0);
 			Inventory equiped = new Inventory(0);
 			List<string> b = new List<string>();
-			
-			Console.WriteLine(node.ChildNodes.Count);
 			
 			foreach (XmlNode subnode in node.ChildNodes)
 			{

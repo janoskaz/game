@@ -14,7 +14,7 @@ namespace Game
 		// can be equiped?
 		public bool CanBeEquiped { get; set;}
 		
-		/// <summary>
+			/// <summary>
 		/// Initializes a new instance of the <see cref="Game.Item"/> class.
 		/// </summary>
 		/// <param name='name'>

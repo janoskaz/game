@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using NLua;
 
 namespace Game
 {
@@ -11,7 +12,9 @@ namespace Game
 		public int X {get; set;}
 		public int Y {get; set;}
 		public IPlace Block {get; set;}
-		public bool Visible {get; set;}
+		public bool Visible {get; set;}		
+		// script, if available. default is null
+		public string Script { get; set;}		
 		
 		public Location (int x, int y, IPlace o)
 		{
@@ -19,6 +22,7 @@ namespace Game
 			Y = y;
 			Block = o;
 			Visible = false;
+			Script = null;
 		}
 		
 		/// <summary>
@@ -66,7 +70,27 @@ namespace Game
 		/// </param>
 		public IPlace AutomaticAction(Player p)
 		{
-			this.Block = Block.AutomaticAction(p);
+			if (Script == null)
+				this.Block = Block.AutomaticAction(p);
+			else
+			{
+				ThisGame.lua["block"] = Block;
+				ThisGame.lua.DoFile(ThisGame.filePath + "/luascripts/" + Script);
+				Block = (IPlace)ThisGame.lua["out"];
+				bool keepScript = (bool)ThisGame.lua["keepscript"];
+				if (!keepScript)
+				{
+					if ((string)ThisGame.lua["newscript"] == "null")
+						Script = null;
+					else
+						Script = (string)ThisGame.lua["newscript"];
+				}
+				ThisGame.lua["block"] = null;
+				ThisGame.lua["out"] = null;
+				ThisGame.lua["keepscript"] = null;
+				ThisGame.lua["newscript"] = null;
+			}
+			
 			return this;
 		}
 		
@@ -94,6 +118,8 @@ namespace Game
 			loc.SetAttribute("x", X.ToString());
 			loc.SetAttribute("y", Y.ToString());
 			loc.SetAttribute("visible", Visible.ToString());
+			if (Script != null)
+				loc.SetAttribute("script", Script);
 			// create block with the name of the inner class
 			XmlElement block = doc.CreateElement("block");
 			string type = Block.GetType().ToString();

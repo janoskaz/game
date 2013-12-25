@@ -296,7 +296,7 @@
       <Wall />
     </block>
   </location>
-  <location x="11" y="2" visible="False">
+  <location x="11" y="2" visible="False" script="/home/zbynek/Plocha/csharp/Game/Game/files/goblin.lua">
     <block type="Game.Being">
       <Being name="Goblin">
         <Characteristics hitpoints="15" attack="5" defence="1" speed="0" />

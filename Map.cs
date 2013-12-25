@@ -76,6 +76,8 @@ namespace Game
 						Console.CursorTop = j;
 						if (this.location[i-diffx,j-diffy].Visible)
 							Console.Write(this.location[i-diffx,j-diffy].Symbol());
+						else
+							Console.Write('?');
 					}
 					catch
 					{
@@ -93,7 +95,7 @@ namespace Game
 		
 		public void ToXml(string mapName)
 		{
-			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/");
+			string path = ThisGame.filePath;
 			
 			XmlDocument doc = new XmlDocument();
 			
@@ -110,6 +112,8 @@ namespace Game
 				loc.SetAttribute("x", l.X.ToString());
 				loc.SetAttribute("y", l.Y.ToString());
 				loc.SetAttribute("visible", l.Visible.ToString());
+				if (l.Script != null)
+					loc.SetAttribute("script", l.Script);
 				// create block with the name of the inner class
 				XmlElement block = doc.CreateElement("block");
 				string type = l.Block.GetType().ToString();
