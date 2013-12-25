@@ -58,20 +58,37 @@ namespace Game
 			}
 		}
 		
-		public void Draw()
+		public void Draw(Player p)
 		{
-			for (int i = 0; i<Width; i++)
+			int w = Console.WindowWidth;
+			int h = ThisGame.mapHeight;
+			
+			int diffx = (int)Math.Ceiling((double)(w/2)) - p.X;
+			int diffy = (int)Math.Ceiling((double)(h/2)) - p.Y;
+			
+			for (int i = 3; i<w-2; i++)
 			{
-				for (int j = 0; j<Heigth; j++)
+				for (int j = 2; j<h-1; j++)
 				{
-					Console.CursorLeft = i;
-					Console.CursorTop = j;
-					if (this.location[i,j].Visible)
-						Console.Write(this.location[i,j].Symbol());
-					else
+					try
+					{
+						Console.CursorLeft = i;
+						Console.CursorTop = j;
+						if (this.location[i-diffx,j-diffy].Visible)
+							Console.Write(this.location[i-diffx,j-diffy].Symbol());
+					}
+					catch
+					{
 						Console.Write('?');
+					}
 				}
 			}			
+			for (int i = 0; i<w; i++)
+			{
+				Console.CursorLeft = i;
+				Console.CursorTop = h;
+				Console.Write('=');
+			}
 		}
 		
 		public void ToXml(string mapName)

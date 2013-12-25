@@ -11,6 +11,7 @@ class Program
 		Console.BackgroundColor = ConsoleColor.White;
 		Console.ForegroundColor = ConsoleColor.Black;		
 		Console.Clear();
+		Console.SetWindowSize(81,10);
 		
 		ThisGame.RunGame();
 		

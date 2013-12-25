@@ -12,13 +12,15 @@ namespace Game
 		public static LimitedQueue<string> messageLog = new LimitedQueue<string>(6);
 		
 		public static Map dungeon;
+		
+		public static int mapHeight = 10;
 	
 		public static void RunGame()
 		{
 
 			Player p = InitializePlayer();
 						
-			dungeon = InitializeMap(p);						
+			dungeon = InitializeMap(p);		
 			
 			// main loop - running the program
 			bool end = false;
@@ -27,13 +29,19 @@ namespace Game
 			{
 				Console.Clear();
 				dungeon.CalculateVisibility(p);
-				dungeon.Draw();			
+				dungeon.Draw(p);	
 				
-				Console.CursorLeft = p.X;
-				Console.CursorTop = p.Y;
+				int w = Console.WindowWidth;
+				int h = mapHeight;
+			
+				int diffx = (int)Math.Ceiling((double)(w/2)) - p.X;
+				int diffy = (int)Math.Ceiling((double)(h/2)) - p.Y;
+				
+				Console.CursorLeft = p.X + diffx;
+				Console.CursorTop = p.Y + diffy;
 				Console.Write(p.Symbol());
 				
-				Console.CursorTop = dungeon.Heigth + 5;
+				Console.CursorTop = h+1;
 				Console.CursorLeft = 0;
 				Console.WriteLine("Movement - arrows");
 				Console.WriteLine("End - press Escape");
