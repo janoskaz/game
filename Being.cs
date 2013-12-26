@@ -39,7 +39,7 @@ namespace Game
 		/// <param name='bagsize'>
 		/// Bagsize.
 		/// </param>
-		public Being (string name, Characteristics ch,Characteristics currentCh, int bagsize)
+		public Being (string name, Characteristics ch, Characteristics currentCh, int bagsize)
 		{
 			this.Name = name;
 			this.Characteristics = ch;

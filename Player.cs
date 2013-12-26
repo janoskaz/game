@@ -109,6 +109,7 @@ namespace Game
 				Console.WriteLine("To strip item, write 'strip #of_equipment'\n" +
 					"To equip item, wrire 'equip #of_equipment'\n" +
 					"To drop item from inventory, write 'drop #of_equipment'\n" +
+				    "To use the item, write 'use #of_equipment'\n" +
 					"To go back to game, write 'close'\n");
 				
 				foreach (string s in messageBoard)
@@ -170,6 +171,13 @@ namespace Game
 					{
 						messageBoard.Enqueue("Something wrong with your output");
 					}
+					break;
+				}
+				case "use":
+				{
+					n = int.Parse(words[1]);
+					Item i = this.bag.bag[n-1];
+					messageBoard.Enqueue(i.Use());
 					break;
 				}
 				default:

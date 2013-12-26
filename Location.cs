@@ -25,6 +25,11 @@ namespace Game
 			Script = null;
 		}
 		
+		public void SetScript(string scriptName)
+		{
+			this.Script = scriptName;
+		}
+		
 		/// <summary>
 		/// Pass to the symbol.
 		/// </summary>
@@ -78,6 +83,9 @@ namespace Game
 				ThisGame.lua.DoFile(ThisGame.filePath + "/luascripts/" + Script);
 				Block = (IPlace)ThisGame.lua["out"];
 				bool keepScript = (bool)ThisGame.lua["keepscript"];
+				string message = (string)ThisGame.lua["message"];
+				if (message != "null")
+					ThisGame.messageLog.Enqueue(message);
 				if (!keepScript)
 				{
 					if ((string)ThisGame.lua["newscript"] == "null")
@@ -89,6 +97,7 @@ namespace Game
 				ThisGame.lua["out"] = null;
 				ThisGame.lua["keepscript"] = null;
 				ThisGame.lua["newscript"] = null;
+				ThisGame.lua["message"] = null;
 			}
 			
 			return this;

@@ -1,6 +1,7 @@
 using Game;
 using System;
 using System.Collections.Generic;
+using NLua;
 
 class Program
 {
@@ -12,6 +13,9 @@ class Program
 		Console.ForegroundColor = ConsoleColor.Black;		
 		Console.Clear();
 		Console.SetWindowSize(81,10);
+		
+		//Lua lua = new Lua();
+		//lua.DoFile("/home/zbynek/Plocha/csharp/Game/Game/files/luascripts/dungeon1.lua");
 		
 		ThisGame.RunGame();
 		

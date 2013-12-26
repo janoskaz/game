@@ -14,6 +14,9 @@ namespace Game
 		// can be equiped?
 		public bool CanBeEquiped { get; set;}
 		
+		// every item can have script, which tells what happens, when the item is used
+		public string Script { get; set;}	
+		
 			/// <summary>
 		/// Initializes a new instance of the <see cref="Game.Item"/> class.
 		/// </summary>
@@ -27,6 +30,12 @@ namespace Game
 		{
 			this.Name = name;
 			this.CanBeEquiped = false;
+			this.Script = null;
+		}
+		
+		public void SetScript(string scriptName)
+		{
+			Script = scriptName;
 		}
 		
 		/// <summary>
@@ -55,6 +64,25 @@ namespace Game
 			return false;
 		}
 		
+		public string Use()
+		{
+			if (Script != null)
+			{
+				ThisGame.lua.DoFile(ThisGame.filePath + "/luascripts/" + Script);
+				string newscript = (string)ThisGame.lua["newscript"];
+				if (newscript == "null")
+					Script = null;
+				string message = (string)ThisGame.lua["message"];
+				ThisGame.lua["message"] = null; // set message to null in order not to interfere with other scripts
+				return message;
+			}
+			else
+			{
+				return "Nothing special can be done with this item";
+			}
+				
+		}
+		
 		public virtual IPlace DropItemOnto(Item i)
 		{
 			Chest chest = new Chest("Rubble on the ground", new Inventory(100));
@@ -74,6 +102,8 @@ namespace Game
 		{
 			XmlElement item = doc.CreateElement(elementName);
 			item.SetAttribute("name", Name);
+			if (Script != null)
+				item.SetAttribute("script", Script);
 			return item;
 		}
 	}

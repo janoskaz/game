@@ -17,6 +17,11 @@ namespace Game
 			message = "You have opened a chest\nCONTENT OF CHEST";
 		}
 		
+		public void SetDescription(string desc)
+		{
+			description = desc;
+		}
+				
 		public override char Symbol()
 		{
 			return 'o';

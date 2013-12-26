@@ -8,7 +8,7 @@ namespace Game
 		
 		public Corpse (string name, Inventory content) :base(name, content)
 		{
-			description = "You have stumbled upon a corpse. Literary - you have stumbled and fallen down.";
+			description = "Yew! Dead body.";
 			message = "Some might find it disgusting, but looting corpses is the only way to survive in this world\nTHE CORPSE HAS:";
 		}
 		

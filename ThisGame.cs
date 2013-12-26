@@ -19,14 +19,20 @@ namespace Game
 		public static string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/");
 		
 		public static Lua lua = new Lua();
+		
+		public static int Visibility = 0;
 	
 		public static void RunGame()
 		{
-
+			// first load lua scripts
+			lua.DoFile(filePath + "luascripts/startup.lua");
+			lua.DoFile(filePath + "luascripts/config.lua");
+			
+			// initialize player, which includes loading lua file, if player is loaded
 			Player p = InitializePlayer();
 			lua["player"] = p;
-			lua.DoFile(filePath + "luascripts/config.lua");
-						
+			
+			//initialize map for player
 			dungeon = InitializeMap(p);		
 			
 			// main loop - running the program
@@ -35,7 +41,13 @@ namespace Game
 			while(!end)
 			{
 				Console.Clear();
-				dungeon.CalculateVisibility(p);
+				
+				// set visibility of the player
+				double vis = (double)lua["visibility"];
+				SetVisibility((int)vis);
+				
+				if (ThisGame.Visibility > 0)
+					dungeon.CalculateVisibility(p, Visibility);
 				dungeon.Draw(p);	
 				
 				int w = Console.WindowWidth;
@@ -69,6 +81,7 @@ namespace Game
 				{
 					p.SaveAsXml();
 					dungeon.ToXml(p.Name.ToLower());
+					ThisGame.SaveConfiguration(p);
 					continue;
 				}					
 					
@@ -83,6 +96,23 @@ namespace Game
 					
 			}
 			
+		}
+		
+		public static void SaveConfiguration(Player p)
+		{
+			double vis = (double)lua["visibility"];
+			bool torch = (bool)lua["torch"];
+			string lines = String.Format("visibility = {0}\ntorch={1}", vis.ToString(), torch.ToString().ToLower());
+
+			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + p.Name.ToLower() + ".lua");
+			file.WriteLine(lines);
+			
+			file.Close();
+		}
+		
+		public static void SetVisibility(int vis)
+		{
+			Visibility = vis;
 		}
 		
 		public static void WriteMessages()
@@ -101,7 +131,8 @@ namespace Game
 			}
 			catch
 			{
-				return LoadMapFromXml("defaultmap");
+				//return LoadMapFromXml("defaultmap");
+				return LoadMapFromXml("newmap_map");
 			}
 		}
 		
@@ -183,7 +214,7 @@ namespace Game
 				ch = new Characteristics(50, 10, 3, -1);
 			else
 				ch = new Characteristics(35, 5, 7, 2);
-			Player p = new Player(name, ch, ch, 100, 3, 3);
+			Player p = new Player(name, ch, ch, 100, 2, 2);
 			return p;
 		}
 		
@@ -279,6 +310,8 @@ namespace Game
 			p.equiped = equiped;
 			p.SetBody(new Body(b));
 			
+			lua.DoFile(filePath + p.Name.ToLower() + ".lua");
+			
 			return p;
 		}
 		
@@ -313,7 +346,11 @@ namespace Game
 		public static Item LoadItemFromXml(XmlElement node)
 		{
 			string name = node.GetAttribute("name");
-			return new Item(name);
+			Item i = new Item(name);
+			string script = node.GetAttribute("script");
+			if(script != "")
+				i.SetScript(script);
+			return i;
 		}
 		
 		public static Equipment LoadEquipmentFromXml(XmlElement node)
@@ -321,7 +358,11 @@ namespace Game
 			string name = node.GetAttribute("name");
 			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
 			List<string> b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
-			return new Equipment(name, ch, b);
+			Equipment e = new Equipment(name, ch, b);
+			string script = node.GetAttribute("script");
+			if(script != "")
+				e.SetScript(script);
+			return e;
 		}
 		
 		public static Weapon LoadWeaponFromXml(XmlElement node)
@@ -330,7 +371,11 @@ namespace Game
 			int nrFacets = int.Parse(node.GetAttribute("nrfacets"));
 			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
 			List<string> b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
-			return new Weapon(name, ch, b, nrFacets);
+			Weapon w = new Weapon(name, ch, b, nrFacets);
+			string script = node.GetAttribute("script");
+			if(script != "")
+				w.SetScript(script);
+			return w;
 		}
 		
 		public static Inventory LoadInventoryFromXml(XmlElement node)

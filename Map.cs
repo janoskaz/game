@@ -39,18 +39,19 @@ namespace Game
 			location[x, y] = l;
 		}
 		
-		public void CalculateVisibility(Player p)
+		// calculate visibility - how far does the player see?
+		public void CalculateVisibility(Player p, int visibility)
 		{
 			int x = p.X;
 			int y = p.Y;
 			double dist;
 			
-			for (int i = Math.Max(x-2,0); i <= Math.Min(x+2,this.Width-1); i++)
+			for (int i = Math.Max(x-visibility,0); i <= Math.Min(x+visibility,this.Width-1); i++)
 			{
-				for (int j = Math.Max(y-2,0); j <= Math.Min(y+2,this.Heigth-1); j++)
+				for (int j = Math.Max(y-visibility,0); j <= Math.Min(y+visibility,this.Heigth-1); j++)
 				{
 					dist = Math.Sqrt((i-x)*(i-x) + (j-y)*(j-y));
-					if (dist <= 2)
+					if (dist <= visibility)
 					{
 						location[i,j].Visible = true;
 					}						
