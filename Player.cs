@@ -175,9 +175,16 @@ namespace Game
 				}
 				case "use":
 				{
-					n = int.Parse(words[1]);
-					Item i = this.bag.bag[n-1];
-					messageBoard.Enqueue(i.Use());
+					try
+					{
+						n = int.Parse(words[1]);
+						Item i = this.bag.bag[n-1];
+						messageBoard.Enqueue(i.Use());
+					}
+					catch
+					{
+						messageBoard.Enqueue("Something wrong with your output");
+					}
 					break;
 				}
 				default:

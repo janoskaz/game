@@ -9,8 +9,8 @@ class Program
 	public static void Main()
 	{
 		// some vizualization
-		Console.BackgroundColor = ConsoleColor.White;
-		Console.ForegroundColor = ConsoleColor.Black;		
+		Console.BackgroundColor = ConsoleColor.DarkGray;
+		Console.ForegroundColor = ConsoleColor.Gray;		
 		Console.Clear();
 		Console.SetWindowSize(81,10);
 		

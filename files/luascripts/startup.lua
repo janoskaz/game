@@ -33,13 +33,13 @@ end
 
 --Say function
 function say(who, what)
-	Console.WriteLine(who .. "> " .. what .. "\n")
-	sleep(1)
+	Console.WriteLine(who .. "> " .. what)
+	Console.Readkey()
 end
 
 --Message function
 function tell_message(what)
-	Console.WriteLine(what .. "\n")
-	sleep(2)
+	Console.WriteLine(what)
+	Console.Readkey()
 end
 

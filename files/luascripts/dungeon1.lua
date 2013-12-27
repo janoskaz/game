@@ -45,4 +45,4 @@ brokenWall:SetScript("broken_wall.lua")
 map:AddLocation(brokenWall)
 
 --Write to XML
-map:ToXml("newmap")
+map:ToXml("dungeon1")

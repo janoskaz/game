@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using System.Threading;
 using NLua;
 
 namespace Game
@@ -131,8 +132,7 @@ namespace Game
 			}
 			catch
 			{
-				//return LoadMapFromXml("defaultmap");
-				return LoadMapFromXml("newmap_map");
+				return LoadMapFromXml("dungeon1_map");
 			}
 		}
 		
@@ -197,24 +197,65 @@ namespace Game
 		
 		public static Player CreateNewPlayer()
 		{
+			// Pick name
 			Console.WriteLine("What is the name of your hero?");
 			string name = Console.ReadLine().Trim();
+			// lets egyptize the name
 			int choice = 0;
-			string userInput;
-			while ((choice!=1) && (choice!=2))
+			string userInput = "";
+			while (choice < 1 || choice > 7)
 			{
-				Console.WriteLine("What is body constitution of {0}", name);
-				Console.WriteLine("Press 1 for strong and resilient");
-				Console.WriteLine("Press 2 for agile and quick");
+				Console.WriteLine("That sounds just bad. What about:");
+				Console.WriteLine("\t1: {0}", name + "nefer");
+				Console.WriteLine("\t2: {0}", name + "hotep");
+				Console.WriteLine("\t3: {0}", "Ptah" + name.ToLower() + "tep");
+				Console.WriteLine("\t4: {0}", "Nefe" + name.ToLower() + "bet");
+				Console.WriteLine("\t5: {0}", "Ankh" + name.ToLower() + "amun");
+				Console.WriteLine("\t6: {0}", "Iset" + name.ToLower() + "rure");
+				Console.WriteLine("\t7: {0}", "Neb" + name.ToLower() + "kare");
 				userInput = Console.ReadLine();
-				int.TryParse(userInput, out choice );
+                int.TryParse(userInput, out choice );
 			}
-			Characteristics ch;
-			if (choice==1)
-				ch = new Characteristics(50, 10, 3, -1);
-			else
-				ch = new Characteristics(35, 5, 7, 2);
-			Player p = new Player(name, ch, ch, 100, 2, 2);
+			// create new name
+			string newname = "";
+			switch (choice)
+			{
+			case 1:
+				newname = name + "nefer";
+				break;
+			case 2:
+				newname = name + "hotep";
+				break;
+			case 3:
+				newname = "Ptah" + name.ToLower() + "tep";
+				break;
+			case 4:
+				newname = "Nefe" + name.ToLower() + "bet";
+				break;
+			case 5:
+				newname = "Ankh" + name.ToLower() + "amun";
+				break;
+			case 6:
+				newname = "Iset" + name.ToLower() + "rure";
+				break;
+			case 7:
+				newname = "Neb" + name.ToLower() + "kare";
+				break;
+			}
+			
+			Characteristics ch = new Characteristics(10,2,1,0);
+			Player p = new Player(newname, ch, ch, 100, 2, 2);
+			
+			Console.Clear();
+			Console.WriteLine("You wake up.");
+			Console.WriteLine("Your head is spinning and you feel throbbing pain on the back of your head.");
+			Console.WriteLine("There is pitch dark all around you, not a single ray of light. And who are you, anyway?");
+			Console.ReadKey();
+			Console.WriteLine("Oh yes, your name is {0} and you were building the tomb for Khasekhemre, pharaohs chief accountant.", newname);
+			Console.WriteLine("And thats the last thing you remember");
+			Console.ReadKey();
+			Console.WriteLine("You should probably find out what happened.");
+			Console.ReadKey();
 			return p;
 		}
 		
