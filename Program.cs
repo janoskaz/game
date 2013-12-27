@@ -12,10 +12,9 @@ class Program
 		Console.BackgroundColor = ConsoleColor.DarkGray;
 		Console.ForegroundColor = ConsoleColor.Gray;		
 		Console.Clear();
-		Console.SetWindowSize(81,10);
 		
-		//Lua lua = new Lua();
-		//lua.DoFile("/home/zbynek/Plocha/csharp/Game/Game/files/luascripts/dungeon1.lua");
+		Lua lua = new Lua();
+		lua.DoFile("/home/zbynek/Plocha/csharp/Game/Game/files/luascripts/dungeon1.lua");
 		
 		ThisGame.RunGame();
 		

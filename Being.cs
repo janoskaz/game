@@ -46,7 +46,7 @@ namespace Game
 			this.CurrentCharacteristics = currentCh;
 			this.bag = new Inventory(bagsize);
 			this.equiped = new Inventory(bagsize);
-			this.Body = new Body( new List<string>());
+			this.Body = new Body( new string[0]);
 		}
 		
 		/// <summary>
@@ -206,7 +206,7 @@ namespace Game
 		}
 		
 		/// <summary>
-		/// Updates the characteristics by enhancement of given item. If item is equiped, add bvalues, if item is stripped, substract values
+		/// Updates the characteristics by enhancement of given item. If item is equiped, add values, if item is stripped, substract values
 		/// </summary>
 		public void UpdateCharacteristics(Equipment i, bool equip)
 		{	
@@ -220,6 +220,12 @@ namespace Game
 			int	speed = i.Characteristics.speed* multiplier;
 						
 			this.CurrentCharacteristics.Update(hitpoints, attack, defence, speed);
+		}
+		
+		public void PermanentlyUpdateCharacteristics(int hp, int attack, int defence, int speed)
+		{
+			this.Characteristics.Update(hp, attack, defence, speed);
+			this.CurrentCharacteristics.Update(hp, attack, defence, speed);
 		}
 		
 		public void SetCurrentCharacteriscs(Characteristics ch)
@@ -242,12 +248,12 @@ namespace Game
 		{
 			// get attack value, set default dice and default weapon to bare hands
 			int attack = this.CurrentCharacteristics.attack;
-			string weapon = "bare hands"; 
 			// if a weapon is equiped, find out the name and dice of this weapon
 			foreach (Item i in this.equiped.bag)
 			{
 				if (i.GetType() == typeof(Weapon))
 					{
+						string weapon = i.Name;
 						attack += Dice.Roll(((Weapon)i).NrFacets);
 						weapon = i.Name;
 						Console.WriteLine("{0} attack with {1} and rolls {2}", this.Name, weapon, attack);
@@ -256,7 +262,7 @@ namespace Game
 			}
 			// if being does not have weapon, attack with bare hands and with dice 6
 			attack += Dice.Roll(6);
-			Console.WriteLine("{0} attack with {1} and rolls {2}", this.Name, weapon, attack);
+			Console.WriteLine("{0} attack and rolls {1}", this.Name, attack);
 			return attack;			
 		}
 		
@@ -343,7 +349,10 @@ namespace Game
 		public override string ToString ()
 		{
 			string s = String.Format("Name: {0}\n", this.Name);
-			s += this.CurrentCharacteristics.ToString();
+			s += ("Hitpoints:  " + this.CurrentCharacteristics.hitpoints.ToString() + "/" + this.Characteristics.hitpoints.ToString());
+			s += ("\nAttack:     " + this.CurrentCharacteristics.attack.ToString());
+			s += ("\nDefence:    " + this.CurrentCharacteristics.defence.ToString());
+			s += ("\nSpeed:      " + this.CurrentCharacteristics.speed.ToString());
 			s += ("\nCurrently equiped are:\n" + this.equiped.ToString());
 			s += ("\nIn inventory are:\n" + this.bag.ToString());
 			return s;

@@ -27,7 +27,7 @@ namespace Game
 		/// <param name='lst'>
 		/// Lst.
 		/// </param>
-		public Equipment (string name, Characteristics ch, List<string> lst) :base (name)
+		public Equipment (string name, Characteristics ch, Array lst) :base (name)
 		{
 			this.CanBeEquiped = true;
 			this.Characteristics = ch;

@@ -53,6 +53,7 @@
     <Compile Include="Corpse.cs" />
     <Compile Include="ThisGame.cs" />
     <Compile Include="IXml.cs" />
+    <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="files\" />

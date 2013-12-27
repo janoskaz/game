@@ -16,14 +16,14 @@ namespace Game
 		/// <param name='lst'>
 		/// Lst.
 		/// </param>
-		public Body ( List<string> lst )
+		public Body ( Array lst )
 		{
-			this["head"] = lst.Contains("head");
-			this["body"] = lst.Contains("body");
-			this["legs"] = lst.Contains("legs");
-			this["boots"] = lst.Contains("boots");
-			this["weapon"] = lst.Contains("weapon");
-			this["shield"] = lst.Contains("shield");
+			this["head"] = (Array.IndexOf(lst, "head") != -1);
+			this["body"] = (Array.IndexOf(lst, "body") != -1);
+			this["legs"] = (Array.IndexOf(lst, "legs") != -1);
+			this["boots"] = (Array.IndexOf(lst, "boots") != -1);
+			this["weapon"] = (Array.IndexOf(lst, "weapon") != -1);
+			this["shield"] = (Array.IndexOf(lst, "shield") != -1);
 		}
 		
 		/// <summary>

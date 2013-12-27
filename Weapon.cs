@@ -11,7 +11,7 @@ namespace Game
 		// Weapon has a dice, which tells, how big the attack is
 		public readonly int NrFacets;
 		
-		public Weapon (string name, Characteristics ch, List<string> lst, int nrFacets) :base(name, ch, lst)
+		public Weapon (string name, Characteristics ch, Array lst, int nrFacets) :base(name, ch, lst)
 		{
 			this.NrFacets = nrFacets;
 		}

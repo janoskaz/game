@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using System.Threading;
+using System.Globalization;
 using NLua;
+using ExtensionMethods;
 
 namespace Game
 {
@@ -22,7 +24,21 @@ namespace Game
 		public static Lua lua = new Lua();
 		
 		public static int Visibility = 0;
-	
+		
+		public static string ToUpperFirstLetter(this string source)
+		{
+		    if (string.IsNullOrEmpty(source))
+		        return string.Empty;
+		    // convert to char array of the string
+		    char[] letters = source.ToCharArray();
+		    // upper case the first char
+		    letters[0] = char.ToUpper(letters[0]);
+		    // return the array made of the new char array
+		    return new string(letters);
+		}
+
+
+		
 		public static void RunGame()
 		{
 			// first load lua scripts
@@ -198,53 +214,30 @@ namespace Game
 		public static Player CreateNewPlayer()
 		{
 			// Pick name
-			Console.WriteLine("What is the name of your hero?");
+			Console.WriteLine("What is your name?");
 			string name = Console.ReadLine().Trim();
 			// lets egyptize the name
 			int choice = 0;
 			string userInput = "";
+			string[] names = {ToUpperFirstLetter(name + "nefer"), ToUpperFirstLetter(name + "hotep"), "Ptah" + name.ToLower() + "tep", "Nefe" + name.ToLower() + "bet", 
+				"Ankh" + name.ToLower() + "amun", "Iset" + name.ToLower() + "rure", "Neb" + name.ToLower() + "kare"};
 			while (choice < 1 || choice > 7)
 			{
 				Console.WriteLine("That sounds just bad. What about:");
-				Console.WriteLine("\t1: {0}", name + "nefer");
-				Console.WriteLine("\t2: {0}", name + "hotep");
-				Console.WriteLine("\t3: {0}", "Ptah" + name.ToLower() + "tep");
-				Console.WriteLine("\t4: {0}", "Nefe" + name.ToLower() + "bet");
-				Console.WriteLine("\t5: {0}", "Ankh" + name.ToLower() + "amun");
-				Console.WriteLine("\t6: {0}", "Iset" + name.ToLower() + "rure");
-				Console.WriteLine("\t7: {0}", "Neb" + name.ToLower() + "kare");
+				for (int i=0; i<names.Length; i++)
+					Console.WriteLine("\t{0}: {1}", i+1, names[i]);
 				userInput = Console.ReadLine();
                 int.TryParse(userInput, out choice );
 			}
 			// create new name
-			string newname = "";
-			switch (choice)
-			{
-			case 1:
-				newname = name + "nefer";
-				break;
-			case 2:
-				newname = name + "hotep";
-				break;
-			case 3:
-				newname = "Ptah" + name.ToLower() + "tep";
-				break;
-			case 4:
-				newname = "Nefe" + name.ToLower() + "bet";
-				break;
-			case 5:
-				newname = "Ankh" + name.ToLower() + "amun";
-				break;
-			case 6:
-				newname = "Iset" + name.ToLower() + "rure";
-				break;
-			case 7:
-				newname = "Neb" + name.ToLower() + "kare";
-				break;
-			}
-			
+			string newname = names[choice-1];
+						
 			Characteristics ch = new Characteristics(10,2,1,0);
-			Player p = new Player(newname, ch, ch, 100, 2, 2);
+			Characteristics ch2 = new Characteristics(10,2,1,0);
+			Player p = new Player(newname, ch, ch2, 100, 2, 2);
+			
+			Item amulet = new Item("Amulet with crocodile");
+			p.PickItem(amulet);
 			
 			Console.Clear();
 			Console.WriteLine("You wake up.");
@@ -310,7 +303,7 @@ namespace Game
 			Characteristics cch = new Characteristics(0,0,0,0);
 			Inventory bag = new Inventory(0);
 			Inventory equiped = new Inventory(0);
-			List<string> b = new List<string>();
+			string[] b = new string[6];
 			
 			foreach (XmlNode node in root.ChildNodes)
 			{
@@ -366,21 +359,21 @@ namespace Game
 			return ch;
 		}
 		
-		public static List<string> LoadBodyFromXML(XmlElement node)
+		public static string[] LoadBodyFromXML(XmlElement node)
 		{
-			List<string> lst = new List<string>();
+			string[] lst = new String[6];
 			if (bool.Parse (node.GetAttribute("body")))
-				lst.Add("body");
+				lst[0] = "body";
 			if (bool.Parse (node.GetAttribute("head")))
-				lst.Add("head");
+				lst[1] = "head";
 			if (bool.Parse (node.GetAttribute("legs")))
-				lst.Add("legs");
+				lst[2] = "legs";
 			if (bool.Parse (node.GetAttribute("boots")))
-				lst.Add("boots");
+				lst[3] = "boots";
 			if (bool.Parse (node.GetAttribute("weapon")))
-				lst.Add("weapon");
+				lst[4] = "weapon";
 			if (bool.Parse (node.GetAttribute("shield")))
-				lst.Add("shield");
+				lst[5] = "shield";
 			return lst;
 		}
 		
@@ -398,7 +391,7 @@ namespace Game
 		{
 			string name = node.GetAttribute("name");
 			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
-			List<string> b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
+			string[] b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
 			Equipment e = new Equipment(name, ch, b);
 			string script = node.GetAttribute("script");
 			if(script != "")
@@ -411,7 +404,7 @@ namespace Game
 			string name = node.GetAttribute("name");
 			int nrFacets = int.Parse(node.GetAttribute("nrfacets"));
 			Characteristics ch = LoadCharacteristicsFromXml((XmlElement)node.GetElementsByTagName("Characteristics")[0]);
-			List<string> b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
+			string[] b = LoadBodyFromXML((XmlElement)node.GetElementsByTagName("Body")[0]);
 			Weapon w = new Weapon(name, ch, b, nrFacets);
 			string script = node.GetAttribute("script");
 			if(script != "")
@@ -565,7 +558,7 @@ namespace Game
 			Characteristics cch = new Characteristics(0,0,0,0);
 			Inventory bag = new Inventory(0);
 			Inventory equiped = new Inventory(0);
-			List<string> b = new List<string>();
+			string[] b = new string[6];
 			
 			foreach (XmlNode subnode in node.ChildNodes)
 			{
