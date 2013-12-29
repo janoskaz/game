@@ -93,13 +93,15 @@ namespace Game
 		/// <param name='name'>
 		/// If set to <c>true</c> name.
 		/// </param>
-		public bool Inside(Item i)
+		//
+		public bool Inside(string name)
 		{
 			foreach (Item item in this.bag)
-				if(item.Name == i.Name)
+				if(item.Name == name)
 					return true;
 			return false;
 		}
+		
 		
 		public int Count()
 		{

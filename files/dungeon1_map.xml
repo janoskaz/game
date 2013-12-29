@@ -274,6 +274,7 @@
             <Characteristics hitpoints="0" attack="2" defence="0" speed="0" />
             <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="False" />
           </Weapon>
+          <Item name="Amulet with owl" />
         </Inventory>
       </Corpse>
     </block>
@@ -1314,13 +1315,21 @@
     </block>
   </location>
   <location x="10" y="1" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject />
+    <block type="Game.Corpse">
+      <Corpse name="Dead body">
+        <Inventory maxsize="10">
+          <Item name="Amulet with fish" />
+        </Inventory>
+      </Corpse>
     </block>
   </location>
   <location x="10" y="2" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject />
+    <block type="Game.Corpse">
+      <Corpse name="Dead body">
+        <Inventory maxsize="10">
+          <Item name="Amulet with jackal" />
+        </Inventory>
+      </Corpse>
     </block>
   </location>
   <location x="10" y="3" visible="False">
@@ -1329,13 +1338,25 @@
     </block>
   </location>
   <location x="10" y="4" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject />
+    <block type="Game.Corpse">
+      <Corpse name="Dead body">
+        <Inventory maxsize="10">
+          <Item name="Amulet with cat" />
+        </Inventory>
+      </Corpse>
     </block>
   </location>
   <location x="10" y="5" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject />
+    <block type="Game.Corpse">
+      <Corpse name="Dead body">
+        <Inventory maxsize="10">
+          <Item name="Amulet with cat" />
+          <Weapon name="Showel" nrfacets="8">
+            <Characteristics hitpoints="0" attack="3" defence="1" speed="0" />
+            <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="True" />
+          </Weapon>
+        </Inventory>
+      </Corpse>
     </block>
   </location>
   <location x="10" y="6" visible="False">

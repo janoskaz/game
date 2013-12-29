@@ -27,6 +27,8 @@ namespace Game
 		// Everyone has a body
 		public Body Body {get; private set;}
 		
+		protected char symbol;
+		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Game.Being"/> class.
 		/// </summary>
@@ -47,6 +49,7 @@ namespace Game
 			this.bag = new Inventory(bagsize);
 			this.equiped = new Inventory(bagsize);
 			this.Body = new Body( new string[0]);
+			this.symbol = 'B';
 		}
 		
 		/// <summary>
@@ -60,9 +63,9 @@ namespace Game
 			this.bag.Add(item);
 		}
 		
-		public bool HasItem(Item i)
+		public bool HasItem(string name)
 		{
-			bool hasIt = (this.bag.Inside(i) || this.equiped.Inside(i));
+			bool hasIt = (this.bag.Inside(name) || this.equiped.Inside(name));
 			return hasIt;
 		}
 		
@@ -109,7 +112,7 @@ namespace Game
 		public string MakeSpaceForEquipment(Item i)
 		{
 			string msg = "Making space for new items";
-			bool isInside = this.bag.Inside(i);
+			bool isInside = this.bag.Inside(i.Name);
 			if (isInside)
 			{
 				// list of covered body parts
@@ -149,7 +152,7 @@ namespace Game
 			if (this.CanEquip(i))
 			{
 				// Is the item already inside bag?
-				bool isInside = this.bag.Inside(i);
+				bool isInside = this.bag.Inside(i.Name);
 				if (isInside)
 				{
 					// can the Item be put on body? (are there empty slots?)
@@ -370,9 +373,14 @@ namespace Game
 		
 		public virtual char Symbol()
 		{
-			return 'A';
+			return symbol;
 		}
 		
+		public virtual void SetSymbol(char x)
+		{
+			this.symbol = x;
+		}
+				
 		public virtual bool CanMoveTo()
 		{
 			return false;

@@ -17,6 +17,7 @@ namespace Game
 		{
 			X = x;
 			Y = y;
+			symbol = 'P';
 		}
 		
 		public void Move(ConsoleKeyInfo c, Map m)
@@ -133,7 +134,7 @@ namespace Game
 					try
 					{
 						n = int.Parse(words[1]);
-						messageBoard.Enqueue(this.StripItem(this.bag.bag[n-1]));
+						messageBoard.Enqueue(this.StripItem(this.equiped.bag[n-1]));
 					}
 					catch
 					{
@@ -196,12 +197,6 @@ namespace Game
 			
 			}
 			
-		}
-		
-		
-		new public char Symbol()
-		{
-			return 'P';
 		}
 		
 		public override XmlElement ToXml(XmlDocument doc, string elementName)

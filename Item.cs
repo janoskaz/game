@@ -14,6 +14,8 @@ namespace Game
 		// can be equiped?
 		public bool CanBeEquiped { get; set;}
 		
+		protected char symbol;
+		
 		// every item can have script, which tells what happens, when the item is used
 		public string Script { get; set;}	
 		
@@ -51,7 +53,12 @@ namespace Game
 		
 		public virtual char Symbol()
 		{
-			return '*';
+			return symbol;
+		}
+		
+		public virtual void SetSymbol(char x)
+		{
+			this.symbol = x;
 		}
 		
 		public virtual bool CanMoveTo()

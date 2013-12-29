@@ -14,7 +14,7 @@ namespace Game
 		
 		public bool Locked {get; private set;}
 		
-		public char MapSymbol;
+		public char symbol;
 		
 		public Door (string description, string key, bool locked=false)
 		{
@@ -23,11 +23,11 @@ namespace Game
 			Locked = locked;
 			if (locked) // set symbol based on state of doors (locked/open)
 			{
-				this.MapSymbol = '/';
+				this.symbol = '/';
 			}
 			else
 			{
-				this.MapSymbol = '-';
+				this.symbol = '-';
 			}
 		}
 		
@@ -44,11 +44,6 @@ namespace Game
 		{
 			ThisGame.messageLog.Enqueue("Door has been opened");
 			this.Locked = false;
-		}
-		
-		public override char Symbol()
-		{
-			return this.MapSymbol;
 		}
 		
 		public override bool CanMoveTo()
@@ -68,11 +63,11 @@ namespace Game
 		{
 			if (this.Locked)
 			{
-				this.MapSymbol = '/';
+				this.symbol = '/';
 			}
 			else
 			{
-				this.MapSymbol = '-';
+				this.symbol = '-';
 			}
 		}
 		

@@ -8,8 +8,11 @@ namespace Game
 	/// </summary>
 	public class BasicObject :IPlace
 	{
+		private char symbol;
+		
 		public BasicObject ()
 		{
+			this.symbol = ' ';
 		}
 		
 		/// <summary>
@@ -17,7 +20,12 @@ namespace Game
 		/// </summary>
 		public virtual char Symbol()
 		{
-			return ' ';
+			return this.symbol;
+		}
+		
+		public virtual void SetSymbol(char x)
+		{
+			this.symbol = x;
 		}
 		
 		public virtual bool CanMoveTo()

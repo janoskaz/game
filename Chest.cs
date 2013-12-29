@@ -15,16 +15,12 @@ namespace Game
 			Content = content;
 			description = String.Format("There is {0} laying on the ground", Name.ToLower());
 			message = "You have opened a chest\nCONTENT OF CHEST";
+			symbol = 'o';
 		}
 		
 		public void SetDescription(string desc)
 		{
 			description = desc;
-		}
-				
-		public override char Symbol()
-		{
-			return 'o';
 		}
 		
 		public override bool CanMoveTo()

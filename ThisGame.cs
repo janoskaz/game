@@ -37,8 +37,6 @@ namespace Game
 		    return new string(letters);
 		}
 
-
-		
 		public static void RunGame()
 		{
 			// first load lua scripts

@@ -119,27 +119,56 @@ end
 
 --ENTRY ROOM - bonus functionality
 --Add corpse in corner
-torch = Item("Torch")
+inv = Inventory(10) -- create inventory
+torch = Item("Torch") -- torch
 torch:SetScript("torch.lua")
-inv = Inventory(10)
 inv:Add(torch)
-
-ss = String[1]
+ss = String[1] -- hammer
 ss[0] = "weapon"
 hammer = Weapon("Hammer", Characteristics(0,2,0,0), ss, 6)
 inv:Add(hammer)
-
-deadman = Corpse("Dead body", inv)
-deadman:SetDescription("You have stumbled upon a corpse. Literary - you have stumbled and fallen down.")
+amulet_owl = Item("Amulet with owl") -- amulet with owl
+inv:Add(amulet_owl)
+deadman1 = Corpse("Dead body", inv) -- create dead body
+deadman1:SetDescription("You have stumbled upon a corpse. Literary - you have stumbled and fallen down.")
 --TODO: previous line is not working
-map:AddLocation(Location(2,1, deadman))
+map:AddLocation(Location(2,1, deadman1))
 
 --Add broken wall
 brokenWall = Location(4,1, Wall())
 brokenWall:SetScript("broken_wall.lua")
 map:AddLocation(brokenWall)
 
---Rest of the small rooms
+--REST OF THE SMALL ROOMS
+inv = Inventory(10) -- dead men 1 in upper right room
+amulet_fish = Item("Amulet with fish") -- amulet with owl
+inv:Add(amulet_fish)
+deadman2= Corpse("Dead body", inv) -- create dead body
+map:AddLocation(Location(10,1, deadman2))
+
+inv = Inventory(10) -- dead men 2 in upper right room
+amulet_jackal = Item("Amulet with jackal") -- amulet with owl
+inv:Add(amulet_jackal)
+deadman3= Corpse("Dead body", inv) -- create dead body
+map:AddLocation(Location(10,2, deadman3))
+
+inv = Inventory(10) -- dead men 1 in lower right room
+amulet_cat = Item("Amulet with cat") -- amulet with owl
+inv:Add(amulet_cat)
+deadman4= Corpse("Dead body", inv) -- create dead body
+map:AddLocation(Location(10,4, deadman4))
+
+inv = Inventory(10) -- dead men 2 in lower right room
+amulet_cat = Item("Amulet with cat") -- amulet with owl
+inv:Add(amulet_cat)
+ss = String[2] -- showel
+ss[0] = "weapon"
+ss[1] = "shield"
+showel = Weapon("Showel", Characteristics(0,3,1,0), ss, 8)
+inv:Add(showel)
+deadman5= Corpse("Dead body", inv) -- create dead body
+map:AddLocation(Location(10,5, deadman5))
+
 
 --Write to XML
 map:ToXml("dungeon1")

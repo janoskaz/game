@@ -10,11 +10,7 @@ namespace Game
 		{
 			description = "Yew! Dead body.";
 			message = "Some might find it disgusting, but looting corpses is the only way to survive in this world\nTHE CORPSE HAS:";
-		}
-		
-		public override char Symbol()
-		{
-			return 'X';
+			symbol = 'X';
 		}
 		
 		public override bool CanMoveTo()

@@ -12,7 +12,8 @@ namespace Game
 		public int X {get; set;}
 		public int Y {get; set;}
 		public IPlace Block {get; set;}
-		public bool Visible {get; set;}		
+		public bool Visible {get; set;}
+		public char symbol;
 		// script, if available. default is null
 		public string Script { get; set;}		
 		
@@ -23,6 +24,7 @@ namespace Game
 			Block = o;
 			Visible = false;
 			Script = null;
+			symbol = Block.Symbol();
 		}
 		
 		public void SetScript(string scriptName)
@@ -35,7 +37,12 @@ namespace Game
 		/// </summary>
 		public char Symbol()
 		{
-			return Block.Symbol();
+			return symbol;
+		}
+		
+		public void SetSymbol(char x)
+		{
+			this.symbol = x;
 		}
 		
 		public bool CanMoveTo()
