@@ -24,18 +24,6 @@ namespace Game
 		public static Lua lua = new Lua();
 		
 		public static int Visibility = 0;
-		
-		public static string ToUpperFirstLetter(this string source)
-		{
-		    if (string.IsNullOrEmpty(source))
-		        return string.Empty;
-		    // convert to char array of the string
-		    char[] letters = source.ToCharArray();
-		    // upper case the first char
-		    letters[0] = char.ToUpper(letters[0]);
-		    // return the array made of the new char array
-		    return new string(letters);
-		}
 
 		public static void RunGame()
 		{
@@ -117,7 +105,8 @@ namespace Game
 		{
 			double vis = (double)lua["visibility"];
 			bool torch = (bool)lua["torch"];
-			string lines = String.Format("visibility = {0}\ntorch={1}", vis.ToString(), torch.ToString().ToLower());
+			bool visited_madman = (bool)lua["had_conversation_with_madman"];
+			string lines = String.Format("visibility = {0}\ntorch={1}\nhad_conversation_with_madman={2}", vis.ToString(), torch.ToString().ToLower(), visited_madman.ToString().ToLower());
 
 			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + p.Name.ToLower() + ".lua");
 			file.WriteLine(lines);
@@ -210,14 +199,14 @@ namespace Game
 		}
 		
 		public static Player CreateNewPlayer()
-		{
+		{			
 			// Pick name
 			Console.WriteLine("What is your name?");
 			string name = Console.ReadLine().Trim();
 			// lets egyptize the name
 			int choice = 0;
 			string userInput = "";
-			string[] names = {ToUpperFirstLetter(name + "nefer"), ToUpperFirstLetter(name + "hotep"), "Ptah" + name.ToLower() + "tep", "Nefe" + name.ToLower() + "bet", 
+			string[] names = {(name.ToLower() + "nefer").ToUpperFirstLetter(), (name.ToLower() + "hotep").ToUpperFirstLetter(), "Ptah" + name.ToLower() + "tep", "Nefe" + name.ToLower() + "bet", 
 				"Ankh" + name.ToLower() + "amun", "Iset" + name.ToLower() + "rure", "Neb" + name.ToLower() + "kare"};
 			while (choice < 1 || choice > 7)
 			{

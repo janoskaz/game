@@ -8,6 +8,7 @@ Map = import_type "Game.Map"
 Location = import_type "Game.Location"
 Player = import_type "Game.Player"
 Being = import_type "Game.Being"
+BasicObject = import_type "Game.BasicObject"
 Wall = import_type "Game.Wall"
 Corpse = import_type "Game.Corpse"
 Item = import_type "Game.Item"
@@ -141,26 +142,26 @@ map:AddLocation(brokenWall)
 
 --REST OF THE SMALL ROOMS
 inv = Inventory(10) -- dead men 1 in upper right room
-amulet_fish = Item("Amulet with fish") -- amulet with owl
+amulet_fish = Item("Amulet with fish") -- amulet with fish
 inv:Add(amulet_fish)
 deadman2= Corpse("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,1, deadman2))
 
 inv = Inventory(10) -- dead men 2 in upper right room
-amulet_jackal = Item("Amulet with jackal") -- amulet with owl
+amulet_jackal = Item("Amulet with jackal") -- amulet with jackal
 inv:Add(amulet_jackal)
 deadman3= Corpse("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,2, deadman3))
 
 inv = Inventory(10) -- dead men 1 in lower right room
-amulet_cat = Item("Amulet with cat") -- amulet with owl
+amulet_cat = Item("Amulet with cat") -- amulet with cat
 inv:Add(amulet_cat)
 deadman4= Corpse("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,4, deadman4))
 
 inv = Inventory(10) -- dead men 2 in lower right room
-amulet_cat = Item("Amulet with cat") -- amulet with owl
-inv:Add(amulet_cat)
+amulet_camel = Item("Amulet with camel") -- amulet with camel
+inv:Add(amulet_camel)
 ss = String[2] -- showel
 ss[0] = "weapon"
 ss[1] = "shield"
@@ -169,6 +170,23 @@ inv:Add(showel)
 deadman5= Corpse("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,5, deadman5))
 
+inv = Inventory(10) -- dead men 1 in lower left room
+amulet_hippo = Item("Amulet with hippo") -- amulet with hippo
+inv:Add(amulet_hippo)
+deadman5= Corpse("Dead body", inv) -- create dead body
+map:AddLocation(Location(2,4, deadman4))
+
+-- Mad men in lower left room
+amulet_octopus = Item("Amulet with octopus") -- amulet with hawk
+ch = Characteristics(3,3,1,0)
+madman = Being("Mad men", ch, ch, 10)
+madman:PickItem(amulet_octopus)
+madman = Location(2,5, madman)
+madman:SetScript("madman.lua")
+map:AddLocation(madman)
+
+-------------------remove
+map:AddLocation(Location(4,5,BasicObject()))
 
 --Write to XML
 map:ToXml("dungeon1")

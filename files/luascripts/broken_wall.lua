@@ -11,11 +11,11 @@ if (torch) then
 	tell_message("You push and the wall breaks down, crumbling on the floor."
 	.. " In horror, you watch dozens of huge sacred carnivore beetles rushing into the room, willing to eat you.")
 	val = player:Fight(beetles)
+	keepscript = false
 	if val then
 		tell_message("You squish the last beetle with your bare hand and exhale a breath full of relief. Killing sacred beetles is moraly problematic thing, you gain some cynicism, and mean people live longer, so you get also two more hitpoints.")
 		player:PermanentlyUpdateCharacteristics(2,0,0,0)
 		out = BasicObject()
-		keepscript = false
 	else
 		out = beetles
 	end

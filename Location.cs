@@ -45,6 +45,11 @@ namespace Game
 			this.symbol = x;
 		}
 		
+		public void UpdateSymbol()
+		{
+			this.symbol = this.Block.Symbol();
+		}
+		
 		public bool CanMoveTo()
 		{
 			return this.Block.CanMoveTo();
@@ -100,6 +105,7 @@ namespace Game
 					else
 						Script = (string)ThisGame.lua["newscript"];
 				}
+				UpdateSymbol();
 				ThisGame.lua["block"] = null;
 				ThisGame.lua["out"] = null;
 				ThisGame.lua["keepscript"] = null;

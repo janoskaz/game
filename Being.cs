@@ -89,6 +89,20 @@ namespace Game
 			return msg;
 		}
 		
+		public Item GetItem(string name)
+		{
+			Item item = new Item("Nothing");
+			foreach (Item i in this.bag.bag)
+			{
+				if (i.Name == name)
+				{
+					item = i;
+					break;
+				}
+			}
+			return item;
+		}
+		
 		/// <summary>
 		/// Determines whether this instance can equip item with specified name.
 		/// </summary>

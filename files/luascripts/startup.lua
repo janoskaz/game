@@ -43,3 +43,16 @@ function tell_message(what)
 	Console.Readkey()
 end
 
+--GetAnswer function
+function get_answer(range)
+	rng = {}
+	for i=1,range do
+		rng[tostring(i)] = i
+	end
+	
+	repeat
+		answer = Console.ReadLine()
+	until rng[answer]
+	
+	return answer
+end

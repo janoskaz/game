@@ -290,13 +290,25 @@
     </block>
   </location>
   <location x="2" y="4" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject />
+    <block type="Game.Corpse">
+      <Corpse name="Dead body">
+        <Inventory maxsize="10">
+          <Item name="Amulet with cat" />
+        </Inventory>
+      </Corpse>
     </block>
   </location>
-  <location x="2" y="5" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject />
+  <location x="2" y="5" visible="False" script="madman.lua">
+    <block type="Game.Being">
+      <Being name="Mad men">
+        <Characteristics hitpoints="3" attack="3" defence="1" speed="0" />
+        <CurrentCharacteristics hitpoints="3" attack="3" defence="1" speed="0" />
+        <Bag maxsize="10">
+          <Item name="Amulet with octopus" />
+        </Bag>
+        <Equiped maxsize="10" />
+        <Body head="False" body="False" legs="False" boots="False" weapon="False" shield="False" />
+      </Being>
     </block>
   </location>
   <location x="2" y="6" visible="False">
@@ -555,8 +567,8 @@
     </block>
   </location>
   <location x="4" y="5" visible="False">
-    <block type="Game.Wall">
-      <Wall />
+    <block type="Game.BasicObject">
+      <BasicObject />
     </block>
   </location>
   <location x="4" y="6" visible="False">
@@ -1350,7 +1362,7 @@
     <block type="Game.Corpse">
       <Corpse name="Dead body">
         <Inventory maxsize="10">
-          <Item name="Amulet with cat" />
+          <Item name="Amulet with camel" />
           <Weapon name="Showel" nrfacets="8">
             <Characteristics hitpoints="0" attack="3" defence="1" speed="0" />
             <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="True" />

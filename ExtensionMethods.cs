@@ -1,3 +1,5 @@
+using System;
+
 namespace ExtensionMethods
 {
     public static class MyExtensions
@@ -14,7 +16,6 @@ namespace ExtensionMethods
 		    // return the array made of the new char array
 		    return new string(letters);
 		}
-
 
     }   
 }

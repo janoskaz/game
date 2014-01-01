@@ -7,10 +7,8 @@ Console.WriteLine("\t1: Curse very loudly.")
 Console.WriteLine("\t2: Try harder.")
 Console.WriteLine("\t3: Promise the soul of your first born son to Ahnutep, the Eater of the Dead.")
 
---Until the player selects one of the options
-repeat
-	answer = Console.ReadLine()
-until answer == "1" or answer == "2" or answer == "3"
+--Inner dialog
+answer = get_answer(3)
 
 if (answer == "1") then --Cursing never helps
 	Console.WriteLine("\t1: Curse very loudly.")
