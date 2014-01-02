@@ -73,5 +73,6 @@
     <None Include="files\luascripts\broken_wall.lua" />
     <None Include="files\luascripts\startup.lua" />
     <None Include="files\luascripts\madman.lua" />
+    <None Include="files\luascripts\statue.lua" />
   </ItemGroup>
 </Project>

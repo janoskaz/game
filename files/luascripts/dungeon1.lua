@@ -176,7 +176,7 @@ inv:Add(amulet_hippo)
 deadman5= Corpse("Dead body", inv) -- create dead body
 map:AddLocation(Location(2,4, deadman4))
 
--- Mad men in lower left room
+--Mad men in lower left room
 amulet_octopus = Item("Amulet with octopus") -- amulet with hawk
 ch = Characteristics(3,3,1,0)
 madman = Being("Mad men", ch, ch, 10)
@@ -185,8 +185,16 @@ madman = Location(2,5, madman)
 madman:SetScript("madman.lua")
 map:AddLocation(madman)
 
+--Statue in the main chamber
+statue = Item("Statue of Qebehsutep")
+statue:SetSymbol('S')
+statue = Location(2,15,statue)
+statue:SetScript("statue.lua")
+statue:SetSymbol('S')
+map:AddLocation(statue)
+
 -------------------remove
-map:AddLocation(Location(4,5,BasicObject()))
+--map:AddLocation(Location(4,5,BasicObject()))
 
 --Write to XML
 map:ToXml("dungeon1")

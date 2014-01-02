@@ -96,7 +96,7 @@ goto endoffile
 
 --if you visited mad man and lived, dont do anything
 ::visited::
-message = "Mad man is staring at you with his blank eyes. There is nothing you can do."
+message = "Mad man is staring at you with his blank eyes. There is nothing you can do for him."
 out = block
 keepscript = true
 

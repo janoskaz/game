@@ -8,7 +8,7 @@ namespace Game
 	public interface IPlace :IXml
 	{
 		char Symbol();
-		void SetSymbol(char x);
+		void SetSymbol(string x);
 		bool CanMoveTo();
 		bool CanDropItemOnto();
 		IPlace DropItemOnto(Item i);

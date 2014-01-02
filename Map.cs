@@ -108,23 +108,7 @@ namespace Game
 			
 			foreach (Location l in location)
 			{
-				XmlElement loc = doc.CreateElement("location");
-				// attributes of location
-				loc.SetAttribute("x", l.X.ToString());
-				loc.SetAttribute("y", l.Y.ToString());
-				loc.SetAttribute("visible", l.Visible.ToString());
-				if (l.Script != null)
-					loc.SetAttribute("script", l.Script);
-				// create block with the name of the inner class
-				XmlElement block = doc.CreateElement("block");
-				string type = l.Block.GetType().ToString();
-				block.SetAttribute("type", type);
-				// append content of block				
-				XmlElement innerObject = l.Block.ToXml(doc, type.Split('.')[1]);
-				block.AppendChild(innerObject);
-				// append block
-				loc.AppendChild(block);
-				// append loc
+				XmlElement loc = l.ToXml(doc, "location");
 				root.AppendChild(loc);
 			}
 			

@@ -390,9 +390,9 @@ namespace Game
 			return symbol;
 		}
 		
-		public virtual void SetSymbol(char x)
+		public virtual void SetSymbol(string x)
 		{
-			this.symbol = x;
+			this.symbol = char.Parse(x);
 		}
 				
 		public virtual bool CanMoveTo()

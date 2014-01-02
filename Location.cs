@@ -40,9 +40,9 @@ namespace Game
 			return symbol;
 		}
 		
-		public void SetSymbol(char x)
+		public virtual void SetSymbol(string x)
 		{
-			this.symbol = x;
+			this.symbol = char.Parse(x);
 		}
 		
 		public void UpdateSymbol()
@@ -139,6 +139,7 @@ namespace Game
 			// attributes of location
 			loc.SetAttribute("x", X.ToString());
 			loc.SetAttribute("y", Y.ToString());
+			loc.SetAttribute("symbol", Symbol().ToString());
 			loc.SetAttribute("visible", Visible.ToString());
 			if (Script != null)
 				loc.SetAttribute("script", Script);
@@ -151,7 +152,6 @@ namespace Game
 			block.AppendChild(innerObject);
 			// append block
 			loc.AppendChild(block);
-			
 			return loc;
 		}
 	}

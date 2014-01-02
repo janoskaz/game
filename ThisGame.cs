@@ -106,7 +106,13 @@ namespace Game
 			double vis = (double)lua["visibility"];
 			bool torch = (bool)lua["torch"];
 			bool visited_madman = (bool)lua["had_conversation_with_madman"];
-			string lines = String.Format("visibility = {0}\ntorch={1}\nhad_conversation_with_madman={2}", vis.ToString(), torch.ToString().ToLower(), visited_madman.ToString().ToLower());
+			bool shitted = (bool)lua["shitted"];
+			bool pray = (bool)lua["pray"];
+			bool has_statue = (bool)lua["has_statue"];
+			string lines = String.Format("visibility = {0}\ntorch={1}\nhad_conversation_with_madman={2}" +
+				"\nshitted={3}\npray={4}\nhas_statue={5}", vis.ToString(), torch.ToString().ToLower(), 
+			                             visited_madman.ToString().ToLower(), shitted.ToString().ToLower(), 
+			                             pray.ToString().ToLower(), has_statue.ToString().ToLower());
 
 			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + p.Name.ToLower() + ".lua");
 			file.WriteLine(lines);
@@ -460,6 +466,7 @@ namespace Game
 			int y = int.Parse(node.Attributes["y"].Value);
 			bool visible = bool.Parse(node.Attributes["visible"].Value);
 			string script;
+			string symb;
 			try
 			{
 				script = node.Attributes["script"].Value;
@@ -468,10 +475,20 @@ namespace Game
 			{
 				script = null;
 			}
+			try
+			{
+				symb = node.Attributes["symbol"].Value;
+			}
+			catch
+			{
+				symb = null;
+			}
 			IPlace block = LoadBlockFromXml((XmlElement)node.GetElementsByTagName("block")[0]);
 			Location l = new Location(x, y, block);
 			l.Script = script;
 			l.Visible = visible;
+			if (symb != null)
+				l.SetSymbol(symb);
 			return l;
 		}
 		
@@ -492,6 +509,10 @@ namespace Game
 			case "Game.Door":
 			{
 				return LoadDoorFromXml((XmlElement)node.GetElementsByTagName("Door")[0]);
+			}
+			case "Game.Item":
+			{
+				return LoadItemFromXml((XmlElement)node.GetElementsByTagName("Item")[0]);	
 			}
 			case "Game.Chest":
 			{
