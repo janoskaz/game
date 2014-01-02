@@ -24,5 +24,5 @@ elseif (answer == "3") then --Yes, lets, the Gods decide
 	message = "Finally, you can see. But you wish you weren't. You are in a small, hermetically sealed tomb with no exit. Perhaps there will be some way out, but so far, you can't see anything"
 	newscript = "null"
 	torch = true
-	visibility = 1
+	visibility = 2
 end

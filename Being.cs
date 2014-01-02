@@ -190,6 +190,7 @@ namespace Game
 				{
 					this.MakeSpaceForEquipment(i);
 					this.EquipItem(i, false);
+					msg = String.Format("{0} has been equiped", i.Name);
 				}
 				else
 					msg = String.Format("{0} can not be equiped", i.Name);			

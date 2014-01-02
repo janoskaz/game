@@ -48,6 +48,20 @@ for i=1,5 do
 	map:AddLocation(Location(11,i, Wall()))
 end
 
+--breakable walls
+brokenWall = Location(4,1, Wall()) -- upper left room - entry room
+brokenWall:SetScript("broken_wall.lua")
+map:AddLocation(brokenWall)
+wall = Location(8,1,Wall()) -- upper right room
+wall:SetScript("breakable_wall.lua")
+map:AddLocation(wall)
+wall = Location(4,5,Wall()) -- lower left room
+wall:SetScript("breakable_wall.lua")
+map:AddLocation(wall)
+wall = Location(8,4,Wall()) -- lower right room
+wall:SetScript("breakable_wall.lua")
+map:AddLocation(wall)
+
 --big room north
 map:AddLocation(Location(5,0, Wall()))
 map:AddLocation(Location(6,0, Wall()))
@@ -75,6 +89,7 @@ map:AddLocation(Location(9,12, Wall()))
 map:AddLocation(Location(10,12, Wall()))
 map:AddLocation(Location(11,12, Wall()))
 map:AddLocation(Location(0,13, Wall())) -- 3rd line of walls
+map:AddLocation(Location(1,13, Wall()))
 map:AddLocation(Location(11,13, Wall()))
 map:AddLocation(Location(12,13, Wall()))
 map:AddLocation(Location(0,14, Wall())) -- 4th line of walls
@@ -134,11 +149,6 @@ deadman1 = Corpse("Dead body", inv) -- create dead body
 deadman1:SetDescription("You have stumbled upon a corpse. Literary - you have stumbled and fallen down.")
 --TODO: previous line is not working
 map:AddLocation(Location(2,1, deadman1))
-
---Add broken wall
-brokenWall = Location(4,1, Wall())
-brokenWall:SetScript("broken_wall.lua")
-map:AddLocation(brokenWall)
 
 --REST OF THE SMALL ROOMS
 inv = Inventory(10) -- dead men 1 in upper right room

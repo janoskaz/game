@@ -23,7 +23,7 @@ function mad_sentence_generator()
 	return mad_sentence
 end
 
-tell_message("You break through the wall and as the dust settles, you glimpse upon a shiverring statue of a man, sitting in the corner, staring at you. His eyes are wide open and his mouth is drooling.")
+tell_message("In the corner, you see small, shiverring silhouette of the man. His eyes are wide open and his mouth is drooling.")
 Console.Write("The man points his shaking hand at you and asks: \"Ahk nun tahep unhe loto?\"")
 
 function conversation(news)

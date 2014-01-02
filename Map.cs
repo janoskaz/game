@@ -51,7 +51,7 @@ namespace Game
 				for (int j = Math.Max(y-visibility,0); j <= Math.Min(y+visibility,this.Heigth-1); j++)
 				{
 					dist = Math.Sqrt((i-x)*(i-x) + (j-y)*(j-y));
-					if (dist <= visibility)
+					if (dist < visibility)
 					{
 						location[i,j].Visible = true;
 					}						

@@ -147,7 +147,7 @@ namespace Game
 					try
 					{
 						n = int.Parse(words[1]);
-						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1]));
+						messageBoard.Enqueue(this.EquipItem(this.bag.bag[n-1], true));
 					}
 					catch
 					{
