@@ -109,6 +109,8 @@ namespace Game
 		{
 			XmlElement item = doc.CreateElement(elementName);
 			item.SetAttribute("name", Name);
+			if (symbol.ToString() != null)
+				item.SetAttribute("symbol", symbol.ToString());
 			if (Script != null)
 				item.SetAttribute("script", Script);
 			return item;

@@ -106,12 +106,11 @@ namespace Game
 			double vis = (double)lua["visibility"];
 			bool torch = (bool)lua["torch"];
 			bool visited_madman = (bool)lua["had_conversation_with_madman"];
-			bool shitted = (bool)lua["shitted"];
 			bool pray = (bool)lua["pray"];
 			bool has_statue = (bool)lua["has_statue"];
 			string lines = String.Format("visibility = {0}\ntorch={1}\nhad_conversation_with_madman={2}" +
-				"\nshitted={3}\npray={4}\nhas_statue={5}", vis.ToString(), torch.ToString().ToLower(), 
-			                             visited_madman.ToString().ToLower(), shitted.ToString().ToLower(), 
+				"\npray={4}\nhas_statue={5}", vis.ToString(), torch.ToString().ToLower(), 
+			                             visited_madman.ToString().ToLower(),
 			                             pray.ToString().ToLower(), has_statue.ToString().ToLower());
 
 			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + p.Name.ToLower() + ".lua");
@@ -377,6 +376,13 @@ namespace Game
 			string script = node.GetAttribute("script");
 			if(script != "")
 				i.SetScript(script);
+			try
+			{
+				string symbol = node.GetAttribute("symbol");
+				i.SetSymbol(symbol);
+			}
+			catch
+			{}
 			return i;
 		}
 		
@@ -389,6 +395,13 @@ namespace Game
 			string script = node.GetAttribute("script");
 			if(script != "")
 				e.SetScript(script);
+			try
+			{
+				string symbol = node.GetAttribute("symbol");
+				e.SetSymbol(symbol);
+			}
+			catch
+			{}
 			return e;
 		}
 		
@@ -402,6 +415,13 @@ namespace Game
 			string script = node.GetAttribute("script");
 			if(script != "")
 				w.SetScript(script);
+			try
+			{
+				string symbol = node.GetAttribute("symbol");
+				w.SetSymbol(symbol);
+			}
+			catch
+			{}
 			return w;
 		}
 		
@@ -455,6 +475,7 @@ namespace Game
 			{
 				Location l = LoadLocationFromXml((XmlElement)node);
 				newmap.AddLocation(l);
+				l.UpdateSymbol();
 			}
 			
 			return newmap;
@@ -466,7 +487,6 @@ namespace Game
 			int y = int.Parse(node.Attributes["y"].Value);
 			bool visible = bool.Parse(node.Attributes["visible"].Value);
 			string script;
-			string symb;
 			try
 			{
 				script = node.Attributes["script"].Value;
@@ -475,20 +495,10 @@ namespace Game
 			{
 				script = null;
 			}
-			try
-			{
-				symb = node.Attributes["symbol"].Value;
-			}
-			catch
-			{
-				symb = null;
-			}
 			IPlace block = LoadBlockFromXml((XmlElement)node.GetElementsByTagName("block")[0]);
 			Location l = new Location(x, y, block);
 			l.Script = script;
 			l.Visible = visible;
-			if (symb != null)
-				l.SetSymbol(symb);
 			return l;
 		}
 		
@@ -500,11 +510,11 @@ namespace Game
 			{
 			case "Game.BasicObject":
 			{
-				return new BasicObject();
+				return LoadBasicObjectFromXml((XmlElement)node.GetElementsByTagName("BasicObject")[0]);
 			}
 			case "Game.Wall":
 			{
-				return new Wall();
+				return LoadWallFromXml((XmlElement)node.GetElementsByTagName("Wall")[0]);
 			}
 			case "Game.Door":
 			{
@@ -536,31 +546,57 @@ namespace Game
 		public static Door LoadDoorFromXml(XmlElement node)
 		{
 			bool locked = bool.Parse(node.Attributes["locked"].Value);
+			string symbol = node.Attributes["symbol"].Value;
 			string msg = node.GetElementsByTagName("Message")[0].InnerText;
 			string keyname = node.GetElementsByTagName("Keyname")[0].InnerText;
-			return new Door(msg, keyname, locked);
+			Door door = new Door(msg, keyname, locked);
+			door.SetSymbol(symbol);
+			return door;
 		}
 		
+		public static BasicObject LoadBasicObjectFromXml(XmlElement node)
+		{
+			string symbol = node.Attributes["symbol"].Value;
+			BasicObject bo = new BasicObject();
+			bo.SetSymbol(symbol);
+			return bo;
+		}
+		
+		public static Wall LoadWallFromXml(XmlElement node)
+		{
+			string symbol = node.Attributes["symbol"].Value;
+			Wall wall = new Wall();
+			wall.SetSymbol(symbol);
+			return wall;
+		}
+			
 		public static Chest LoadChestFromXml(XmlElement node)
 		{
 			string name = node.Attributes["name"].Value;
+			string symbol = node.Attributes["symbol"].Value;
 			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
 			Inventory inv = LoadInventoryFromXml(child);
-			return new Chest(name, inv);
+			Chest chest = new Chest(name, inv);
+			chest.SetSymbol(symbol);
+			return chest;
 		}
 		
 		public static Corpse LoadCorpseFromXml(XmlElement node)
 		{
 			string name = node.Attributes["name"].Value;
+			string symbol = node.Attributes["symbol"].Value;
 			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
 			Inventory inv = LoadInventoryFromXml(child);
-			return new Corpse(name, inv);
+			Corpse corpse = new Corpse(name, inv);
+			corpse.SetSymbol(symbol);
+			return corpse;
 		}
 		
 		public static Being LoadBeingFromXml(XmlElement node)
 		{
 			// get name of being
 			string name = node.Attributes["name"].Value;
+			string symbol = node.Attributes["symbol"].Value;
 			
 			Characteristics ch = new Characteristics(0,0,0,0);
 			Characteristics cch = new Characteristics(0,0,0,0);
@@ -606,6 +642,7 @@ namespace Game
 			being.bag = bag;
 			being.equiped = equiped;
 			being.SetBody(new Body(b));
+			being.SetSymbol(symbol);
 			
 			return being;
 		}

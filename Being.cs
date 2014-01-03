@@ -162,6 +162,11 @@ namespace Game
 		public string EquipItem(Item i, bool force = false)
 		{
 			string msg = "Attempt to equip and item";
+			if(!i.CanBeEquiped)
+			{
+				msg = "This item can not be equiped";
+				return msg;
+			}
 			// can the thing be equiped?
 			if (this.CanEquip(i))
 			{
@@ -424,6 +429,7 @@ namespace Game
 		{
 			XmlElement being = doc.CreateElement(elementName);
 			being.SetAttribute("name", Name); // set name attribute
+			being.SetAttribute("symbol", symbol.ToString()); // set symbol attribute
 			// add characteristics
 			XmlElement ch = this.Characteristics.ToXml(doc, "Characteristics");
 			being.AppendChild(ch);

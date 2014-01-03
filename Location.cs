@@ -139,7 +139,7 @@ namespace Game
 			// attributes of location
 			loc.SetAttribute("x", X.ToString());
 			loc.SetAttribute("y", Y.ToString());
-			loc.SetAttribute("symbol", Symbol().ToString());
+			//loc.SetAttribute("symbol", Symbol().ToString());
 			loc.SetAttribute("visible", Visible.ToString());
 			if (Script != null)
 				loc.SetAttribute("script", Script);

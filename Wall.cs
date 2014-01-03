@@ -40,6 +40,7 @@ namespace Game
 		public override XmlElement ToXml(XmlDocument doc, string elementName)
 		{
 			XmlElement wall = doc.CreateElement("Wall");
+			wall.SetAttribute("symbol", symbol.ToString());
 			return wall;
 		}
 		

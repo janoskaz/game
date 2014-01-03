@@ -22,6 +22,7 @@ namespace Game
 		{
 			XmlElement chest = doc.CreateElement("Corpse");		
 			chest.SetAttribute("name", this.Name);
+			chest.SetAttribute("symbol", symbol.ToString());
 			XmlElement inv = this.Content.ToXml(doc, "Inventory");
 			chest.AppendChild(inv);
 			return chest;

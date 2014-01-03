@@ -34,6 +34,8 @@ namespace Game
 			XmlElement equipment = doc.CreateElement(elementName);
 			equipment.SetAttribute("name", Name);
 			equipment.SetAttribute("nrfacets", NrFacets.ToString());
+			if (symbol.ToString() != null)
+				equipment.SetAttribute("symbol", symbol.ToString());
 			XmlElement ch = this.Characteristics.ToXml(doc, "Characteristics");
 			equipment.AppendChild(ch);
 			XmlElement body = this.Body.ToXml(doc, "Body");

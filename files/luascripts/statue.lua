@@ -30,13 +30,7 @@ elseif (answer == "2") then
 	goto conversation
 elseif (answer == "3") then
 	Console.WriteLine("3: Pray to Amon.")
-	if (pray) then 
-		tell_message("What are you, mad?") 
-	else
-		tell_message("All hail to the mighty Amon, shining lord of the Sun...")
-		tell_message("Praying to one god in the temple of another... not a good idea. Before you finish your prayer, you feel a sudden movement in the lower part of your body and in a second, the content of your intesties comes pouring from your bottoms. Let this be a lesson to you.")
-		shitted = true
-	end
+	tell_message("What are you, mad?") 
 	goto conversation
 elseif (answer == "4") then
 	Console.WriteLine("4: Take the statue.")

@@ -14,9 +14,7 @@ namespace Game
 		
 		public bool Locked {get; private set;}
 		
-		public char symbol;
-		
-		public Door (string description, string key, bool locked=false)
+		public Door (string description, string key, bool locked=true)
 		{
 			Description = description;
 			this.Keyname = key;
@@ -96,6 +94,7 @@ namespace Game
 			door.AppendChild(keyname);
 			// append locked
 			door.SetAttribute("locked", Locked.ToString());
+			door.SetAttribute("symbol", symbol.ToString());
 				
 			return door;
 		}
@@ -120,7 +119,7 @@ namespace Game
 		/// </param>
 		public override IPlace AutomaticAction(Player p)
 		{
-			ThisGame.messageLog.Enqueue(this.Description);
+			string message = Description;
 			// does the user have a key to open the door?
 			string keyname = this.Keyname;
 			bool hasKey = p.HasKey(keyname);
@@ -133,8 +132,9 @@ namespace Game
 					this.UpdateSymbol();
 				}
 				else
-					ThisGame.messageLog.Enqueue("The doors is locked and you don't have the key.");
+					message += " The doors is locked and you don't have the key.";
 			}
+			ThisGame.messageLog.Enqueue(message);
 			return this;
 		}
 		

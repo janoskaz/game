@@ -8,7 +8,7 @@ namespace Game
 	/// </summary>
 	public class BasicObject :IPlace
 	{
-		private char symbol;
+		protected char symbol;
 		
 		public BasicObject ()
 		{
@@ -60,6 +60,7 @@ namespace Game
 		public virtual XmlElement ToXml(XmlDocument doc, string elementName)
 		{
 			XmlElement basicObject = doc.CreateElement("BasicObject");
+			basicObject.SetAttribute("symbol", symbol.ToString());
 			return basicObject;
 		}
 		

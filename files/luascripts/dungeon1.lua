@@ -10,6 +10,7 @@ Player = import_type "Game.Player"
 Being = import_type "Game.Being"
 BasicObject = import_type "Game.BasicObject"
 Wall = import_type "Game.Wall"
+Door = import_type "Game.Door"
 Corpse = import_type "Game.Corpse"
 Item = import_type "Game.Item"
 Weapon = import_type "Game.Weapon"
@@ -117,13 +118,13 @@ for i=20,22 do -- lines 10 to 12
 	map:AddLocation(Location(3,i, Wall()))
 	map:AddLocation(Location(9,i, Wall()))
 end
-for i=22,24 do -- lines 22 to 24
+for i=22,24 do -- lines 12 to 14
 	map:AddLocation(Location(4,i, Wall()))
 	map:AddLocation(Location(8,i, Wall()))
 end
 map:AddLocation(Location(5,24, Wall()))
 map:AddLocation(Location(7,24, Wall()))
-map:AddLocation(Location(5,25, Wall())) -- line 25
+map:AddLocation(Location(5,25, Wall())) -- line 15
 map:AddLocation(Location(6,25, Wall()))
 map:AddLocation(Location(7,25, Wall()))
 
@@ -203,8 +204,12 @@ statue:SetScript("statue.lua")
 statue:SetSymbol('S')
 map:AddLocation(statue)
 
--------------------remove
---map:AddLocation(Location(4,5,BasicObject()))
+--Doors to burial chamber
+doors = Location(6,19,Door("This door is huge, made from stone and covered with elaborate carwings, resembling different kinds of animals.","special key",true))
+--doors:SetScript("doors_burial_chamber.lua")
+doors:UpdateSymbol()
+map:AddLocation(doors)
+
 
 --Write to XML
 map:ToXml("dungeon1")
