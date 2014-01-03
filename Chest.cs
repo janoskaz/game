@@ -7,6 +7,7 @@ namespace Game
 	{
 		protected string message;
 		protected string description;
+		public bool removeIfEmpty = false;
 		
 		public Inventory Content {get; set;}
 		
@@ -17,10 +18,14 @@ namespace Game
 			message = "You have opened a chest\nCONTENT OF CHEST";
 			symbol = 'o';
 		}
+		public bool IsEmpty()
+		{
+			return Content.Count() == 0;
+		}
 		
 		public void SetDescription(string desc)
 		{
-			description = desc;
+			this.description = desc;
 		}
 		
 		public override bool CanMoveTo()

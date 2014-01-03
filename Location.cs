@@ -119,6 +119,11 @@ namespace Game
 		public void VoluntaryAction(Player p)
 		{
 			Block.VoluntaryAction(p);
+			if (Block is Chest)
+				if (((Chest)Block).removeIfEmpty)
+					if (((Chest)Block).IsEmpty())
+						Block = new BasicObject();
+			this.UpdateSymbol();
 		}
 		
 		/// <summary>

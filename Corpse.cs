@@ -5,12 +5,12 @@ namespace Game
 {
 	public class Corpse: Chest
 	{
-		
 		public Corpse (string name, Inventory content) :base(name, content)
 		{
 			description = "Yew! Dead body.";
 			message = "Some might find it disgusting, but looting corpses is the only way to survive in this world\nTHE CORPSE HAS:";
 			symbol = 'X';
+			removeIfEmpty = true;
 		}
 		
 		public override bool CanMoveTo()
