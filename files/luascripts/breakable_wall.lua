@@ -1,10 +1,10 @@
-message = "This wall looks quite weak, you could try to break it"
+message = "This wall looks quite weak, you could try to break it."
 
 out = block
 keepscript = true
 
 if (player:HasItem("Hammer")) then
-	tell_message"\nThe wall is too strong to be broken with a hammer, you will need something bigger."
+	message = message .." The wall is too strong to be broken with a hammer, you will need something bigger."
 end
 if (player:HasItem("Statue of Qebehsutep")) then
 	tell_message("You could try to use the statue of Qebehsutep as a ram.")

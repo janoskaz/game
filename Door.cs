@@ -42,6 +42,7 @@ namespace Game
 		{
 			ThisGame.messageLog.Enqueue("Door has been opened");
 			this.Locked = false;
+			this.UpdateSymbol();
 		}
 		
 		public override bool CanMoveTo()
@@ -129,7 +130,6 @@ namespace Game
 				if (hasKey)
 				{
 					this.OpenDoor();
-					this.UpdateSymbol();
 				}
 				else
 					message += " The doors is locked and you don't have the key.";

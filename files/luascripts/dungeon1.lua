@@ -185,7 +185,7 @@ inv = Inventory(10) -- dead men 1 in lower left room
 amulet_hippo = Item("Amulet with hippo") -- amulet with hippo
 inv:Add(amulet_hippo)
 deadman5= Corpse("Dead body", inv) -- create dead body
-map:AddLocation(Location(2,4, deadman4))
+map:AddLocation(Location(2,4, deadman5))
 
 --Mad men in lower left room
 amulet_octopus = Item("Amulet with octopus") -- amulet with hawk
@@ -206,7 +206,7 @@ map:AddLocation(statue)
 
 --Doors to burial chamber
 doors = Location(6,19,Door("This door is huge, made from stone and covered with elaborate carwings, resembling different kinds of animals.","special key",true))
---doors:SetScript("doors_burial_chamber.lua")
+doors:SetScript("burial_chamber_door.lua")
 doors:UpdateSymbol()
 map:AddLocation(doors)
 

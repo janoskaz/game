@@ -166,6 +166,7 @@ namespace Game
 							Item i = this.bag.bag[n-1];
 							messageBoard.Enqueue(this.DropItem(i));
 							ThisGame.dungeon.location[this.X,this.Y].DropItemOnLocation(i);
+							ThisGame.dungeon.location[this.X,this.Y].UpdateSymbol();
 						}
 					}
 					catch

@@ -92,7 +92,7 @@ namespace Game
 				
 				if (!p.Alive())
 				{
-					Console.WriteLine("Your dead! press any key");
+					Console.WriteLine("You're dead! press any key");
 					end = true;
 					Console.ReadKey();
 				}
@@ -109,7 +109,7 @@ namespace Game
 			bool pray = (bool)lua["pray"];
 			bool has_statue = (bool)lua["has_statue"];
 			string lines = String.Format("visibility = {0}\ntorch={1}\nhad_conversation_with_madman={2}" +
-				"\npray={4}\nhas_statue={5}", vis.ToString(), torch.ToString().ToLower(), 
+				"\npray={3}\nhas_statue={4}", vis.ToString(), torch.ToString().ToLower(), 
 			                             visited_madman.ToString().ToLower(),
 			                             pray.ToString().ToLower(), has_statue.ToString().ToLower());
 

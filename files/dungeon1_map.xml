@@ -293,7 +293,7 @@
     <block type="Game.Corpse">
       <Corpse name="Dead body" symbol="X">
         <Inventory maxsize="10">
-          <Item name="Amulet with cat" symbol="&#x0;" />
+          <Item name="Amulet with hippo" symbol="&#x0;" />
         </Inventory>
       </Corpse>
     </block>
@@ -896,7 +896,7 @@
       <BasicObject symbol=" " />
     </block>
   </location>
-  <location x="6" y="19" visible="False">
+  <location x="6" y="19" visible="False" script="burial_chamber_door.lua">
     <block type="Game.Door">
       <Door locked="True" symbol="/">
         <Message>This door is huge, made from stone and covered with elaborate carwings, resembling different kinds of animals.</Message>
