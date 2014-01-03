@@ -381,13 +381,13 @@ namespace Game
 			return s;
 		}
 		
-		public Corpse BecameCorpse()
+		public Chest BecameCorpse()
 		{
 			foreach (Equipment e in this.equiped.bag)
 			{
 				this.bag.Add(e);
 			}
-			Corpse thisCorpse = new Corpse(string.Format("Corpse of {0}", this.Name), this.bag);
+			Chest thisCorpse = new Chest(string.Format("Corpse of {0}", this.Name), this.bag);
 			return thisCorpse;
 		}
 		

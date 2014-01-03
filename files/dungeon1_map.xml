@@ -266,8 +266,8 @@
     </block>
   </location>
   <location x="2" y="1" visible="False">
-    <block type="Game.Corpse">
-      <Corpse name="Dead body" symbol="X">
+    <block type="Game.Chest">
+      <Chest name="Dead body" symbol="x">
         <Inventory maxsize="10">
           <Item name="Torch" symbol="&#x0;" script="torch.lua" />
           <Weapon name="Hammer" nrfacets="6" symbol="&#x0;">
@@ -276,7 +276,7 @@
           </Weapon>
           <Item name="Amulet with owl" symbol="&#x0;" />
         </Inventory>
-      </Corpse>
+      </Chest>
     </block>
   </location>
   <location x="2" y="2" visible="False">
@@ -290,12 +290,12 @@
     </block>
   </location>
   <location x="2" y="4" visible="False">
-    <block type="Game.Corpse">
-      <Corpse name="Dead body" symbol="X">
+    <block type="Game.Chest">
+      <Chest name="Dead body" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with hippo" symbol="&#x0;" />
         </Inventory>
-      </Corpse>
+      </Chest>
     </block>
   </location>
   <location x="2" y="5" visible="False" script="madman.lua">
@@ -1330,21 +1330,21 @@
     </block>
   </location>
   <location x="10" y="1" visible="False">
-    <block type="Game.Corpse">
-      <Corpse name="Dead body" symbol="X">
+    <block type="Game.Chest">
+      <Chest name="Dead body" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with fish" symbol="&#x0;" />
         </Inventory>
-      </Corpse>
+      </Chest>
     </block>
   </location>
   <location x="10" y="2" visible="False">
-    <block type="Game.Corpse">
-      <Corpse name="Dead body" symbol="X">
+    <block type="Game.Chest">
+      <Chest name="Dead body" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with jackal" symbol="&#x0;" />
         </Inventory>
-      </Corpse>
+      </Chest>
     </block>
   </location>
   <location x="10" y="3" visible="False">
@@ -1353,17 +1353,17 @@
     </block>
   </location>
   <location x="10" y="4" visible="False">
-    <block type="Game.Corpse">
-      <Corpse name="Dead body" symbol="X">
+    <block type="Game.Chest">
+      <Chest name="Dead body" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with cat" symbol="&#x0;" />
         </Inventory>
-      </Corpse>
+      </Chest>
     </block>
   </location>
   <location x="10" y="5" visible="False">
-    <block type="Game.Corpse">
-      <Corpse name="Dead body" symbol="X">
+    <block type="Game.Chest">
+      <Chest name="Dead body" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with camel" symbol="&#x0;" />
           <Weapon name="Showel" nrfacets="8" symbol="&#x0;">
@@ -1371,7 +1371,7 @@
             <Body head="False" body="False" legs="False" boots="False" weapon="True" shield="True" />
           </Weapon>
         </Inventory>
-      </Corpse>
+      </Chest>
     </block>
   </location>
   <location x="10" y="6" visible="False">

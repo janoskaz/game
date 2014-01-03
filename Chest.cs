@@ -3,11 +3,11 @@ using System.Xml;
 
 namespace Game
 {
-	public class Chest :Item
+	public class Chest :Item //default setting is to represent corpse - symbol is x and can be removed after looting
 	{
-		protected string message;
-		protected string description;
-		public bool removeIfEmpty = false;
+		private string message;
+		private string description;
+		private bool removeIfEmpty = true;
 		
 		public Inventory Content {get; set;}
 		
@@ -15,8 +15,8 @@ namespace Game
 		{
 			Content = content;
 			description = String.Format("There is {0} laying on the ground", Name.ToLower());
-			message = "You have opened a chest\nCONTENT OF CHEST";
-			symbol = 'o';
+			message = "Time to loot:\nCONTENT";
+			symbol = 'x';
 		}
 		public bool IsEmpty()
 		{
@@ -26,6 +26,21 @@ namespace Game
 		public void SetDescription(string desc)
 		{
 			this.description = desc;
+		}
+		
+		public void SetMessage(string msg)
+		{
+			this.message = msg;
+		}
+		
+		public void SetRemoving(bool val)
+		{
+			removeIfEmpty = val;
+		}
+		
+		public bool CanBeRemoved()
+		{
+			return removeIfEmpty;
 		}
 		
 		public override bool CanMoveTo()

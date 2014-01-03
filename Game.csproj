@@ -50,7 +50,6 @@
     <Compile Include="LimitedQueue.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="IPlace.cs" />
-    <Compile Include="Corpse.cs" />
     <Compile Include="ThisGame.cs" />
     <Compile Include="IXml.cs" />
     <Compile Include="ExtensionMethods.cs" />

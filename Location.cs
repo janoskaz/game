@@ -120,7 +120,7 @@ namespace Game
 		{
 			Block.VoluntaryAction(p);
 			if (Block is Chest)
-				if (((Chest)Block).removeIfEmpty)
+				if (((Chest)Block).CanBeRemoved())
 					if (((Chest)Block).IsEmpty())
 						Block = new BasicObject();
 			this.UpdateSymbol();

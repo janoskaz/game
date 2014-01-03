@@ -11,7 +11,7 @@ Being = import_type "Game.Being"
 BasicObject = import_type "Game.BasicObject"
 Wall = import_type "Game.Wall"
 Door = import_type "Game.Door"
-Corpse = import_type "Game.Corpse"
+Chest = import_type "Game.Chest"
 Item = import_type "Game.Item"
 Weapon = import_type "Game.Weapon"
 Inventory = import_type "Game.Inventory"
@@ -146,7 +146,7 @@ hammer = Weapon("Hammer", Characteristics(0,2,0,0), ss, 6)
 inv:Add(hammer)
 amulet_owl = Item("Amulet with owl") -- amulet with owl
 inv:Add(amulet_owl)
-deadman1 = Corpse("Dead body", inv) -- create dead body
+deadman1 = Chest("Dead body", inv) -- create dead body
 deadman1:SetDescription("You have stumbled upon a corpse. Literary - you have stumbled and fallen down.")
 --TODO: previous line is not working
 map:AddLocation(Location(2,1, deadman1))
@@ -155,19 +155,19 @@ map:AddLocation(Location(2,1, deadman1))
 inv = Inventory(10) -- dead men 1 in upper right room
 amulet_fish = Item("Amulet with fish") -- amulet with fish
 inv:Add(amulet_fish)
-deadman2= Corpse("Dead body", inv) -- create dead body
+deadman2= Chest("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,1, deadman2))
 
 inv = Inventory(10) -- dead men 2 in upper right room
 amulet_jackal = Item("Amulet with jackal") -- amulet with jackal
 inv:Add(amulet_jackal)
-deadman3= Corpse("Dead body", inv) -- create dead body
+deadman3= Chest("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,2, deadman3))
 
 inv = Inventory(10) -- dead men 1 in lower right room
 amulet_cat = Item("Amulet with cat") -- amulet with cat
 inv:Add(amulet_cat)
-deadman4= Corpse("Dead body", inv) -- create dead body
+deadman4= Chest("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,4, deadman4))
 
 inv = Inventory(10) -- dead men 2 in lower right room
@@ -178,13 +178,13 @@ ss[0] = "weapon"
 ss[1] = "shield"
 showel = Weapon("Showel", Characteristics(0,3,1,0), ss, 8)
 inv:Add(showel)
-deadman5= Corpse("Dead body", inv) -- create dead body
+deadman5= Chest("Dead body", inv) -- create dead body
 map:AddLocation(Location(10,5, deadman5))
 
 inv = Inventory(10) -- dead men 1 in lower left room
 amulet_hippo = Item("Amulet with hippo") -- amulet with hippo
 inv:Add(amulet_hippo)
-deadman5= Corpse("Dead body", inv) -- create dead body
+deadman5= Chest("Dead body", inv) -- create dead body
 map:AddLocation(Location(2,4, deadman5))
 
 --Mad men in lower left room

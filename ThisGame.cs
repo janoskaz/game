@@ -528,10 +528,6 @@ namespace Game
 			{
 				return LoadChestFromXml((XmlElement)node.GetElementsByTagName("Chest")[0]);
 			}
-			case "Game.Corpse":
-			{
-				return LoadCorpseFromXml((XmlElement)node.GetElementsByTagName("Corpse")[0]);
-			}
 			case "Game.Being":
 			{
 				return LoadBeingFromXml((XmlElement)node.GetElementsByTagName("Being")[0]);
@@ -579,17 +575,6 @@ namespace Game
 			Chest chest = new Chest(name, inv);
 			chest.SetSymbol(symbol);
 			return chest;
-		}
-		
-		public static Corpse LoadCorpseFromXml(XmlElement node)
-		{
-			string name = node.Attributes["name"].Value;
-			string symbol = node.Attributes["symbol"].Value;
-			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
-			Inventory inv = LoadInventoryFromXml(child);
-			Corpse corpse = new Corpse(name, inv);
-			corpse.SetSymbol(symbol);
-			return corpse;
 		}
 		
 		public static Being LoadBeingFromXml(XmlElement node)

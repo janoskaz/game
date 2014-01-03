@@ -13,6 +13,7 @@ if (player:HasItem("Statue of Qebehsutep")) then
 	answer = get_answer(2)
 	if (answer == "1") then
 		tell_message("You swing the statue several times before the wall breaks down. The dust is slowly settling and you can see small room with two bodies.")
+		message = "You broke through the wall, using sacred item. Well done."
 		out = BasicObject()
 		keepscript = false
 	end
