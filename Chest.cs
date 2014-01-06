@@ -1,5 +1,7 @@
 using System;
 using System.Xml;
+using System.Collections.Generic;
+using ExtensionMethods;
 
 namespace Game
 {
@@ -70,6 +72,7 @@ namespace Game
 			bool lootChest = true;
 			
 			LimitedQueue<string> messageBoard = new LimitedQueue<string>(10);
+			List<string> commands = new List<string>();
 			
 			while (lootChest)
 			{
@@ -83,14 +86,15 @@ namespace Game
 				
 				Console.WriteLine("To pick item, write 'pick #of_equipment'\n" +
 					"To drop item from inventory, write 'drop #of_equipment'\n" +
-					"To go back to game, write 'close'\n");
+					"To go back to game, press Escape\n");
 				
 				foreach (string s in messageBoard)
 				{
 					Console.WriteLine(s);
 				}
 				
-				string response = Console.ReadLine();
+				string response = commands.ListThroughCommands();
+				commands.Add(response);
 				messageBoard.Enqueue(response);
 				string[] words = response.Split(' ');
 				int n;
@@ -146,6 +150,7 @@ namespace Game
 		{
 			XmlElement chest = doc.CreateElement("Chest");		
 			chest.SetAttribute("name", this.Name);
+			chest.SetAttribute("removeIfEmpty", CanBeRemoved().ToString());
 			chest.SetAttribute("symbol", symbol.ToString());
 			XmlElement inv = this.Content.ToXml(doc, "Inventory");
 			chest.AppendChild(inv);

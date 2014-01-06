@@ -569,11 +569,13 @@ namespace Game
 		public static Chest LoadChestFromXml(XmlElement node)
 		{
 			string name = node.Attributes["name"].Value;
+			bool removeIfEmpty = bool.Parse(node.Attributes["removeIfEmpty"].Value);
 			string symbol = node.Attributes["symbol"].Value;
 			XmlElement child = (XmlElement)node.GetElementsByTagName("Inventory")[0];
 			Inventory inv = LoadInventoryFromXml(child);
 			Chest chest = new Chest(name, inv);
 			chest.SetSymbol(symbol);
+			chest.SetRemoving(removeIfEmpty);
 			return chest;
 		}
 		

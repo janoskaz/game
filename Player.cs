@@ -1,7 +1,9 @@
 using System;
 using System.Threading;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
+using ExtensionMethods;
 using System.Xml;
 using NLua;
 
@@ -10,7 +12,7 @@ namespace Game
 	public class Player: Being
 	{
 		public int X {get; set;}
-		public int Y {get; set;}
+		publ\\ic int Y {get; set;}
 		public string Message {get; set;}
 		
 		public Player (string name, Characteristics ch, Characteristics currentCh, int bagsize, int x, int y) :base(name, ch, currentCh, bagsize)
@@ -99,8 +101,10 @@ namespace Game
 		public void ManageInventory()
 		{
 			bool runInventory = true;
+			//Queue commands = new Queue();
 			
 			LimitedQueue<string> messageBoard = new LimitedQueue<string>(15);
+			List<string> commands = new List<string>();
 			
 			while (runInventory)
 			{
@@ -111,14 +115,15 @@ namespace Game
 					"To equip item, wrire 'equip #of_equipment'\n" +
 					"To drop item from inventory, write 'drop #of_equipment'\n" +
 				    "To use the item, write 'use #of_equipment'\n" +
-					"To go back to game, write 'close'\n");
+					"To go back to game, press Escape\n");
 				
 				foreach (string s in messageBoard)
 				{
 					Console.WriteLine(s);
 				}
 				
-				string response = Console.ReadLine();
+				string response = commands.ListThroughCommands();
+				commands.Add(response);
 				messageBoard.Enqueue(response);
 				string[] words = response.Split(' ');
 				int n;

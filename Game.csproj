@@ -47,7 +47,6 @@
     <Compile Include="Door.cs" />
     <Compile Include="BasicObject.cs" />
     <Compile Include="Chest.cs" />
-    <Compile Include="LimitedQueue.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="IPlace.cs" />
     <Compile Include="ThisGame.cs" />

@@ -267,7 +267,7 @@
   </location>
   <location x="2" y="1" visible="False">
     <block type="Game.Chest">
-      <Chest name="Dead body" symbol="x">
+      <Chest name="Dead body" removeIfEmpty="True" symbol="x">
         <Inventory maxsize="10">
           <Item name="Torch" symbol="&#x0;" script="torch.lua" />
           <Weapon name="Hammer" nrfacets="6" symbol="&#x0;">
@@ -291,7 +291,7 @@
   </location>
   <location x="2" y="4" visible="False">
     <block type="Game.Chest">
-      <Chest name="Dead body" symbol="x">
+      <Chest name="Dead body" removeIfEmpty="True" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with hippo" symbol="&#x0;" />
         </Inventory>
@@ -1331,7 +1331,7 @@
   </location>
   <location x="10" y="1" visible="False">
     <block type="Game.Chest">
-      <Chest name="Dead body" symbol="x">
+      <Chest name="Dead body" removeIfEmpty="True" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with fish" symbol="&#x0;" />
         </Inventory>
@@ -1340,7 +1340,7 @@
   </location>
   <location x="10" y="2" visible="False">
     <block type="Game.Chest">
-      <Chest name="Dead body" symbol="x">
+      <Chest name="Dead body" removeIfEmpty="True" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with jackal" symbol="&#x0;" />
         </Inventory>
@@ -1354,7 +1354,7 @@
   </location>
   <location x="10" y="4" visible="False">
     <block type="Game.Chest">
-      <Chest name="Dead body" symbol="x">
+      <Chest name="Dead body" removeIfEmpty="True" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with cat" symbol="&#x0;" />
         </Inventory>
@@ -1363,7 +1363,7 @@
   </location>
   <location x="10" y="5" visible="False">
     <block type="Game.Chest">
-      <Chest name="Dead body" symbol="x">
+      <Chest name="Dead body" removeIfEmpty="True" symbol="x">
         <Inventory maxsize="10">
           <Item name="Amulet with camel" symbol="&#x0;" />
           <Weapon name="Showel" nrfacets="8" symbol="&#x0;">
