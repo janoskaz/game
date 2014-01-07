@@ -67,6 +67,11 @@ namespace Game
 			return msg;
 		}
 		
+		public void RemoveAll()
+		{
+			this.bag = new List<Item>();
+		}
+		
 		/// <summary>
 		/// Returns one item with given name from the Inventory.
 		/// </summary>

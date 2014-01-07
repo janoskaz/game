@@ -59,7 +59,7 @@ if (has_amulets(amulets, true)) then --does the player has all of the amulets?
 	block:OpenDoor()
 	out = block
 elseif (has_amulets(amulets, false)) then --does he has at least some amulets?
-	message = message .. "Some of the amulets that you have seem to be fitting inside the carvings, but you will need more."
+	message = message .. " Some of the amulets that you have seem to be fitting inside the carvings, but you will need more."
 else
-	message = message .. "You can not open the door."
+	message = message .. " You can not open the door."
 end

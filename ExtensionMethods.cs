@@ -50,7 +50,7 @@ namespace ExtensionMethods
 					if (whichFromEnd > cmds.Count)
 						whichFromEnd = cmds.Count;
 					whichToDisplay = cmds.Count-whichFromEnd;
-					if (whichToDisplay >= 0)
+					if (whichToDisplay >= 0 & cmds.Count > 0)
 					{
 						Console.CursorLeft = 0;
 						int w = Console.WindowWidth;
@@ -66,7 +66,7 @@ namespace ExtensionMethods
 					if (whichFromEnd <=0)
 						whichFromEnd = 1;
 					whichToDisplay = cmds.Count-whichFromEnd;
-					if (whichToDisplay < cmds.Count)
+					if (whichToDisplay < cmds.Count & cmds.Count > 0)
 					{
 						Console.CursorLeft = 0;
 						int w = Console.WindowWidth;

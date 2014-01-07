@@ -7,7 +7,7 @@ if (player:HasItem("Hammer")) then
 	message = message .." The wall is too strong to be broken with a hammer, you will need something bigger."
 end
 if (player:HasItem("Statue of Qebehsutep")) then
-	tell_message("You could try to use the statue of Qebehsutep as a ram.")
+	Console.WriteLine("You could try to use the statue of Qebehsutep as a ram.")
 	Console.WriteLine("\t1: Do it.")
 	Console.WriteLine("\t2: Don't do it.")
 	answer = get_answer(2)

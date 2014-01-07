@@ -7,7 +7,7 @@ end
 --possible players sentences
 s1 = "\t 1:\"What?\""
 s2 = "\t 2:\"I am sorry man, but I did not understand you, can you please repeat that?\""
-s3 = {"\t3:\"No, it's actually thursday.\"", "\t3:\"Nothing better than good old fashioned stoning of an infidel, I totally agree.\"", "\t3:\"Did you know, that storks can sleep standing only on one leg?.\"", "\t3: \"You are clearly mad, Hamuneferi's hips are way too fat\"", "\t3:\"Who wouldn't?! That's the best way to prepare octopus.\""}
+s3 = {"\t 3:\"No, it's actually thursday.\"", "\t3:\"Nothing better than good old fashioned stoning of an infidel, I totally agree.\"", "\t3:\"Did you know, that storks can sleep standing only on one leg?.\"", "\t3: \"You are clearly mad, Hamuneferi's hips are way too fat\"", "\t3:\"Who wouldn't?! That's the best way to prepare octopus.\""}
 s4 = "\t 4:\"Anuh homtet rabbasete nih.\""
 s5 = "\t 5:Attack him."
 

@@ -84,7 +84,7 @@ namespace Game
 				Console.Write(p.bag.ToString());
 				Console.WriteLine();
 				
-				Console.WriteLine("To pick item, write 'pick #of_equipment'\n" +
+				Console.WriteLine("To pick item, write 'pick #of_equipment' or write 'pick all' to take everything\n" +
 					"To drop item from inventory, write 'drop #of_equipment'\n" +
 					"To go back to game, press Escape\n");
 				
@@ -109,10 +109,22 @@ namespace Game
 				{
 					try
 					{
-						n = int.Parse(words[1]);
-						p.PickItem(this.Content.bag[n-1]);
-						messageBoard.Enqueue(this.Content.bag[n-1].Name);
-						this.Content.Remove(this.Content.bag[n-1]);
+						if (words[1] == "all")
+						{
+							foreach (Item i in this.Content.bag)
+							{
+								Console.WriteLine(i.Name);
+								p.PickItem(i);
+								messageBoard.Enqueue(i.Name);
+							}
+							this.Content.RemoveAll();
+							messageBoard.Enqueue("All item has been taken");
+						} else {
+							n = int.Parse(words[1]);
+							p.PickItem(this.Content.bag[n-1]);
+							messageBoard.Enqueue(this.Content.bag[n-1].Name);
+							this.Content.Remove(this.Content.bag[n-1]);
+						}
 					}
 					catch
 					{
