@@ -111,24 +111,32 @@ namespace Game
 					{
 						if (words[1] == "all")
 						{
+							if (p.bag.maxsize - p.bag.Count() - this.Content.Count() < 0)
+							{
+								messageBoard.Enqueue("You don't have enough space to take all items in your bag.");
+								break;
+							}
 							foreach (Item i in this.Content.bag)
 							{
-								Console.WriteLine(i.Name);
 								p.PickItem(i);
-								messageBoard.Enqueue(i.Name);
 							}
 							this.Content.RemoveAll();
 							messageBoard.Enqueue("All item has been taken");
 						} else {
 							n = int.Parse(words[1]);
-							p.PickItem(this.Content.bag[n-1]);
-							messageBoard.Enqueue(this.Content.bag[n-1].Name);
-							this.Content.Remove(this.Content.bag[n-1]);
+							if (p.bag.maxsize - p.bag.Count() > 0)
+							{
+								p.PickItem(this.Content.bag[n-1]);
+								messageBoard.Enqueue(this.Content.bag[n-1].Name);
+								this.Content.Remove(this.Content.bag[n-1]);
+							}
+							else
+								messageBoard.Enqueue("You don't have enough space to take all items in your bag.");							
 						}
 					}
 					catch
 					{
-						messageBoard.Enqueue("Something wrong with your output");
+						messageBoard.Enqueue("Something wrong with your command");
 					}
 					break;
 				}
@@ -143,7 +151,7 @@ namespace Game
 					}
 					catch
 					{
-						messageBoard.Enqueue("Something wrong with your output");
+						messageBoard.Enqueue("Something wrong with your command");
 					}
 					break;
 				}

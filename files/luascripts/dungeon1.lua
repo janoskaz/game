@@ -211,15 +211,12 @@ doors:UpdateSymbol()
 map:AddLocation(doors)
 
 --sarcophagus
-inv = Inventory(10)
-ss = String[1]
-ss[0] = "weapon"
-scepter = Weapon("Beautiful scepter", Characteristics(0,3,1,1), ss, 6)
-inv:Add(scepter)
-sarcophagus = Chest("Ormented Sarcophagus", inv)
-sarcophagus = Location(6,24,sarcophagus)
---sarcophagus:SetScript("sarcophagus.lua")
+sarcophagus = Item("Ornamented Sarcophagus")
 sarcophagus:SetSymbol('O')
+sarcophagus = Location(6,24,sarcophagus)
+sarcophagus:SetScript("sarcophagus.lua")
+sarcophagus:SetSymbol('O')
+map:AddLocation(sarcophagus)
 
 --Write to XML
 map:ToXml("dungeon1")
