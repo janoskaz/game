@@ -83,7 +83,7 @@ namespace Game
 				else if (c.Key == ConsoleKey.S)
 				{
 					p.SaveAsXml();
-					dungeon.ToXml(p.Name.ToLower());
+					dungeon.ToXml("players/" + p.Name.ToLower() + "/dungeon1");
 					ThisGame.SaveConfiguration(p);
 					continue;
 				}					
@@ -113,7 +113,7 @@ namespace Game
 			                             visited_madman.ToString().ToLower(),
 			                             pray.ToString().ToLower(), has_statue.ToString().ToLower());
 
-			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + p.Name.ToLower() + ".lua");
+			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + "players/" + p.Name.ToLower() + "/config.lua");
 			file.WriteLine(lines);
 			
 			file.Close();
@@ -132,7 +132,7 @@ namespace Game
 		
 		public static Map InitializeMap(Player p)
 		{			
-			string mapname = p.Name + "_map";
+			string mapname = "players/" + p.Name.ToLower() + "/dungeon1";
 			
 			try
 			{
@@ -140,7 +140,7 @@ namespace Game
 			}
 			catch
 			{
-				return LoadMapFromXml("dungeon1_map");
+				return LoadMapFromXml("dungeon1");
 			}
 		}
 		
@@ -153,15 +153,11 @@ namespace Game
 			// initialize empty player, which will be overriden
 			Player p = new Player("name", new Characteristics(0,0,0,0), new Characteristics(0,0,0,0), 10, 0, 0);
 			// list of all players ctored in a database
-			DirectoryInfo dir = new DirectoryInfo(startupPath);
-			foreach (FileInfo file in dir.GetFiles())
+			DirectoryInfo dir = new DirectoryInfo(startupPath + "players/");
+			foreach (DirectoryInfo dirinfo in dir.GetDirectories())
 			{
-				string filename = file.Name;
-				if (filename.EndsWith("_plr.xml"))
-				{
-					string newname = char.ToUpper(filename[0]) + filename.Substring(1); // correct name with first capital letter
-					players.Add (newname.Replace("_plr.xml",""));
-				}
+				string dirname = dirinfo.Name.ToUpperFirstLetter();
+				players.Add (dirname);
 			}
 			
 			// ask player, if he want to chose from existing players, or create a new one
@@ -279,7 +275,7 @@ namespace Game
 		
 		public static Player LoadPlayerFromXml(string playername)
 		{
-			string path = filePath + playername.ToLower() + "_plr.xml";
+			string path = filePath + "players/" + playername.ToLower() + "/player.xml";
 			
 			XmlDocument doc = new XmlDocument();
 			doc.Load(path);
@@ -336,7 +332,7 @@ namespace Game
 			p.equiped = equiped;
 			p.SetBody(new Body(b));
 			
-			lua.DoFile(filePath + p.Name.ToLower() + ".lua");
+			lua.DoFile(filePath + "players/" + p.Name.ToLower() + "/config.lua");
 			
 			return p;
 		}

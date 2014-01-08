@@ -233,8 +233,11 @@ namespace Game
 		public void SaveAsXml()
 		{
 			ThisGame.messageLog.Enqueue("Attepmt to save the player.");
-			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/");
+			string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/players/");
 			
+			if (!Directory.Exists(path + this.Name.ToLower()))
+				Directory.CreateDirectory(path + this.Name.ToLower());
+				
 			XmlDocument doc = new XmlDocument();
 			
 			XmlDeclaration header = doc.CreateXmlDeclaration("1.0", "utf-8", null);
@@ -242,7 +245,7 @@ namespace Game
 			XmlElement root = this.ToXml(doc, "Player");
 			
 			doc.AppendChild(root);
-			doc.Save( Path.Combine(path, this.Name.ToLower()+"_plr.xml") );
+			doc.Save( Path.Combine(path, this.Name.ToLower()+"/player.xml") );
 			ThisGame.messageLog.Enqueue("Save");
 		}
 		
