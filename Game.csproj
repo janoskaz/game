@@ -75,5 +75,7 @@
     <None Include="files\luascripts\breakable_wall.lua" />
     <None Include="files\luascripts\burial_chamber_door.lua" />
     <None Include="files\luascripts\sarcophagus.lua" />
+    <None Include="files\luascripts\door_out.lua" />
+    <None Include="files\luascripts\warning.lua" />
   </ItemGroup>
 </Project>

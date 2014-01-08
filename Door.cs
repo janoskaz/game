@@ -10,14 +10,11 @@ namespace Game
 	{
 		public string Description {get; private set;}
 		
-		private readonly string Keyname;
-		
 		public bool Locked {get; private set;}
 		
-		public Door (string description, string key, bool locked=true)
+		public Door (string description, bool locked=true)
 		{
 			Description = description;
-			this.Keyname = key;
 			Locked = locked;
 			if (locked) // set symbol based on state of doors (locked/open)
 			{
@@ -89,10 +86,6 @@ namespace Game
 			XmlElement msg = doc.CreateElement("Message");
 			msg.InnerXml = Description;
 			door.AppendChild(msg);
-			// append keyname
-			XmlElement keyname = doc.CreateElement("Keyname");
-			keyname.InnerXml = Keyname;
-			door.AppendChild(keyname);
 			// append locked
 			door.SetAttribute("locked", Locked.ToString());
 			door.SetAttribute("symbol", symbol.ToString());
@@ -120,21 +113,7 @@ namespace Game
 		/// </param>
 		public override IPlace AutomaticAction(Player p)
 		{
-			string message = Description;
-			// does the user have a key to open the door?
-			string keyname = this.Keyname;
-			bool hasKey = p.HasKey(keyname);
-			// open, if user has a key
-			if (Locked)
-			{
-				if (hasKey)
-				{
-					this.OpenDoor();
-				}
-				else
-					message += " The doors is locked and you don't have the key.";
-			}
-			ThisGame.messageLog.Enqueue(message);
+			// this wont happen, every door has a key
 			return this;
 		}
 		

@@ -32,11 +32,12 @@ namespace Game
 			lua.DoFile(filePath + "luascripts/config.lua");
 			
 			// initialize player, which includes loading lua file, if player is loaded
-			Player p = InitializePlayer();
+			bool newgame = true;
+			Player p = InitializePlayer(out newgame);
 			lua["player"] = p;
 			
 			//initialize map for player
-			dungeon = InitializeMap(p);		
+			dungeon = InitializeMap(p, newgame);		
 			
 			// main loop - running the program
 			bool end = false;
@@ -107,11 +108,11 @@ namespace Game
 			bool torch = (bool)lua["torch"];
 			bool visited_madman = (bool)lua["had_conversation_with_madman"];
 			bool pray = (bool)lua["pray"];
-			bool has_statue = (bool)lua["has_statue"];
+			bool explored_sarcophagus = (bool)lua["explored_sarcophagus"];
 			string lines = String.Format("visibility = {0}\ntorch={1}\nhad_conversation_with_madman={2}" +
-				"\npray={3}\nhas_statue={4}", vis.ToString(), torch.ToString().ToLower(), 
+				"\npray={3}\nexplored_sarcophagus={4}", vis.ToString(), torch.ToString().ToLower(), 
 			                             visited_madman.ToString().ToLower(),
-			                             pray.ToString().ToLower(), has_statue.ToString().ToLower());
+			                             pray.ToString().ToLower(),explored_sarcophagus.ToString().ToLower());
 
 			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + "players/" + p.Name.ToLower() + "/config.lua");
 			file.WriteLine(lines);
@@ -130,23 +131,29 @@ namespace Game
 				Console.WriteLine(msg);
 		}
 		
-		public static Map InitializeMap(Player p)
+		public static Map InitializeMap(Player p, bool newgame)
 		{			
 			string mapname = "players/" + p.Name.ToLower() + "/dungeon1";
 			
 			try
 			{
-				return LoadMapFromXml(mapname);
+				if (newgame)
+					return LoadMapFromXml("dungeon1");
+				else
+					return LoadMapFromXml(mapname);
 			}
 			catch
 			{
+				Console.WriteLine("Couldn't load map.");
 				return LoadMapFromXml("dungeon1");
 			}
+			
 		}
 		
-		public static Player InitializePlayer()
+		public static Player InitializePlayer(out bool newgame)
 		{
 			string startupPath = filePath;
+			newgame = true;
 			
 			List<string> players = new List<string>();
 			
@@ -185,6 +192,7 @@ namespace Game
 				case 'n':
 				{
 					p = PickCharacter(players);
+					newgame = false;
 					ask = false;
 					break;
 				}
@@ -540,8 +548,7 @@ namespace Game
 			bool locked = bool.Parse(node.Attributes["locked"].Value);
 			string symbol = node.Attributes["symbol"].Value;
 			string msg = node.GetElementsByTagName("Message")[0].InnerText;
-			string keyname = node.GetElementsByTagName("Keyname")[0].InnerText;
-			Door door = new Door(msg, keyname, locked);
+			Door door = new Door(msg, locked);
 			door.SetSymbol(symbol);
 			return door;
 		}

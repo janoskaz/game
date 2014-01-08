@@ -6,7 +6,7 @@ keepscript = true
 out = block
 
 ::options::
-Console.WriteLine("\t1: Open the sarcophagus.")
+Console.Write("\t1: Open the sarcophagus.\n")
 Console.WriteLine("\t2: Leave it alone.")
 
 answer = get_answer(2)
@@ -14,7 +14,7 @@ if (answer == "1") then
 	times_opened = times_opened + 1
 	if (times_opened == 2) then
 	--better message
-		tell_message("You open the sarcophagus for the second time and it's still full of paper and ink. You pick randomly one of the pieces of papyrus and start reading. It's a story of hare and turtle, and although you did not learn how to run, you learned a lot about of running. You gain one point of speed.")
+		tell_message("You open the sarcophagus for the second time and it's still full of paper and ink. Annoyed, you pick randomly one of the pieces of papyrus and start reading. It's a story of hare and turtle, and although you did not learn how to run, you learned a lot about of running. You gain one point of speed.")
 		player:PermanentlyUpdateCharacteristics(0,0,0,1)
 		keepscript = false
 	else
@@ -25,4 +25,5 @@ else
 	tell_message("You leave the sarcophagus alone.")
 end
 
+explored_sarcophagus = true
 message = "You explored the sarcophagus"

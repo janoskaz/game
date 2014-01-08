@@ -205,7 +205,7 @@ statue:SetSymbol('S')
 map:AddLocation(statue)
 
 --Doors to burial chamber
-doors = Location(6,19,Door("This door is huge, made from stone and covered with elaborate carwings, resembling different kinds of animals.","special key",true))
+doors = Location(6,19,Door("This door is huge, made from stone and covered with elaborate carwings, resembling different kinds of animals.",true))
 doors:SetScript("burial_chamber_door.lua")
 doors:UpdateSymbol()
 map:AddLocation(doors)
@@ -215,8 +215,20 @@ sarcophagus = Item("Ornamented Sarcophagus")
 sarcophagus:SetSymbol('O')
 sarcophagus = Location(6,24,sarcophagus)
 sarcophagus:SetScript("sarcophagus.lua")
-sarcophagus:SetSymbol('O')
+--sarcophagus:SetSymbol('O')
+sarcophagus:UpdateSymbol()
 map:AddLocation(sarcophagus)
+
+--door out
+doorout = Location(12,15, Door("This is simple stone plate, used to seal the entrance to the tomb.", true))
+doorout:Setscript("door_out.lua")
+doorout:UpdateSymbol()
+map:AddLocation(doorout)
+
+--warning before leaving
+loc = Location(20,15,BasicObject())
+loc:SetScript("warning.lua")
+map:AddLocation(loc)
 
 --Write to XML
 map:ToXml("dungeon1")

@@ -900,7 +900,6 @@
     <block type="Game.Door">
       <Door locked="True" symbol="/">
         <Message>This door is huge, made from stone and covered with elaborate carwings, resembling different kinds of animals.</Message>
-        <Keyname>special key</Keyname>
       </Door>
     </block>
   </location>
@@ -1679,9 +1678,11 @@
       <Wall symbol=" " />
     </block>
   </location>
-  <location x="12" y="15" visible="False">
-    <block type="Game.BasicObject">
-      <BasicObject symbol=" " />
+  <location x="12" y="15" visible="False" script="door_out.lua">
+    <block type="Game.Door">
+      <Door locked="True" symbol="/">
+        <Message>This is simple stone plate, used to seal the entrance to the tomb.</Message>
+      </Door>
     </block>
   </location>
   <location x="12" y="16" visible="False">
@@ -2719,7 +2720,7 @@
       <Wall symbol=" " />
     </block>
   </location>
-  <location x="20" y="15" visible="False">
+  <location x="20" y="15" visible="False" script="warning.lua">
     <block type="Game.BasicObject">
       <BasicObject symbol=" " />
     </block>
