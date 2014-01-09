@@ -20,12 +20,12 @@ if (answer == "1") then
 	goto conversation
 elseif (answer == "2") then
 	Console.WriteLine("2: Pray to Qebehsutep.")
-	if (pray) then 
+	if (config.pray) then 
 		tell_message("You have already tried that") 
 	else
 		tell_message("\"All hail to the mighty Qebehsutep, the queen of all the entrails - livers, stomachs, kidneys and kidney stones. I praise your heavenly presence in this temple.\"")
 		tell_message("Your prayers have been answered and in case you get mummified one day, you know that your guts will safely get to the heavens.")
-		pray = true
+		config.pray = true
 	end
 	goto conversation
 elseif (answer == "3") then

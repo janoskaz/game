@@ -23,6 +23,6 @@ elseif (answer == "3") then --Yes, lets, the Gods decide
 	tell_message("The torch imediately catches fire. That was easy.")
 	message = "Finally, you can see. But you wish you couldn't. You are in a small, hermetically sealed tomb with no exit. Perhaps there will be some way out, but so far, you can't see anything"
 	newscript = "null"
-	torch = true
-	visibility = 2
+	config.torch = true
+	config.visibility = 2
 end

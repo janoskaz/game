@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
@@ -47,7 +48,7 @@ namespace Game
 				Console.Clear();
 				
 				// set visibility of the player
-				double vis = (double)lua["visibility"];
+				double vis = (double)lua["config.visibility"];
 				SetVisibility((int)vis);
 				
 				if (ThisGame.Visibility > 0)
@@ -104,16 +105,17 @@ namespace Game
 		
 		public static void SaveConfiguration(Player p)
 		{
-			double vis = (double)lua["visibility"];
-			bool torch = (bool)lua["torch"];
-			bool visited_madman = (bool)lua["had_conversation_with_madman"];
-			bool pray = (bool)lua["pray"];
-			bool explored_sarcophagus = (bool)lua["explored_sarcophagus"];
-			string lines = String.Format("visibility = {0}\ntorch={1}\nhad_conversation_with_madman={2}" +
-				"\npray={3}\nexplored_sarcophagus={4}", vis.ToString(), torch.ToString().ToLower(), 
-			                             visited_madman.ToString().ToLower(),
-			                             pray.ToString().ToLower(),explored_sarcophagus.ToString().ToLower());
-
+			LuaTable config = lua.GetTable("config");
+			
+			string lines = "config = {}\n";
+			Dictionary<object, object> tb = lua.GetTableDict(config);
+		
+			foreach(KeyValuePair<object, object> kv in tb)
+			{
+				lines += string.Format("config.{0} = {1}\n", kv.Key, kv.Value.ToString().ToLower());
+			}
+			config.Dispose();
+			
 			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + "players/" + p.Name.ToLower() + "/config.lua");
 			file.WriteLine(lines);
 			

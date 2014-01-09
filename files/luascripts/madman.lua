@@ -1,6 +1,6 @@
 --- Interaction with Mad Man
 
-if (had_conversation_with_madman) then
+if (config.had_conversation_with_madman) then
 	goto visited
 end
 
@@ -36,7 +36,7 @@ round = 1
 
 --conversation with madman
 ::conversation::
-had_conversation_with_madman = true
+config.had_conversation_with_madman = true
 conversation(s2[round])
 answer = get_answer(4)
 

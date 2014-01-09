@@ -5,7 +5,7 @@ ch = Characteristics(5,1,2,0)
 beetles = Being("Sacred beetles", ch, ch, 10)
 
 -- only if the toch is lit
-if (torch) then
+if (config.torch) then
 	tell_message("In the light of the torch you can see the shity work you have done." 
 	.. " If you push hard, you could move some of the stone block.")
 	tell_message("You push and the wall breaks down, crumbling on the floor."
