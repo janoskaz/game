@@ -34,17 +34,10 @@ elseif (answer == "3") then
 	goto conversation
 elseif (answer == "4") then
 	Console.WriteLine("4: Take the statue.")
-	if (has_statue) then 
-		tell_message("You have already done that.") 
-		goto conversation
-	else
-		tell_message("You contemplate for a while, if something bad will happen to you. Then you take the statue and nothing happens.")
-		player:PickItem(block)
-		out = BasicObject()
-		keepscript = false
-		has_statue = true
-	end
-	goto conversation
+	tell_message("You contemplate for a while, if something bad will happen to you. Then you take the statue and nothing happens.")
+	player:PickItem(block)
+	out = BasicObject()
+	keepscript = false
 elseif (answer == "5") then
 	tell_message("5: Leave.")
 end

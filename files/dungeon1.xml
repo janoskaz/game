@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<map width="26" heigth="26">
+<map width="26" heigth="26" playerX="2" playerY="2">
   <location x="0" y="0" visible="False">
     <block type="Game.BasicObject">
       <BasicObject symbol=" " />
@@ -3110,7 +3110,7 @@
       <Wall symbol=" " />
     </block>
   </location>
-  <location x="23" y="15" visible="False">
+  <location x="23" y="15" visible="False" script="leave.lua">
     <block type="Game.BasicObject">
       <BasicObject symbol=" " />
     </block>

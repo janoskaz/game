@@ -5,6 +5,8 @@ import_type, load_assembly = luanet.import_type, luanet.load_assembly
 --Load classes / game
 load_assembly "Game"
 
+ThisGame = import_type "Game.ThisGame"
+
 Map = import_type "Game.Map"
 Location = import_type "Game.Location"
 

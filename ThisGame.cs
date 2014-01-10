@@ -18,6 +18,8 @@ namespace Game
 		
 		public static Map dungeon;
 		
+		public static Player player;
+		
 		public static int mapHeight = 10;
 		
 		public static string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,"files/");
@@ -34,11 +36,18 @@ namespace Game
 			
 			// initialize player, which includes loading lua file, if player is loaded
 			bool newgame = true;
-			Player p = InitializePlayer(out newgame);
-			lua["player"] = p;
+			InitializePlayer(out newgame);
 			
 			//initialize map for player
-			dungeon = InitializeMap(p, newgame);		
+			InitializeMap(newgame, "dungeon1");
+			
+			// set coordinates of a player
+			player.X = dungeon.PlayerX;
+			player.Y = dungeon.PlayerY;
+			
+			// pass variables to lua
+			lua["player"] = player;
+			lua["map"] = dungeon;
 			
 			// main loop - running the program
 			bool end = false;
@@ -52,18 +61,18 @@ namespace Game
 				SetVisibility((int)vis);
 				
 				if (ThisGame.Visibility > 0)
-					dungeon.CalculateVisibility(p, Visibility);
-				dungeon.Draw(p);	
+					dungeon.CalculateVisibility(player, Visibility);
+				dungeon.Draw(player);	
 				
 				int w = Console.WindowWidth;
 				int h = mapHeight;
 			
-				int diffx = (int)Math.Ceiling((double)(w/2)) - p.X;
-				int diffy = (int)Math.Ceiling((double)(h/2)) - p.Y;
+				int diffx = (int)Math.Ceiling((double)(w/2)) - player.X;
+				int diffy = (int)Math.Ceiling((double)(h/2)) - player.Y;
 				
-				Console.CursorLeft = p.X + diffx;
-				Console.CursorTop = p.Y + diffy;
-				Console.Write(p.Symbol());
+				Console.CursorLeft = player.X + diffx;
+				Console.CursorTop = player.Y + diffy;
+				Console.Write(player.Symbol());
 				
 				Console.CursorTop = h+1;
 				Console.CursorLeft = 0;
@@ -79,20 +88,17 @@ namespace Game
 				if (c.Key == ConsoleKey.Escape)
 					end = true;
 				else if (c.Key == ConsoleKey.I)
-					p.ManageInventory();
+					player.ManageInventory();
 				else if (c.Key == ConsoleKey.Enter)
-					dungeon.location[p.X,p.Y].VoluntaryAction(p);
+					dungeon.location[player.X,player.Y].VoluntaryAction(player);
 				else if (c.Key == ConsoleKey.S)
 				{
-					p.SaveAsXml();
-					dungeon.ToXml("players/" + p.Name.ToLower() + "/dungeon1");
-					ThisGame.SaveConfiguration(p);
-					continue;
+					SaveGame("dungeon1");
 				}					
 					
-				p.Move(c, dungeon);
+				player.Move(c, dungeon);
 				
-				if (!p.Alive())
+				if (!player.Alive())
 				{
 					Console.WriteLine("You're dead! press any key");
 					end = true;
@@ -103,7 +109,23 @@ namespace Game
 			
 		}
 		
-		public static void SaveConfiguration(Player p)
+		public static void LoadNextMap(string dungeonname)
+		{
+			InitializeMap(false, dungeonname);
+			player.X = dungeon.PlayerX;
+			player.Y = dungeon.PlayerY;
+		}
+		
+		public static void SaveGame(string dungeonname)
+		{
+			player.SaveAsXml();
+			dungeon.PlayerX = player.X;
+			dungeon.PlayerY = player.Y;
+			dungeon.ToXml("players/" + player.Name.ToLower() + "/" + dungeonname);
+			ThisGame.SaveConfiguration();
+		}
+		
+		public static void SaveConfiguration()
 		{
 			LuaTable config = lua.GetTable("config");
 			
@@ -116,7 +138,7 @@ namespace Game
 			}
 			config.Dispose();
 			
-			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + "players/" + p.Name.ToLower() + "/config.lua");
+			System.IO.StreamWriter file = new System.IO.StreamWriter(filePath + "players/" + player.Name.ToLower() + "/config.lua");
 			file.WriteLine(lines);
 			
 			file.Close();
@@ -133,26 +155,26 @@ namespace Game
 				Console.WriteLine(msg);
 		}
 		
-		public static Map InitializeMap(Player p, bool newgame)
+		public static void InitializeMap(bool newgame, string newmap)
 		{			
-			string mapname = "players/" + p.Name.ToLower() + "/dungeon1";
+			string mapname = "players/" + player.Name.ToLower() + "/" + newmap;
 			
 			try
 			{
 				if (newgame)
-					return LoadMapFromXml("dungeon1");
+					dungeon = LoadMapFromXml(newmap);
 				else
-					return LoadMapFromXml(mapname);
+					dungeon = LoadMapFromXml(mapname);
 			}
 			catch
 			{
 				Console.WriteLine("Couldn't load map.");
-				return LoadMapFromXml("dungeon1");
+				dungeon = LoadMapFromXml(newmap);
 			}
 			
 		}
 		
-		public static Player InitializePlayer(out bool newgame)
+		public static void InitializePlayer(out bool newgame)
 		{
 			string startupPath = filePath;
 			newgame = true;
@@ -172,9 +194,9 @@ namespace Game
 			// ask player, if he want to chose from existing players, or create a new one
 			if (players.Count == 0)
 			{
-				p = CreateNewPlayer();
-				return p;
-			}
+				player = CreateNewPlayer();
+				return;
+			}				
 			
 			bool ask = true;
 			
@@ -205,8 +227,7 @@ namespace Game
 				}				
 				
 			}
-			return p;
-					
+			player = p;
 		}
 		
 		public static Player CreateNewPlayer()
@@ -473,9 +494,13 @@ namespace Game
 			// get attributes of map - width and heigth
 			int x = int.Parse(root.Attributes["width"].Value);
 			int y = int.Parse(root.Attributes["heigth"].Value);
+			int playerX = int.Parse(root.Attributes["playerX"].Value);
+			int playerY = int.Parse(root.Attributes["playerY"].Value);
 			
 			Map newmap = new Map();
 			newmap.CreateMapField(x,y);
+			newmap.PlayerX = playerX;
+			newmap.PlayerY = playerY;
 			
 			foreach (XmlNode node in root.ChildNodes)
 			{

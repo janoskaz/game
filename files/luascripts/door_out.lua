@@ -5,7 +5,7 @@ keepscript = true
 out = block
 
 if (has_showel) then
-	tell_message("You could try to use the showel as a lever. Do you want to?")
+	Console.WriteLine("You could try to use the showel as a lever. Do you want to?")
 	Console.Write("\t1: Yes.\n")
 	Console.WriteLine("\t2: No.")
 	answer = get_answer(2)

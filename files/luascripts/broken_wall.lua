@@ -13,7 +13,7 @@ if (config.torch) then
 	val = player:Fight(beetles)
 	keepscript = false
 	if val then
-		tell_message("You squish the last beetle with your bare hand and exhale a breath full of relief. Killing sacred beetles is moraly problematic thing, you gain some cynicism, and mean people live longer, so you get also two more hitpoints.")
+		tell_message("You squish the last beetle with your bare hand and exhale a breath full of relief. Killing sacred beetles is moraly problematic thing, you gain some cynism, and mean people live longer, so you get also two more hitpoints.")
 		player:PermanentlyUpdateCharacteristics(2,0,0,0)
 		out = BasicObject()
 	else

@@ -9,6 +9,8 @@ namespace Game
 	{
 		public int Heigth {get; private set;}
 		public int Width {get; private set;}
+		public int PlayerX {get; set;}
+		public int PlayerY {get; set;}
 		
 		public Location[,] location;
 		
@@ -105,6 +107,8 @@ namespace Game
 			XmlElement root = doc.CreateElement("map");
 			root.SetAttribute("width", Width.ToString());
 			root.SetAttribute("heigth", Heigth.ToString());
+			root.SetAttribute("playerX", PlayerX.ToString());
+			root.SetAttribute("playerY", PlayerY.ToString());
 			
 			foreach (Location l in location)
 			{

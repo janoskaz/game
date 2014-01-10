@@ -51,8 +51,17 @@ hourglass = function(pos)
 	end
 end
 
+drop_amulets = function()
+	am = {"Amulet with owl", "Amulet with fish", "Amulet with jackal", "Amulet with cat", "Amulet with crocodile", "Amulet with hippo","Amulet with camel", "Amulet with octopus"}
+	for i,v in ipairs(am) do
+		amulet = player:GetItem(v)
+		player:DropItem(amulet)
+	end
+end
+
 if (has_amulets(amulets, true)) then --does the player has all of the amulets?
 	tell_message("You place amulets inside carvings and suddenly you hear a sound of sand piling up somewhere.")
+	drop_amulets()
 	hourglass()
 	message = "The door opens and you enter the burial chamber."
 	keepscript = false

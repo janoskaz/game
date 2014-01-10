@@ -16,6 +16,7 @@ Item = import_type "Game.Item"
 Weapon = import_type "Game.Weapon"
 Inventory = import_type "Game.Inventory"
 Characteristics = import_type "Game.Characteristics"
+ThisGame = import_type "Game.ThisGame"
 
 load_assembly "System"
 
@@ -215,7 +216,6 @@ sarcophagus = Item("Ornamented Sarcophagus")
 sarcophagus:SetSymbol('O')
 sarcophagus = Location(6,24,sarcophagus)
 sarcophagus:SetScript("sarcophagus.lua")
---sarcophagus:SetSymbol('O')
 sarcophagus:UpdateSymbol()
 map:AddLocation(sarcophagus)
 
@@ -230,5 +230,13 @@ loc = Location(20,15,BasicObject())
 loc:SetScript("warning.lua")
 map:AddLocation(loc)
 
+--leave
+loc = Location(23,15,BasicObject())
+loc:SetScript("leave.lua")
+loc:SetSymbol('Q')
+map:AddLocation(loc)
+
+map.PlayerX = 2
+map.PlayerY = 2
 --Write to XML
 map:ToXml("dungeon1")

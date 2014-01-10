@@ -15,6 +15,7 @@ class Program
 		
 		Lua lua = new Lua();
 		lua.DoFile("/home/zbynek/Plocha/csharp/Game/Game/files/luascripts/dungeon1.lua");
+		lua.DoFile("/home/zbynek/Plocha/csharp/Game/Game/files/luascripts/dungeon2.lua");
 		
 		ThisGame.RunGame();
 		

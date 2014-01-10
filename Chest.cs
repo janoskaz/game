@@ -121,7 +121,7 @@ namespace Game
 								p.PickItem(i);
 							}
 							this.Content.RemoveAll();
-							messageBoard.Enqueue("All item has been taken");
+							messageBoard.Enqueue("All items has been taken");
 						} else {
 							n = int.Parse(words[1]);
 							if (p.bag.maxsize - p.bag.Count() > 0)
