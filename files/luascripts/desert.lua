@@ -22,8 +22,27 @@ load_assembly "System"
 String = import_type "System.String"
 
 local map = Map()
-map:CreateMapField(11,11)
+map:CreateMapField(100,100)
+
+for i=0,99 do
+	for j=0,99 do
+		rnd = math.random()
+		if rnd<0.05 then
+			rock = Impassable("rock")
+			rock:SetSymbol('.')
+			loc = Location(i,j,rock)
+			--loc:UpdateSymbol()
+		elseif rnd<0.08 and rnd>=0.05 then
+			loc = Location(i,j,Impassable("cactus"))
+		else
+			loc = Location(i,j,BasicObject())
+			loc:SetScript("desert_action.lua")
+		end
+		map:AddLocation(loc)
+	end
+end
+
 map.PlayerX = 0
 map.PlayerY = 5
 --Write to XML
-map:ToXml("dungeon2")
+map:ToXml("desert")

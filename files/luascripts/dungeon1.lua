@@ -9,7 +9,7 @@ Location = import_type "Game.Location"
 Player = import_type "Game.Player"
 Being = import_type "Game.Being"
 BasicObject = import_type "Game.BasicObject"
-Wall = import_type "Game.Wall"
+Impassable = import_type "Game.Impassable"
 Door = import_type "Game.Door"
 Chest = import_type "Game.Chest"
 Item = import_type "Game.Item"
@@ -29,110 +29,110 @@ map:CreateMapField(26,26)
 ---CREATE ALL WALLS
 --Small rooms
 for i=1,4 do --rooms on left side
-	map:AddLocation(Location(i,0, Wall()))
-	map:AddLocation(Location(i,3, Wall()))
-	map:AddLocation(Location(i,6, Wall()))
+	map:AddLocation(Location(i,0, Impassable("Wall")))
+	map:AddLocation(Location(i,3, Impassable("Wall")))
+	map:AddLocation(Location(i,6, Impassable("Wall")))
 end
 
 for i=1,5 do
-	map:AddLocation(Location(1,i, Wall()))
-	map:AddLocation(Location(4,i, Wall()))
+	map:AddLocation(Location(1,i, Impassable("Wall")))
+	map:AddLocation(Location(4,i, Impassable("Wall")))
 end
 
 for i=8,11 do --rooms on right side
-	map:AddLocation(Location(i,0, Wall()))
-	map:AddLocation(Location(i,3, Wall()))
-	map:AddLocation(Location(i,6, Wall()))
+	map:AddLocation(Location(i,0, Impassable("Wall")))
+	map:AddLocation(Location(i,3, Impassable("Wall")))
+	map:AddLocation(Location(i,6, Impassable("Wall")))
 end
 
 for i=1,5 do
-	map:AddLocation(Location(8,i, Wall()))
-	map:AddLocation(Location(11,i, Wall()))
+	map:AddLocation(Location(8,i, Impassable("Wall")))
+	map:AddLocation(Location(11,i, Impassable("Wall")))
 end
 
 --breakable walls
-brokenWall = Location(4,1, Wall()) -- upper left room - entry room
+brokenWall = Location(4,1, Impassable("Wall")) -- upper left room - entry room
 brokenWall:SetScript("broken_wall.lua")
 map:AddLocation(brokenWall)
-wall = Location(8,1,Wall()) -- upper right room
+wall = Location(8,1,Impassable("Wall")) -- upper right room
 wall:SetScript("breakable_wall.lua")
 map:AddLocation(wall)
-wall = Location(4,5,Wall()) -- lower left room
+wall = Location(4,5,Impassable("Wall")) -- lower left room
 wall:SetScript("breakable_wall.lua")
 map:AddLocation(wall)
-wall = Location(8,4,Wall()) -- lower right room
+wall = Location(8,4,Impassable("Wall")) -- lower right room
 wall:SetScript("breakable_wall.lua")
 map:AddLocation(wall)
 
 --big room north
-map:AddLocation(Location(5,0, Wall()))
-map:AddLocation(Location(6,0, Wall()))
-map:AddLocation(Location(7,0, Wall()))
-map:AddLocation(Location(4,7, Wall()))
-map:AddLocation(Location(5,7, Wall()))
-map:AddLocation(Location(7,7, Wall()))
-map:AddLocation(Location(8,7, Wall()))
+map:AddLocation(Location(5,0, Impassable("Wall")))
+map:AddLocation(Location(6,0, Impassable("Wall")))
+map:AddLocation(Location(7,0, Impassable("Wall")))
+map:AddLocation(Location(4,7, Impassable("Wall")))
+map:AddLocation(Location(5,7, Impassable("Wall")))
+map:AddLocation(Location(7,7, Impassable("Wall")))
+map:AddLocation(Location(8,7, Impassable("Wall")))
 
 --hall to central chamber
 for i=8,11 do
-	map:AddLocation(Location(5,i, Wall()))
-	map:AddLocation(Location(7,i, Wall()))
+	map:AddLocation(Location(5,i, Impassable("Wall")))
+	map:AddLocation(Location(7,i, Impassable("Wall")))
 end
 
 --central chamber
-map:AddLocation(Location(3,11, Wall())) -- 1st line of walls
-map:AddLocation(Location(4,11, Wall()))
-map:AddLocation(Location(8,11, Wall()))
-map:AddLocation(Location(9,11, Wall()))
-map:AddLocation(Location(1,12, Wall())) -- 2nd line of walls
-map:AddLocation(Location(2,12, Wall()))
-map:AddLocation(Location(3,12, Wall()))
-map:AddLocation(Location(9,12, Wall()))
-map:AddLocation(Location(10,12, Wall()))
-map:AddLocation(Location(11,12, Wall()))
-map:AddLocation(Location(0,13, Wall())) -- 3rd line of walls
-map:AddLocation(Location(1,13, Wall()))
-map:AddLocation(Location(11,13, Wall()))
-map:AddLocation(Location(12,13, Wall()))
-map:AddLocation(Location(0,14, Wall())) -- 4th line of walls
-map:AddLocation(Location(12,14, Wall()))
-map:AddLocation(Location(0,15, Wall())) -- 5th line of walls
-map:AddLocation(Location(0,16, Wall())) -- 6th line of walls
-map:AddLocation(Location(12,16, Wall()))
-map:AddLocation(Location(0,17, Wall())) -- 7th line of walls
-map:AddLocation(Location(1,17, Wall()))
-map:AddLocation(Location(11,17, Wall()))
-map:AddLocation(Location(12,17, Wall()))
-map:AddLocation(Location(1,18, Wall())) -- 8th line of walls
-map:AddLocation(Location(2,18, Wall()))
-map:AddLocation(Location(3,18, Wall()))
-map:AddLocation(Location(9,18, Wall()))
-map:AddLocation(Location(10,18, Wall()))
-map:AddLocation(Location(11,18, Wall()))
-map:AddLocation(Location(3,19, Wall())) -- 9th line of walls
-map:AddLocation(Location(4,19, Wall()))
-map:AddLocation(Location(5,19, Wall()))
-map:AddLocation(Location(7,19, Wall()))
-map:AddLocation(Location(8,19, Wall()))
-map:AddLocation(Location(9,19, Wall()))
+map:AddLocation(Location(3,11, Impassable("Wall"))) -- 1st line of walls
+map:AddLocation(Location(4,11, Impassable("Wall")))
+map:AddLocation(Location(8,11, Impassable("Wall")))
+map:AddLocation(Location(9,11, Impassable("Wall")))
+map:AddLocation(Location(1,12, Impassable("Wall"))) -- 2nd line of walls
+map:AddLocation(Location(2,12, Impassable("Wall")))
+map:AddLocation(Location(3,12, Impassable("Wall")))
+map:AddLocation(Location(9,12, Impassable("Wall")))
+map:AddLocation(Location(10,12, Impassable("Wall")))
+map:AddLocation(Location(11,12, Impassable("Wall")))
+map:AddLocation(Location(0,13, Impassable("Wall"))) -- 3rd line of walls
+map:AddLocation(Location(1,13, Impassable("Wall")))
+map:AddLocation(Location(11,13, Impassable("Wall")))
+map:AddLocation(Location(12,13, Impassable("Wall")))
+map:AddLocation(Location(0,14, Impassable("Wall"))) -- 4th line of walls
+map:AddLocation(Location(12,14, Impassable("Wall")))
+map:AddLocation(Location(0,15, Impassable("Wall"))) -- 5th line of walls
+map:AddLocation(Location(0,16, Impassable("Wall"))) -- 6th line of walls
+map:AddLocation(Location(12,16, Impassable("Wall")))
+map:AddLocation(Location(0,17, Impassable("Wall"))) -- 7th line of walls
+map:AddLocation(Location(1,17, Impassable("Wall")))
+map:AddLocation(Location(11,17, Impassable("Wall")))
+map:AddLocation(Location(12,17, Impassable("Wall")))
+map:AddLocation(Location(1,18, Impassable("Wall"))) -- 8th line of walls
+map:AddLocation(Location(2,18, Impassable("Wall")))
+map:AddLocation(Location(3,18, Impassable("Wall")))
+map:AddLocation(Location(9,18, Impassable("Wall")))
+map:AddLocation(Location(10,18, Impassable("Wall")))
+map:AddLocation(Location(11,18, Impassable("Wall")))
+map:AddLocation(Location(3,19, Impassable("Wall"))) -- 9th line of walls
+map:AddLocation(Location(4,19, Impassable("Wall")))
+map:AddLocation(Location(5,19, Impassable("Wall")))
+map:AddLocation(Location(7,19, Impassable("Wall")))
+map:AddLocation(Location(8,19, Impassable("Wall")))
+map:AddLocation(Location(9,19, Impassable("Wall")))
 for i=20,22 do -- lines 10 to 12
-	map:AddLocation(Location(3,i, Wall()))
-	map:AddLocation(Location(9,i, Wall()))
+	map:AddLocation(Location(3,i, Impassable("Wall")))
+	map:AddLocation(Location(9,i, Impassable("Wall")))
 end
 for i=22,24 do -- lines 12 to 14
-	map:AddLocation(Location(4,i, Wall()))
-	map:AddLocation(Location(8,i, Wall()))
+	map:AddLocation(Location(4,i, Impassable("Wall")))
+	map:AddLocation(Location(8,i, Impassable("Wall")))
 end
-map:AddLocation(Location(5,24, Wall()))
-map:AddLocation(Location(7,24, Wall()))
-map:AddLocation(Location(5,25, Wall())) -- line 15
-map:AddLocation(Location(6,25, Wall()))
-map:AddLocation(Location(7,25, Wall()))
+map:AddLocation(Location(5,24, Impassable("Wall")))
+map:AddLocation(Location(7,24, Impassable("Wall")))
+map:AddLocation(Location(5,25, Impassable("Wall"))) -- line 15
+map:AddLocation(Location(6,25, Impassable("Wall")))
+map:AddLocation(Location(7,25, Impassable("Wall")))
 
 --hall out
 for i=12,25 do -- lines 22 to 24
-	map:AddLocation(Location(i,14, Wall()))
-	map:AddLocation(Location(i,16, Wall()))
+	map:AddLocation(Location(i,14, Impassable("Wall")))
+	map:AddLocation(Location(i,16, Impassable("Wall")))
 end
 
 --ENTRY ROOM - bonus functionality

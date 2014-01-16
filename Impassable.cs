@@ -6,10 +6,14 @@ namespace Game
 	/// <summary>
 	/// Wall.
 	/// </summary>
-	public class Wall: BasicObject
+	public class Impassable: BasicObject
 	{
-		public Wall ()
+		private string name;
+		
+		public Impassable (string name)
 		{
+			this.name = name;
+			this.symbol = '#';
 		}
 		
 		/// <summary>
@@ -17,7 +21,7 @@ namespace Game
 		/// </summary>
 		public override char Symbol()
 		{
-			return '#';
+			return this.symbol;
 		}
 		
 		public override bool CanMoveTo()
@@ -39,8 +43,9 @@ namespace Game
 		/// </param>
 		public override XmlElement ToXml(XmlDocument doc, string elementName)
 		{
-			XmlElement wall = doc.CreateElement("Wall");
-			wall.SetAttribute("symbol", symbol.ToString());
+			XmlElement wall = doc.CreateElement("Impassable");
+			wall.SetAttribute("name", name.ToString());
+			wall.SetAttribute("symbol", Symbol().ToString());
 			return wall;
 		}
 		
@@ -64,7 +69,7 @@ namespace Game
 		/// </param>
 		public override IPlace AutomaticAction(Player p)
 		{
-			ThisGame.messageLog.Enqueue("You can't go there - there's a wall!");
+			ThisGame.messageLog.Enqueue(String.Format("You can't go there - there's a {0}!", name));
 			return this;
 		}
 		

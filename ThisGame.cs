@@ -48,6 +48,7 @@ namespace Game
 			// pass variables to lua
 			lua["player"] = player;
 			lua["map"] = dungeon;
+			lua["path_to_files"] = filePath;
 			
 			// main loop - running the program
 			bool end = false;
@@ -168,7 +169,7 @@ namespace Game
 			}
 			catch
 			{
-				Console.WriteLine("Couldn't load map.");
+				//Console.WriteLine("Couldn't load map.");
 				dungeon = LoadMapFromXml(newmap);
 			}
 			
@@ -543,9 +544,9 @@ namespace Game
 			{
 				return LoadBasicObjectFromXml((XmlElement)node.GetElementsByTagName("BasicObject")[0]);
 			}
-			case "Game.Wall":
+			case "Game.Impassable":
 			{
-				return LoadWallFromXml((XmlElement)node.GetElementsByTagName("Wall")[0]);
+				return LoadImpassableFromXml((XmlElement)node.GetElementsByTagName("Impassable")[0]);
 			}
 			case "Game.Door":
 			{
@@ -588,12 +589,13 @@ namespace Game
 			return bo;
 		}
 		
-		public static Wall LoadWallFromXml(XmlElement node)
+		public static Impassable LoadImpassableFromXml(XmlElement node)
 		{
 			string symbol = node.Attributes["symbol"].Value;
-			Wall wall = new Wall();
-			wall.SetSymbol(symbol);
-			return wall;
+			string name = node.Attributes["name"].Value;
+			Impassable imp = new Impassable(name);
+			imp.SetSymbol(symbol);
+			return imp;
 		}
 			
 		public static Chest LoadChestFromXml(XmlElement node)

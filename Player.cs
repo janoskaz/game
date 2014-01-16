@@ -98,6 +98,11 @@ namespace Game
 			return this.Alive();
 		}
 		
+		public void Die()
+		{
+			this.CurrentCharacteristics.hitpoints = 0;
+		}
+		
 		public void ManageInventory()
 		{
 			bool runInventory = true;

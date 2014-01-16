@@ -43,7 +43,6 @@
     <Compile Include="Weapon.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Wall.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="BasicObject.cs" />
     <Compile Include="Chest.cs" />
@@ -52,6 +51,7 @@
     <Compile Include="ThisGame.cs" />
     <Compile Include="IXml.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Impassable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="files\" />
@@ -78,6 +78,8 @@
     <None Include="files\luascripts\door_out.lua" />
     <None Include="files\luascripts\warning.lua" />
     <None Include="files\luascripts\leave.lua" />
-    <None Include="files\luascripts\dungeon2.lua" />
+    <None Include="files\luascripts\directory.lua" />
+    <None Include="files\luascripts\desert.lua" />
+    <None Include="files\luascripts\desert_action.lua" />
   </ItemGroup>
 </Project>

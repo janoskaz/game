@@ -96,6 +96,19 @@ namespace Game
 			}
 		}
 		
+		public bool AllExplored()
+		{
+			for (int i=0;i<this.Width; i++)
+			{
+				for (int j=0; j<this.Heigth; j++)
+				{
+					if (!this.location[i,j].Visible)
+						return false;
+				}
+			}
+			return true;
+		}
+		
 		public void ToXml(string mapName)
 		{
 			string path = ThisGame.filePath;

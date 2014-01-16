@@ -7,10 +7,6 @@ objects are defined as C# objects, more complicated interaction is governed by l
 
 **TODO**
 
-+ manage several dungeons - loading and saving data, transfer of configuration
-
-+ how to store configuration of a player - perhaps a table in lua, which is read by C# and stored?
++ manage several dungeons - loading and saving data, transfer of configuration -- partly done
 
 + improve listing through commands
-
-+ Door - shouldn't be the object simplified? no key, instead having lua script for every door?

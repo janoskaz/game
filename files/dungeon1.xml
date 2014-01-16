@@ -66,28 +66,28 @@
     </block>
   </location>
   <location x="0" y="13" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="0" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="0" y="15" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="0" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="0" y="17" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="0" y="18" visible="False">
@@ -131,38 +131,38 @@
     </block>
   </location>
   <location x="1" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="1" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="2" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="4" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="5" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="7" visible="False">
@@ -191,13 +191,13 @@
     </block>
   </location>
   <location x="1" y="12" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="13" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="14" visible="False">
@@ -216,13 +216,13 @@
     </block>
   </location>
   <location x="1" y="17" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="18" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="1" y="19" visible="False">
@@ -261,8 +261,8 @@
     </block>
   </location>
   <location x="2" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="2" y="1" visible="False">
@@ -285,8 +285,8 @@
     </block>
   </location>
   <location x="2" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="2" y="4" visible="False">
@@ -312,8 +312,8 @@
     </block>
   </location>
   <location x="2" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="2" y="7" visible="False">
@@ -342,8 +342,8 @@
     </block>
   </location>
   <location x="2" y="12" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="2" y="13" visible="False">
@@ -372,8 +372,8 @@
     </block>
   </location>
   <location x="2" y="18" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="2" y="19" visible="False">
@@ -412,8 +412,8 @@
     </block>
   </location>
   <location x="3" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="1" visible="False">
@@ -427,8 +427,8 @@
     </block>
   </location>
   <location x="3" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="4" visible="False">
@@ -442,8 +442,8 @@
     </block>
   </location>
   <location x="3" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="7" visible="False">
@@ -467,13 +467,13 @@
     </block>
   </location>
   <location x="3" y="11" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="12" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="13" visible="False">
@@ -502,28 +502,28 @@
     </block>
   </location>
   <location x="3" y="18" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="19" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="20" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="21" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="22" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="3" y="23" visible="False">
@@ -542,43 +542,43 @@
     </block>
   </location>
   <location x="4" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="1" visible="False" script="broken_wall.lua">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="2" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="4" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="5" visible="False" script="breakable_wall.lua">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="7" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="8" visible="False">
@@ -597,8 +597,8 @@
     </block>
   </location>
   <location x="4" y="11" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="12" visible="False">
@@ -637,8 +637,8 @@
     </block>
   </location>
   <location x="4" y="19" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="20" visible="False">
@@ -652,18 +652,18 @@
     </block>
   </location>
   <location x="4" y="22" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="23" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="24" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="4" y="25" visible="False">
@@ -672,8 +672,8 @@
     </block>
   </location>
   <location x="5" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="1" visible="False">
@@ -707,28 +707,28 @@
     </block>
   </location>
   <location x="5" y="7" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="8" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="9" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="10" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="11" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="12" visible="False">
@@ -767,8 +767,8 @@
     </block>
   </location>
   <location x="5" y="19" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="20" visible="False">
@@ -792,18 +792,18 @@
     </block>
   </location>
   <location x="5" y="24" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="5" y="25" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="6" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="6" y="1" visible="False">
@@ -929,13 +929,13 @@
     </block>
   </location>
   <location x="6" y="25" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="1" visible="False">
@@ -969,28 +969,28 @@
     </block>
   </location>
   <location x="7" y="7" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="8" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="9" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="10" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="11" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="12" visible="False">
@@ -1029,8 +1029,8 @@
     </block>
   </location>
   <location x="7" y="19" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="20" visible="False">
@@ -1054,53 +1054,53 @@
     </block>
   </location>
   <location x="7" y="24" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="7" y="25" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="1" visible="False" script="breakable_wall.lua">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="2" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="4" visible="False" script="breakable_wall.lua">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="5" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="7" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="8" visible="False">
@@ -1119,8 +1119,8 @@
     </block>
   </location>
   <location x="8" y="11" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="12" visible="False">
@@ -1159,8 +1159,8 @@
     </block>
   </location>
   <location x="8" y="19" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="20" visible="False">
@@ -1174,18 +1174,18 @@
     </block>
   </location>
   <location x="8" y="22" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="23" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="24" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="8" y="25" visible="False">
@@ -1194,8 +1194,8 @@
     </block>
   </location>
   <location x="9" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="1" visible="False">
@@ -1209,8 +1209,8 @@
     </block>
   </location>
   <location x="9" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="4" visible="False">
@@ -1224,8 +1224,8 @@
     </block>
   </location>
   <location x="9" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="7" visible="False">
@@ -1249,13 +1249,13 @@
     </block>
   </location>
   <location x="9" y="11" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="12" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="13" visible="False">
@@ -1284,28 +1284,28 @@
     </block>
   </location>
   <location x="9" y="18" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="19" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="20" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="21" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="22" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="9" y="23" visible="False">
@@ -1324,8 +1324,8 @@
     </block>
   </location>
   <location x="10" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="10" y="1" visible="False">
@@ -1347,8 +1347,8 @@
     </block>
   </location>
   <location x="10" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="10" y="4" visible="False">
@@ -1374,8 +1374,8 @@
     </block>
   </location>
   <location x="10" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="10" y="7" visible="False">
@@ -1404,8 +1404,8 @@
     </block>
   </location>
   <location x="10" y="12" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="10" y="13" visible="False">
@@ -1434,8 +1434,8 @@
     </block>
   </location>
   <location x="10" y="18" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="10" y="19" visible="False">
@@ -1474,38 +1474,38 @@
     </block>
   </location>
   <location x="11" y="0" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="1" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="2" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="3" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="4" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="5" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="6" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="7" visible="False">
@@ -1534,13 +1534,13 @@
     </block>
   </location>
   <location x="11" y="12" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="13" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="14" visible="False">
@@ -1559,13 +1559,13 @@
     </block>
   </location>
   <location x="11" y="17" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="18" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="11" y="19" visible="False">
@@ -1669,13 +1669,13 @@
     </block>
   </location>
   <location x="12" y="13" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="12" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="12" y="15" visible="False" script="door_out.lua">
@@ -1686,13 +1686,13 @@
     </block>
   </location>
   <location x="12" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="12" y="17" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="12" y="18" visible="False">
@@ -1806,8 +1806,8 @@
     </block>
   </location>
   <location x="13" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="13" y="15" visible="False">
@@ -1816,8 +1816,8 @@
     </block>
   </location>
   <location x="13" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="13" y="17" visible="False">
@@ -1936,8 +1936,8 @@
     </block>
   </location>
   <location x="14" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="14" y="15" visible="False">
@@ -1946,8 +1946,8 @@
     </block>
   </location>
   <location x="14" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="14" y="17" visible="False">
@@ -2066,8 +2066,8 @@
     </block>
   </location>
   <location x="15" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="15" y="15" visible="False">
@@ -2076,8 +2076,8 @@
     </block>
   </location>
   <location x="15" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="15" y="17" visible="False">
@@ -2196,8 +2196,8 @@
     </block>
   </location>
   <location x="16" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="16" y="15" visible="False">
@@ -2206,8 +2206,8 @@
     </block>
   </location>
   <location x="16" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="16" y="17" visible="False">
@@ -2326,8 +2326,8 @@
     </block>
   </location>
   <location x="17" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="17" y="15" visible="False">
@@ -2336,8 +2336,8 @@
     </block>
   </location>
   <location x="17" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="17" y="17" visible="False">
@@ -2456,8 +2456,8 @@
     </block>
   </location>
   <location x="18" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="18" y="15" visible="False">
@@ -2466,8 +2466,8 @@
     </block>
   </location>
   <location x="18" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="18" y="17" visible="False">
@@ -2586,8 +2586,8 @@
     </block>
   </location>
   <location x="19" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="19" y="15" visible="False">
@@ -2596,8 +2596,8 @@
     </block>
   </location>
   <location x="19" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="19" y="17" visible="False">
@@ -2716,8 +2716,8 @@
     </block>
   </location>
   <location x="20" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="20" y="15" visible="False" script="warning.lua">
@@ -2726,8 +2726,8 @@
     </block>
   </location>
   <location x="20" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="20" y="17" visible="False">
@@ -2846,8 +2846,8 @@
     </block>
   </location>
   <location x="21" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="21" y="15" visible="False">
@@ -2856,8 +2856,8 @@
     </block>
   </location>
   <location x="21" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="21" y="17" visible="False">
@@ -2976,8 +2976,8 @@
     </block>
   </location>
   <location x="22" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="22" y="15" visible="False">
@@ -2986,8 +2986,8 @@
     </block>
   </location>
   <location x="22" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="22" y="17" visible="False">
@@ -3106,8 +3106,8 @@
     </block>
   </location>
   <location x="23" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="23" y="15" visible="False" script="leave.lua">
@@ -3116,8 +3116,8 @@
     </block>
   </location>
   <location x="23" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="23" y="17" visible="False">
@@ -3236,8 +3236,8 @@
     </block>
   </location>
   <location x="24" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="24" y="15" visible="False">
@@ -3246,8 +3246,8 @@
     </block>
   </location>
   <location x="24" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="24" y="17" visible="False">
@@ -3366,8 +3366,8 @@
     </block>
   </location>
   <location x="25" y="14" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="25" y="15" visible="False">
@@ -3376,8 +3376,8 @@
     </block>
   </location>
   <location x="25" y="16" visible="False">
-    <block type="Game.Wall">
-      <Wall symbol=" " />
+    <block type="Game.Impassable">
+      <Impassable name="Wall" symbol="#" />
     </block>
   </location>
   <location x="25" y="17" visible="False">
