@@ -239,4 +239,4 @@ map:AddLocation(loc)
 map.PlayerX = 2
 map.PlayerY = 2
 --Write to XML
-map:ToXml("dungeon1")
+map:ToXml("dungeons/dungeon1")

@@ -27,6 +27,8 @@ namespace Game
 		public static Lua lua = new Lua();
 		
 		public static int Visibility = 0;
+		
+		//public static string currentDungeon;
 
 		public static void RunGame()
 		{
@@ -94,7 +96,7 @@ namespace Game
 					dungeon.location[player.X,player.Y].VoluntaryAction(player);
 				else if (c.Key == ConsoleKey.S)
 				{
-					SaveGame("dungeon1");
+					SaveGame(player.currentDungeon);
 				}					
 					
 				player.Move(c, dungeon);
@@ -150,27 +152,37 @@ namespace Game
 			Visibility = vis;
 		}
 		
+		/*
+		public static void SetCurrentDungeon(string newDungeon)
+		{
+			currentDungeon = newDungeon;
+		}
+		*/
+		
 		public static void WriteMessages()
 		{
 			foreach (string msg in messageLog)
 				Console.WriteLine(msg);
 		}
 		
-		public static void InitializeMap(bool newgame, string newmap)
+		public static void InitializeMap(bool newgame, string dungeonName)
 		{			
-			string mapname = "players/" + player.Name.ToLower() + "/" + newmap;
+			string mapname = "players/" + player.Name.ToLower() + "/" + dungeonName;
 			
 			try
 			{
 				if (newgame)
-					dungeon = LoadMapFromXml(newmap);
+				{
+					dungeon = LoadMapFromXml("dungeons/" + dungeonName);
+					//SetCurrentDungeon("dungeon1");
+				}				
 				else
 					dungeon = LoadMapFromXml(mapname);
 			}
 			catch
 			{
 				//Console.WriteLine("Couldn't load map.");
-				dungeon = LoadMapFromXml(newmap);
+				dungeon = LoadMapFromXml("dungeons/" + dungeonName);
 			}
 			
 		}
@@ -256,6 +268,8 @@ namespace Game
 			Characteristics ch2 = new Characteristics(10,2,1,0);
 			Player p = new Player(newname, ch, ch2, 100, 2, 2);
 			
+			p.SetCurrentDungeon("dungeon1");
+			
 			Item amulet = new Item("Amulet with crocodile");
 			p.PickItem(amulet);
 			
@@ -318,6 +332,7 @@ namespace Game
 			string name = root.Attributes["name"].Value;
 			int x = int.Parse(root.Attributes["x"].Value);
 			int y = int.Parse(root.Attributes["y"].Value);
+			string dungeonName = root.Attributes["currentDungeon"].Value;
 			
 			Characteristics ch = new Characteristics(0,0,0,0);
 			Characteristics cch = new Characteristics(0,0,0,0);
@@ -363,6 +378,7 @@ namespace Game
 			p.bag = bag;
 			p.equiped = equiped;
 			p.SetBody(new Body(b));
+			p.SetCurrentDungeon(dungeonName);
 			
 			lua.DoFile(filePath + "players/" + p.Name.ToLower() + "/config.lua");
 			

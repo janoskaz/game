@@ -100,7 +100,7 @@ end
 
 tell_message("Your wife hands you small bag with some food, water and a knife. You want to kiss her goodbye, but she doesn't seem to be in the mood, so you just make an awkward smile and leave.")
 
-dofile(path_to_files .. "luascripts/directory.lua")
+dofile(path_to_files .. "luascripts/dungeons/directory.lua")
 
 ::eof::
 

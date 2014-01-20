@@ -109,6 +109,20 @@ namespace Game
 			return true;
 		}
 		
+		public int HowMuchExplored()
+		{
+			int explored = 0;
+			for (int i=0;i<this.Width; i++)
+			{
+				for (int j=0; j<this.Heigth; j++)
+				{
+					if (this.location[i,j].Visible)
+						explored++;
+				}
+			}
+			return explored;			
+		}
+		
 		public void ToXml(string mapName)
 		{
 			string path = ThisGame.filePath;
@@ -130,7 +144,7 @@ namespace Game
 			}
 			
 			doc.AppendChild(root);
-			doc.Save( Path.Combine(path, mapName + ".xml") );
+			doc.Save(path + mapName + ".xml");
 			
 		}
 		

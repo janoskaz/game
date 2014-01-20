@@ -75,7 +75,7 @@ namespace Game
 		{
 			if (Script != null)
 			{
-				ThisGame.lua.DoFile(ThisGame.filePath + "/luascripts/" + Script);
+				ThisGame.lua.DoFile(ThisGame.filePath + "/luascripts/dungeons/" + ThisGame.player.currentDungeon + "/" + Script);
 				string newscript = (string)ThisGame.lua["newscript"];
 				if (newscript == "null")
 					Script = null;

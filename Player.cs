@@ -14,12 +14,18 @@ namespace Game
 		public int X {get; set;}
 		publ\\ic int Y {get; set;}
 		public string Message {get; set;}
+		public string currentDungeon;
 		
 		public Player (string name, Characteristics ch, Characteristics currentCh, int bagsize, int x, int y) :base(name, ch, currentCh, bagsize)
 		{
 			X = x;
 			Y = y;
 			symbol = 'P';
+		}
+		
+		public void SetCurrentDungeon(string newDungeon)
+		{
+			currentDungeon = newDungeon;
 		}
 		
 		public void Move(ConsoleKeyInfo c, Map m)
@@ -216,6 +222,7 @@ namespace Game
 			plr.SetAttribute("name", Name); // set name attribute
 			plr.SetAttribute("x", this.X.ToString()); // set coordinates
 			plr.SetAttribute("y", this.Y.ToString()); // set coordinates
+			plr.SetAttribute("currentDungeon", this.currentDungeon); // set current dungeon name
 			// add characteristics
 			XmlElement ch = this.Characteristics.ToXml(doc, "Characteristics");
 			plr.AppendChild(ch);

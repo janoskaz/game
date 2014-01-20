@@ -66,20 +66,20 @@
   <ItemGroup>
     <None Include="README.md" />
     <None Include="files\luascripts\config.lua" />
-    <None Include="files\luascripts\dungeon1.lua" />
-    <None Include="files\luascripts\torch.lua" />
-    <None Include="files\luascripts\broken_wall.lua" />
     <None Include="files\luascripts\startup.lua" />
-    <None Include="files\luascripts\madman.lua" />
-    <None Include="files\luascripts\statue.lua" />
-    <None Include="files\luascripts\breakable_wall.lua" />
-    <None Include="files\luascripts\burial_chamber_door.lua" />
-    <None Include="files\luascripts\sarcophagus.lua" />
-    <None Include="files\luascripts\door_out.lua" />
-    <None Include="files\luascripts\warning.lua" />
-    <None Include="files\luascripts\leave.lua" />
-    <None Include="files\luascripts\directory.lua" />
-    <None Include="files\luascripts\desert.lua" />
-    <None Include="files\luascripts\desert_action.lua" />
+    <None Include="files\luascripts\dungeons\directory.lua" />
+    <None Include="files\luascripts\dungeons\desert\desert_action.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\breakable_wall.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\broken_wall.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\burial_chamber_door.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\door_out.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\leave.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\madman.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\sarcophagus.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\statue.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\torch.lua" />
+    <None Include="files\luascripts\dungeons\dungeon1\warning.lua" />
+    <None Include="files\luascripts\generator\desert.lua" />
+    <None Include="files\luascripts\generator\dungeon1.lua" />
   </ItemGroup>
 </Project>

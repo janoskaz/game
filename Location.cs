@@ -91,8 +91,9 @@ namespace Game
 				this.Block = Block.AutomaticAction(p);
 			else
 			{
+				ThisGame.lua["map"] = ThisGame.dungeon;
 				ThisGame.lua["block"] = Block;
-				ThisGame.lua.DoFile(ThisGame.filePath + "/luascripts/" + Script);
+				ThisGame.lua.DoFile(ThisGame.filePath + "luascripts/dungeons/" + ThisGame.player.currentDungeon + "/" + Script);
 				Block = (IPlace)ThisGame.lua["out"];
 				bool keepScript = (bool)ThisGame.lua["keepscript"];
 				string message = (string)ThisGame.lua["message"];

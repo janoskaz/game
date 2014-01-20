@@ -6,4 +6,5 @@ get_answer(3)
 
 if (answer=='3') then
 	ThisGame.LoadNextMap("desert")
+	player:SetCurrentDungeon("desert")
 end
