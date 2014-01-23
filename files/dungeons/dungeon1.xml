@@ -3112,7 +3112,7 @@
   </location>
   <location x="23" y="15" visible="False" script="leave.lua">
     <block type="Game.BasicObject">
-      <BasicObject symbol=" " />
+      <BasicObject symbol="X" />
     </block>
   </location>
   <location x="23" y="16" visible="False">

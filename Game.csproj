@@ -81,5 +81,6 @@
     <None Include="files\luascripts\dungeons\dungeon1\warning.lua" />
     <None Include="files\luascripts\generator\desert.lua" />
     <None Include="files\luascripts\generator\dungeon1.lua" />
+    <None Include="files\luascripts\dungeons\desert\leave.lua" />
   </ItemGroup>
 </Project>

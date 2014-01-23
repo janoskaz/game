@@ -42,7 +42,8 @@ namespace Game
 		
 		public virtual void SetSymbol(string x)
 		{
-			this.symbol = char.Parse(x);
+			this.Block.SetSymbol(x);
+			UpdateSymbol();
 		}
 		
 		public void UpdateSymbol()

@@ -202,7 +202,7 @@ statue = Item("Statue of Qebehsutep")
 statue:SetSymbol('S')
 statue = Location(2,15,statue)
 statue:SetScript("statue.lua")
-statue:SetSymbol('S')
+--statue:SetSymbol('S')
 map:AddLocation(statue)
 
 --Doors to burial chamber
@@ -232,8 +232,9 @@ map:AddLocation(loc)
 
 --leave
 loc = Location(23,15,BasicObject())
+loc:SetSymbol('X')
 loc:SetScript("leave.lua")
-loc:SetSymbol('Q')
+loc:UpdateSymbol()
 map:AddLocation(loc)
 
 map.PlayerX = 2

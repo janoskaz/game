@@ -21,11 +21,12 @@ load_assembly "System"
 
 String = import_type "System.String"
 
+desertsize = 100
 local map = Map()
-map:CreateMapField(30,30)
+map:CreateMapField(desertsize,desertsize)
 
-for i=0,29 do
-	for j=0,29 do
+for i=0,(desertsize-1) do
+	for j=0,(desertsize-1) do
 		rnd = math.random()
 		if rnd<0.03 then
 			rock = Impassable("rock")
@@ -42,7 +43,15 @@ for i=0,29 do
 	end
 end
 
-map.PlayerX = 0
+--leave
+leave = BasicObject()
+leave:SetSymbol('X')
+loc = Location(0,5,leave)
+loc:SetScript("leave.lua")
+loc:UpdateSymbol()
+map:AddLocation(loc)
+
+map.PlayerX = 1
 map.PlayerY = 5
 --Write to XML
 map:ToXml("dungeons/desert")
