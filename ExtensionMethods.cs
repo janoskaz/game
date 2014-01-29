@@ -26,6 +26,7 @@ namespace ExtensionMethods
 			int whichFromEnd = 0;
 			int whichToDisplay;
 			bool run = true;
+			int stringPosition = 0;
 			
 			while (run)
 			{
@@ -37,13 +38,55 @@ namespace ExtensionMethods
 					s = "close";
 					run = false;
 					break;					
-				case ConsoleKey.Backspace:
-					if (s.Length > 0)
-						s = s.Substring(0,s.Length-1);
+				case ConsoleKey.Backspace: // backspace character
+					if (s.Length > 0 & stringPosition>0)
+					{
+						s = s.Remove(stringPosition-1,1);
+						stringPosition--;
+						char[] charlist = s.ToCharArray();
+						for (int i=stringPosition; i<charlist.Length; i++)
+							Console.Write(charlist[i]);
+						Console.Write(" ");
+						Console.CursorLeft = stringPosition;
+					}
+					break;
+				case ConsoleKey.Delete: // delete character
+					if (s.Length>stringPosition)
+					{
+						s = s.Remove(stringPosition,1);
+						char[] charlist = s.ToCharArray();
+						for (int i=stringPosition; i<charlist.Length; i++)
+							Console.Write(charlist[i]);
+						Console.Write(" ");
+						Console.CursorLeft = stringPosition;
+					}
 					break;
 				case ConsoleKey.Enter: // return s
 					if (s.Trim().Length>0)
 						run = false;
+					stringPosition = 0;
+					break;
+				case ConsoleKey.End: // go to end
+					stringPosition = s.Length;
+					Console.CursorLeft = stringPosition;
+					break;
+				case ConsoleKey.Home: // go to beginning
+					stringPosition = 0;
+					Console.CursorLeft = stringPosition;
+					break;
+				case ConsoleKey.RightArrow: // go one character right
+					if (s.Length>(stringPosition))
+					{
+						stringPosition++;
+						Console.CursorLeft = stringPosition;
+					}						
+					break;
+				case ConsoleKey.LeftArrow: // go one character left
+					if (stringPosition>0)
+					{
+						stringPosition--;
+						Console.CursorLeft = stringPosition;
+					}						
 					break;
 				case ConsoleKey.UpArrow: // List through commands
 					whichFromEnd += 1;
@@ -60,8 +103,9 @@ namespace ExtensionMethods
 						Console.Write(cmds[whichToDisplay]);
 						s = cmds[whichToDisplay];
 					}
+					stringPosition = s.Length;
 					break;
-				case ConsoleKey.DownArrow:
+				case ConsoleKey.DownArrow: // List through commands
 					whichFromEnd += -1;
 					if (whichFromEnd <=0)
 						whichFromEnd = 1;
@@ -76,11 +120,19 @@ namespace ExtensionMethods
 						Console.Write(cmds[whichToDisplay]);
 						s = cmds[whichToDisplay];
 					}
+					stringPosition = s.Length;
 					break;
 				default:
 					int asciicode = (int)keyhit.KeyChar;
-					if (asciicode<255)
-						s += keyhit.KeyChar.ToString();
+					if (asciicode<255) //better condition
+					{
+						s = s.Insert(stringPosition, keyhit.KeyChar.ToString());
+						stringPosition++;
+						char[] charlist = s.ToCharArray();
+						for (int i=stringPosition; i<charlist.Length; i++)
+							Console.Write(charlist[i]);
+						Console.CursorLeft = stringPosition;
+					}						
 					break;
 				}
 			

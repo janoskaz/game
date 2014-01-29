@@ -7,6 +7,8 @@ objects are defined as C# objects, more complicated interaction is governed by l
 
 **TODO**
 
-+ manage several dungeons - loading and saving data, transfer of configuration -- partly done
++ improve listing through commands - condition, which keys will be accepted (end,home)
 
-+ improve listing through commands
++ make dungeon temple_district
+
++ make dungeon pub
